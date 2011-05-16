@@ -1,8 +1,6 @@
-`package.json` is a little file that holds the metadata to your project. Most node projects will have one at the root directory. The metadata `package.json` holds relates to the creater and the project dependencies. Probably the most barebones package.json possible:
+All npm package have a little file called `package.json` which holds metadata relevant to the project. This little file gives information to npm allowing it to handle the package's dependencies. It also contains other metadata such as its name, description, versions, license and configuration values which is useful to both npm and the user of the package. The package.json file is normally located at the root directory of a node.js project.
 
-Why is package.json useful?
-- it allows you to list dependencies and versions and npm will handle them for you
-- it lets you publish your module with metadata such as its name, description, versions, license and configuration values
+Now as an example of probably the most barebones package.json possible:
 
 =======
 {
@@ -11,50 +9,24 @@ Why is package.json useful?
 }
 ======
 
-The name field intuitively means the name of your project. The version field is a bit more complicated, but generally it takes the form of "a.b.c" where `a` is considered a major change, `b` is a minor change, and `c` is a patch. Thus from order to newest to oldest: 2.0.0 > 1.5.11  > 1.5.10 > 1.4.100 > 0.0.0
-For more details, look at this spec: http://semver.org.
+The `name` field intuitively means the name of your project. The `version` field is used by npm to make sure the right version of the package is being installed. Generally, it takes the form of `major.minor.patch` where `major`, `minor`, and `patch` are integers which increase after each new release. For more details, look at this spec: http://semver.org.
 
-For a more complete example, we can check out the npm package.json:
-
+For a more complete package.json, we can check out `underscore`:
 ===========
-{ "name" : "npm"
-, "description" : "A package manager for node"
-, "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "1.0.6"
-, "preferGlobal" : true
-, "config" : { "publishtest" : false }
-, "homepage" : "http://npmjs.org/"
-, "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
-, "repository" :
-  { "type" : "git"
-  , "url" : "git://github.com/isaacs/npm.git"
-  }
-, "bugs" :
-  { "mail" : "npm-@googlegroups.com"
-  , "web" : "http://github.com/isaacs/npm/issues"
-  }
-, "directories" : { "doc" : "./doc"
-                  , "man" : "./man1"
-                  , "lib" : "./lib"
-                  , "bin" : "./bin"
-                  }
-, "main" : "npm"
-, "bin" : "./bin/npm.js"
-, "dependencies" :
-  { "semver" : "1"
-  , "abbrev" : "1"
-  , "nopt" : "1"
-  , "node-uuid" : "1.1" }
-, "bundleDependencies" : [ "semver", "abbrev", "nopt" ]
-, "devDependencies" : { "ronn" : "" }
-, "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
-, "scripts" : { "test" : "./test/run.sh"
-              , "prepublish" : "make doc"
-              }
-, "licenses" :
-  [ { "type" : "MIT"
-    , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
-    }
-  ]
+{
+  "name" : "underscore",
+  "description" : "JavaScript's functional programming helper library.",
+  "homepage" : "http://documentcloud.github.com/underscore/",
+  "keywords" : ["util", "functional", "server", "client", "browser"],
+  "author" : "Jeremy Ashkenas <jeremy@documentcloud.org>",
+  "contributors" : [],
+  "dependencies" : [],
+  "repository" : {"type": "git", "url": "git://github.com/documentcloud/underscore.git"},
+  "main" : "underscore.js",
+  "version" : "1.1.6"
 }
 ==========
+
+As you can see, there are fields for the `description` and `keywords` of your projects. This allows people who find your project understand what it is in a few a few words. The fields `author`, `contributors`, `homepage` and `repository` all can used to reference who wrote the files, show how to contact the author, and gives links for additional references. The file listed in the `main` field is the file that exports the libary. So when someone runs `require(<library name>)`, require resolves this call to `require(<package.json:main>)`. Finally the `dependencies` field is used to list all the dependencies of your project. When someone installs your project through npm, all the dependencies listed will be installed as well. Also if someone runs `npm install` in the root directory of your project, it will install all the dependencies to `./node_modules`.
+
+For even more options, you can look through <https://github.com/isaacs/npm/blob/master/doc/json.md> or run `npm help json`

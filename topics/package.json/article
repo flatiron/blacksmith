@@ -1,0 +1,60 @@
+`package.json` is a little file that holds the metadata to your project. Most node projects will have one at the root directory. The metadata `package.json` holds relates to the creater and the project dependencies. Probably the most barebones package.json possible:
+
+Why is package.json useful?
+- it allows you to list dependencies and versions and npm will handle them for you
+- it lets you publish your module with metadata such as its name, description, versions, license and configuration values
+
+=======
+{
+  "name" : "barebones",
+  "version" : "0.0.0",
+}
+======
+
+The name field intuitively means the name of your project. The version field is a bit more complicated, but generally it takes the form of "a.b.c" where `a` is considered a major change, `b` is a minor change, and `c` is a patch. Thus from order to newest to oldest: 2.0.0 > 1.5.11  > 1.5.10 > 1.4.100 > 0.0.0
+For more details, look at this spec: http://semver.org.
+
+For a more complete example, we can check out the npm package.json:
+
+===========
+{ "name" : "npm"
+, "description" : "A package manager for node"
+, "keywords" : [ "package manager", "modules", "install", "package.json" ]
+, "version" : "1.0.6"
+, "preferGlobal" : true
+, "config" : { "publishtest" : false }
+, "homepage" : "http://npmjs.org/"
+, "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
+, "repository" :
+  { "type" : "git"
+  , "url" : "git://github.com/isaacs/npm.git"
+  }
+, "bugs" :
+  { "mail" : "npm-@googlegroups.com"
+  , "web" : "http://github.com/isaacs/npm/issues"
+  }
+, "directories" : { "doc" : "./doc"
+                  , "man" : "./man1"
+                  , "lib" : "./lib"
+                  , "bin" : "./bin"
+                  }
+, "main" : "npm"
+, "bin" : "./bin/npm.js"
+, "dependencies" :
+  { "semver" : "1"
+  , "abbrev" : "1"
+  , "nopt" : "1"
+  , "node-uuid" : "1.1" }
+, "bundleDependencies" : [ "semver", "abbrev", "nopt" ]
+, "devDependencies" : { "ronn" : "" }
+, "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
+, "scripts" : { "test" : "./test/run.sh"
+              , "prepublish" : "make doc"
+              }
+, "licenses" :
+  [ { "type" : "MIT"
+    , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
+    }
+  ]
+}
+==========

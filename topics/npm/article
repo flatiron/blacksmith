@@ -1,0 +1,18 @@
+npm (node package manager) is a super useful a tool that installs and updates packages as well as manage dependencies.
+
+The commandline usage of npm is super simple. You can run
+`npm install <package>` to install the package in the current directory. So you run this at the root of your project, so `require` can find the libraries.
+
+If you want globally install the package, you run `npm install <package> -g`. *research the precise differences between global and local. it appears as if when require can not find globally installed packages
+
+Another way to use npm is when you have a node project with a package.json <link to package.json explanation> file. You can run `npm install` and npm will install all the dependencies listed in the package.json. This makes it installing from a git repo much easier!
+
+Example:
+git clone ...
+cd dir/
+npm install
+
+
+
+
+npm can also be used programmatically. 

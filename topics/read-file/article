@@ -1,6 +1,6 @@
 How do I to read a file in node.js?
 
-This task is very simple because it is built into the node.js api. It turns out that api has a function called readFile which is very easy to use.
+This task is very simple because reading a file is built into the node.js api. We can use the handy api call `readFile` inside the `fs` module which is very easy to use thankfully. 
 
 ===
 fs = require('fs');
@@ -15,6 +15,7 @@ callback = (optional function (err, data) {}) If there is no error, `err === nul
 
 So if we wanted to read `/etc/hosts` and print it to stdout:
 ========
+fs = require('fs')
 fs.readFile('/etc/hosts', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
@@ -27,6 +28,7 @@ fs.readFile('/etc/hosts', 'utf8', function (err,data) {
 
 An example of what happens when you read an invalid file
 ========
+fs = require('fs')
 fs.readFile('/doesnt/exist', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);

@@ -1,3 +1,4 @@
+async = require 'async'
 fs = require 'fs'
 journey = require 'journey'
 http = require 'http'
@@ -19,7 +20,35 @@ router.map ()->
                 return res.send 404, {}, err
             return res.send 200, {}, data
 
-    this.get(/([a-z\-\.]+)/).bind (req, res, name)->
+    this.get("/tag").bind (req, res)->
+         fs.readdir "topics/", (err, results)->
+            if err
+                return res.send 404, {}, err
+            tags = {}
+
+            iter = (dir, callback)->
+                fs.readFile "topics/"+dir+'/metadata.json', 'utf8', (err,json)->
+                    if err
+                        return callback err
+                    obj = JSON.parse json
+                    for tag in obj.tags
+                        tags[tag] = ""
+                    callback()
+
+            async.forEach results, iter, (err)->
+                if err
+                    return res.send 404, {}, err
+
+                tags_array = []
+
+                for tag of tags
+                    tags_array.push tag
+
+                return res.send 200, {}, JSON.stringify tags_array
+
+       
+
+    this.get(/article\/([a-z\-\.]+)/).bind (req, res, name)->
         fs.readFile "topics/"+name+'/article', 'utf8', (err,article)->
           fs.readFile "topics/"+name+'/metadata.json', 'utf8', (err,json)->
             json ?= "{}"

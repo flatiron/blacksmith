@@ -33,10 +33,9 @@ Metadata Format
 
     {
         "title":"What is npm?",
-        "date": "Today",
-	"description": "A simple little article explaining the basic uses of npm",
+        "data-last-modified": "Today",
+        "description": "A simple little article explaining the basic uses of npm",
         "tags": ["npm", "modules"],
-        "author": "nico",
         "difficulty": 1
     }
 

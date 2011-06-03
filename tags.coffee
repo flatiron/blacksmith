@@ -25,7 +25,7 @@ generate_tag_data_ = (callback)->
 
 generate_tag_data = ->
     generate_tag_data_ (tags)->
-        exports.articles = tags
+        exports.tagid = tags
         temp = []
         for tag of tags
             temp.push tag
@@ -33,5 +33,5 @@ generate_tag_data = ->
         setTimeout generate_tag_data, 1000
 generate_tag_data()
 
-exports.articles = {}
+exports.tagid = {}
 exports.names = []

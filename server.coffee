@@ -25,6 +25,11 @@ router.map ()->
     this.get("/tag").bind (req, res)->
         res.send 200, {}, JSON.stringify tag_lookup.names
 
+    this.get(/tag\/([a-z]+)/).bind (req, res, tag_name)->
+        if tag_lookup.tagid[tag_name]?
+            return res.send 200, {}, JSON.stringify tag_lookup.tagid[tag_name]
+        return res.send 404, {}, JSON.stringify []
+
     this.get(/article\/([a-z\-\.]+)/).bind (req, res, name)->
         fs.readFile "topics/"+name+'/article', 'utf8', (err,article)->
           fs.readFile "topics/"+name+'/metadata.json', 'utf8', (err,json)->

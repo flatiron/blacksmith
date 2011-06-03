@@ -14,8 +14,8 @@ router.map ()->
             if err
                 return res.send 404, {}, err
             body = ""
-            for dir in results
-                body += "<a href='article/#{dir}'>#{dir}</a> "
+            for dir in results 
+                body += "<a href='article/#{dir}'>#{ JSON.parse(fs.readFileSync('topics/'+dir+'/metadata.json')).title }</a> "#first time i wrote a sync function, sorry
             return res.send 200, {}, body
         fs.readFile 'index.htm', 'utf8', (err,data)->
             if err

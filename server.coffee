@@ -6,6 +6,8 @@ template = require './template'
 
 router = new journey.Router
 
+tag_lookup = require './tags'
+
 router.map ()->
     this.root.bind (req, res)->
         fs.readdir "topics/", (err, results)->
@@ -13,7 +15,7 @@ router.map ()->
                 return res.send 404, {}, err
             body = ""
             for dir in results
-                body += "<a href='#{dir}'>#{dir}</a> "
+                body += "<a href='article/#{dir}'>#{dir}</a> "
             return res.send 200, {}, body
         fs.readFile 'index.htm', 'utf8', (err,data)->
             if err
@@ -21,32 +23,7 @@ router.map ()->
             return res.send 200, {}, data
 
     this.get("/tag").bind (req, res)->
-         fs.readdir "topics/", (err, results)->
-            if err
-                return res.send 404, {}, err
-            tags = {}
-
-            iter = (dir, callback)->
-                fs.readFile "topics/"+dir+'/metadata.json', 'utf8', (err,json)->
-                    if err
-                        return callback err
-                    obj = JSON.parse json
-                    for tag in obj.tags
-                        tags[tag] = ""
-                    callback()
-
-            async.forEach results, iter, (err)->
-                if err
-                    return res.send 404, {}, err
-
-                tags_array = []
-
-                for tag of tags
-                    tags_array.push tag
-
-                return res.send 200, {}, JSON.stringify tags_array
-
-       
+        res.send 200, {}, JSON.stringify tag_lookup.names
 
     this.get(/article\/([a-z\-\.]+)/).bind (req, res, name)->
         fs.readFile "topics/"+name+'/article', 'utf8', (err,article)->

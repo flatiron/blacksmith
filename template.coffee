@@ -1,3 +1,5 @@
+md = require 'markdown'
+console.log md
 module.exports = (context)->
     return "
 <html>
@@ -8,7 +10,7 @@ module.exports = (context)->
     <p>Last Modified: #{context.date}</p>
     <p>Tags: #{JSON.stringify context.tags}</p>
     <p>Difficulty: #{context.difficulty}</p><br/><br/>
-    <pre>#{context.article}</pre>
+    <p style='white-space: pre-wrap'>#{md.parse context.article }</p>
 </body>
 </html>"
 

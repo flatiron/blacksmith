@@ -15,9 +15,10 @@ Use case: Manage dependencies
 Another way to use npm is when you have a node project with a <a href="package.json">package.json</a> file. You can run `npm install` and npm will install all the dependencies listed in the package.json. This makes it installing from a git repo much easier! For example, vows, one of node.js's testing frameworks, can be git cloned and it's single dependency (eyes) can be automatically handled:
 
 Example:
-git https://github.com/cloudhead/vows.git
-cd vows
-npm install
+
+    git https://github.com/cloudhead/vows.git
+    cd vows
+    npm install
 
 After running those commands, you will see a `node_modules` folder with all of the project dependenecies specified in the package.json.
 

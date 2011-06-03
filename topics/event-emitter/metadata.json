@@ -1,4 +1,4 @@
-:close
+{
     "title":"What are Event Emitters?",
     "date": "Today",
     "tags": ["core", "event-emitters"],

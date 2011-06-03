@@ -1,5 +1,3 @@
-What is require?
-
 Node.js follows the CommonJS module system and the builtin `require` function is the easiest way to included files. The basic functionality of `require` is that it reads a javascript file, executes the file, and then proceeds to return the `exports` object. An example module:
 example.js ======
 console.log("evaluating example.js");

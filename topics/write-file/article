@@ -1,5 +1,3 @@
-How do I to write to a file in node.js?
-
 This task is very simple because writing to a file is built into the node.js api. We can use the handy api call `writeFile` inside the `fs` module which makes the whole process very streamlined. 
 
 ===

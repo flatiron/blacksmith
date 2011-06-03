@@ -1,1 +1,42 @@
-This is a readme
+To Run
+======
+npm install coffee-script -g
+coffee server.coffee
+
+Everything about this project is under flux
+
+Preliminary routes
+================
+GET /tags
+    -return all unique tags (these are the differing topics)
+
+GET /tag/:tagid
+    -return all articles with that tag
+
+GET /article/:article
+    -return "rendered" article content
+
+
+Directory Structure
+===================
+
+    topics/
+        article-name/ //url version
+            metadata.json 
+            article //file with the real article
+            assets/
+                ...
+        ...
+
+Metadata Format
+===============
+
+    {
+        "title":"What is npm?",
+        "date": "Today",
+	"description": "A simple little article explaining the basic uses of npm",
+        "tags": ["npm", "modules"],
+        "author": "nico",
+        "difficulty": 1
+    }
+

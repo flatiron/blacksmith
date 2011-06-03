@@ -12,7 +12,12 @@ generate_tag_data_ = (callback)->
             fs.readFile "topics/"+dir+'/metadata.json', 'utf8', (err,json)->
                 if err
                     return callback err
-                obj = JSON.parse json
+
+                try
+                    obj = JSON.parse json
+                catch e
+                    return callback(e)
+
                 for tag in obj.tags
                     tags[tag] ?= []
                     tags[tag].push dir
@@ -20,6 +25,7 @@ generate_tag_data_ = (callback)->
 
         async.forEach results, iter, (err)->
             if err
+                console.log err
                 return callback {}
             return callback tags
 

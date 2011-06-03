@@ -1,26 +1,24 @@
-async = require 'async'
 fs = require 'fs'
-journey = require 'journey'
 http = require 'http'
-template = require './template'
-
+journey = require 'journey'
 router = new journey.Router
 
+
 tag_lookup = require './tags'
+template = require './template'
 
 router.map ()->
-    this.root.bind (req, res)->
+    this.root.bind (req, res)-> #ugly i know, its a makeshift solutoin for now
         fs.readdir "topics/", (err, results)->
             if err
                 return res.send 404, {}, err
             body = ""
+
             for dir in results 
-                body += "<a href='article/#{dir}'>#{ JSON.parse(fs.readFileSync('topics/'+dir+'/metadata.json')).title }</a> "#first time i wrote a sync function, sorry
+                #first time i wrote a sync function, sorry
+                body += "<a href='article/#{dir}'>" +
+                     JSON.parse(fs.readFileSync('topics/'+dir+'/metadata.json')).title+"</a> "
             return res.send 200, {}, body
-        fs.readFile 'index.htm', 'utf8', (err,data)->
-            if err
-                return res.send 404, {}, err
-            return res.send 200, {}, data
 
     this.get("/tag").bind (req, res)->
         res.send 200, {}, JSON.stringify tag_lookup.names
@@ -32,13 +30,19 @@ router.map ()->
 
     this.get(/article\/([a-z\-\.]+)/).bind (req, res, name)->
         fs.readFile "topics/"+name+'/article', 'utf8', (err,article)->
-          fs.readFile "topics/"+name+'/metadata.json', 'utf8', (err,json)->
-            json ?= "{}"
-            context = JSON.parse(json)
-            context.article = article
             if err
                 return res.send 404, {}, err
-            return res.send 200, {}, template(context)
+            fs.readFile "topics/"+name+'/metadata.json', 'utf8', (err,json)->
+                if err
+                    return res.send 404, {}, err
+
+                try
+                    context = JSON.parse(json)
+                catch e
+                    return res.send 404, {}, "Error parsing metadata.json"
+
+                context.article = article
+                return res.send 200, {}, template(context)
 
 server = http.createServer (req, res) ->
     router.handle req, "", (result)->

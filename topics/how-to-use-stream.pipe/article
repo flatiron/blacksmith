@@ -1,0 +1,27 @@
+How to use stream.pipe
+
+If you've been using node.js for a while, you've definitely run into streams.  HTTP connections are streams,  open files are streams;  stdin, stdout, and stderr are all streams.  A 'stream' is node's I/O abstraction - if you feel like you still need to understand them better, you can read more about them here.  <link>
+
+Streams make for quite a handy abstraction, and there's a lot you can do with them - as an example, let's take a look at stream.pipe, the method used to connect one stream to another.  Our first use case: communicating with a child process.  
+
+     #!/usr/bin/env node
+
+     var child = require('child_process');
+
+     var myREPL = child.spawn('node');
+
+     myREPL.stdout.pipe(process.stdout, { end: false });
+
+     process.stdin.resume();
+
+     process.stdin.pipe(myREPL.stdin, { end: false });
+
+     myREPL.stdin.on("end", function() {
+       process.stdout.write("REPL stream ended.");
+     });
+
+     myREPL.on('exit', function (code) {
+       process.exit(code);
+     });
+     
+There you have it - spawn the node REPL as a child process, and pipe your stdin and stdout to its stdin and stdout.  Make sure to listen for the child's 'exit' event, too, or else your program will just hang there when the REPL exits.  

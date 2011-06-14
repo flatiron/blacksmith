@@ -65,7 +65,6 @@ Another very important use case for stream.pipe is with HTTP request and respons
        var proxyRequest = proxy.request(request.method, request.url, request.headers);
        proxyRequest.on('response', function (proxyResponse) {
          proxyResponse.pipe(response);
-         response.writeHead(proxyResponse.statusCode, proxyResponse.headers);
        });
        request.pipe(proxyRequest);
      }).listen(8080);

@@ -18,6 +18,6 @@ fs.readFile 'tags/tags.json', 'utf8', (err,data)->
     for key in keys
         temp[key] = obj[key]
 
-    console.log JSON.stringify temp, null, 2
+    fs.writeFile 'tags/tags.json.sort', (JSON.stringify temp, null, 2)
 
 

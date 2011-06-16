@@ -1,8 +1,19 @@
 {
   "Filesystem": {},
+  "JSHINT": {},
+  "JSLINT": {},
+  "JSON": {},
+  "REST": {},
   "SSL": {},
+  "XML": {},
+  "addons": {},
+  "arguments": {},
+  "argument parsing": {},
+  "browser": {},
   "callbacks": {},
   "child processes": {},
+  "code coverage": {},
+  "command line tools": {},
   "community": {},
   "config.json": {},
   "control flow": {
@@ -18,13 +29,17 @@
   "debugging": {},
   "deployment": {},
   "dnode": {},
+  "dual-sided": {},
   "error message": {},
+  "eval": {},
   "eventemitter": {
     "description": "The event emitter class for node.js"
   },
   "files": {
     "description": "Interacting with files and the filesystem"
   },
+  "forms": {},
+  "git": {},
   "github": {
     "description": "The Github.com social coding website"
   },
@@ -39,6 +54,7 @@
   "javascript": {},
   "logging": {},
   "modules": {},
+  "multi-part file uploads": {},
   "npm": {},
   "package.json": {
     "description": "The package.json format for node.js applications"
@@ -48,20 +64,29 @@
     "description": "The event emitter class for node.js"
   },
   "processes": {},
+  "proxying": {},
   "repl": {
     "description": "An interactive read-eval-print-loop for writing node.js code"
   },
   "require": {
     "description": "The require module for node.js"
   },
+  "reverse proxy": {},
+  "runInNewContext": {},
   "self": {},
   "signals": {},
   "socket.io": {},
+  "sockets": {},
   "streams": {
     "description": "A stream as defined in node.js"
   },
+  "tcp": {},
+  "testing": {},
   "that": {},
   "this": {},
   "timers": {},
-  "twitter": {}
+  "twitter": {},
+  "udp": {},
+  "uploads": {},
+  "v8": {}
 }

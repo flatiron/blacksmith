@@ -1,0 +1,22 @@
+{
+    "files": {},
+    "http": {},
+    "logging": {},
+    "control flow": {},
+    "streams": {},
+    "package.json": {
+        "description": "The package.json format for node.js applications"
+    },
+    "require": {},
+    "callbacks": {},
+    "npm": {},
+    "core": {
+        "description": "A core node.js API method or module."
+    },
+    "event-emitters": {},
+    "Filesystem": {},
+    "writing": {},
+    "convention": {},
+    "modules": {},
+    "pkginfo": {}
+}

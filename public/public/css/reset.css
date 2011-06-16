@@ -1,0 +1,110 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, u, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, u, mark, audio, video {
+  border: 0;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+html, body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+}
+a, abbr, acronym, address, article, aside, b, bdo, blockquote, button, caption, cite, command, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, i, input, ins, keygen, label, legend, li, mark, menu, meter, nav, ol, output, p, progress, q, s, samp, section, small, span, strong, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, tt, u, ul, var, wbr {
+  font-size: 1em;
+  font-style: normal;
+  vertical-align: baseline;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+em {
+  font-style: italic;
+}
+strong {
+  font-weight: bold;
+}
+article, aside, figure, footer, header, hgroup, nav, section {
+  display: block;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+a, a:link, a:active, a:hover {
+  background: transparent;
+  color: #000;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+a img, a:link img, a:active img, a:hover img {
+  display: block;
+}
+p {
+  padding-bottom: 1em;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset, img {
+  border: 0;
+  border: none;
+}
+pre, code, kbd, samp {
+  font-family: monospace, sans-serif;
+  text-wrap: wrap;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+ul {
+  list-style: none;
+}
+caption, th {
+  text-align: left;
+}
+abbr, acronym {
+  border: 0;
+  border: none;
+  font-size: 1em;
+  font-style: normal;
+  vertical-align: baseline;
+}
+input, textarea, select {
+  background-color: #FFF;
+  border: 0.1em solid transparent;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
+  margin: 0;
+  padding: 0.4em;
+  outline: none;
+  border-radius: none;
+  -moz-border-radius: none;
+  -o-border-radius: none;
+  -webkit-border-radius: none;
+  -webkit-user-select: text;
+  -webkit-appearance: none;
+}
+[type=button], [type=submit] {
+  padding: 0.45em;
+}
+[type=checkbox] {
+  -webkit-appearance: checkbox;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}

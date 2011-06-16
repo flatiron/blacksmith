@@ -1,22 +1,36 @@
 {
-    "files": {},
+    "files": {
+        "description": "Interacting with files and the filesystem"
+    },
     "http": {},
     "logging": {},
-    "control flow": {},
-    "streams": {},
+    "control flow": {
+        "description": "The order in which functions execute"
+    },
+    "streams": {
+        "description": "A stream as defined in node.js"
+    },
     "package.json": {
         "description": "The package.json format for node.js applications"
     },
-    "require": {},
+    "require": {
+        "description": "The require module for node.js"
+    },
     "callbacks": {},
     "npm": {},
     "core": {
         "description": "A core node.js API method or module."
     },
-    "event-emitters": {},
+    "eventemitter": {
+        "description": "The event emitter class for node.js"
+    },
     "Filesystem": {},
-    "writing": {},
-    "convention": {},
+    "convention": {
+        "description": "A coding convention which is used in the node.js community"
+    },
     "modules": {},
-    "pkginfo": {}
+    "pkginfo": {},
+    "github": {
+        "description": "The Github.com social coding website"
+    }
 }

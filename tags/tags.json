@@ -4,6 +4,11 @@
     },
     "http": {},
     "logging": {},
+    "community": {},
+    "irc": {},
+    "twitter": {},
+    "socket.io": {},
+    "dnode": {},
     "control flow": {
         "description": "The order in which functions execute"
     },

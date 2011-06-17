@@ -3,16 +3,16 @@
 
 ;!function(root) {
 
+  // Check server side *require* availability.
+  var req = (typeof require !== 'undefined');
 
   // Require *_* if it's not already present.
   var _ = root._;
-  if (!_ && (typeof require !== 'undefined')) _ = require('underscore')._;
+  if (!_ && req) _ = require('underscore')._;
   if (!_) throw new Error('Dependency missing: Underscore.');
 
-
-  // Extendable
-  var Extendable = root.Extendable = function Extendable() {};
-
+  // MicroExtendable
+  var MicroExtendable = root.MicroExtendable = function MicroExtendable() {};
 
   // Shared empty constructor function to aid in prototype-chain creation.
   var ctor = function() {};
@@ -23,9 +23,9 @@
   var inherits = function(parent, protoProps, staticProps) {
     var child;
 
-    // The constructor function for the new subclass is either defined by you
-    // (the "constructor" property in your `extend` definition), or defaulted
-    // by us to simply call `super()`.
+    // The constructor function for the new subclass is either defined (the
+    // "constructor" property in the `extend` definition), or defaulted to
+    // simply call *super*.
     if (protoProps && protoProps.hasOwnProperty('constructor')) {
       child = protoProps.constructor;
     } else {
@@ -56,7 +56,6 @@
     return child;
   };
 
-
   // The self-propagating extend function.
   var extend = function (protoProps, classProps) {
     var child = inherits(this, protoProps, classProps);
@@ -64,10 +63,8 @@
     return child;
   };
 
-
-  // Add `extend` function to Extendable and make it available to the outside
+  // Add `extend` function to MicroExtendable and make it available to the outside
   // world.
-  Extendable.extend = extend;
-
+  MicroExtendable.extend = extend;
 
 }(typeof exports === 'undefined' ? window : exports);

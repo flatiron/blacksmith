@@ -3,40 +3,21 @@
 
 ;!function(root) {
 
-
   // Check server side *require* availability.
   var req = (typeof require !== 'undefined');
-
 
   // Require *_* if it's not already present.
   var _ = root._;
   if (!_ && req) _ = require('underscore')._;
   if (!_) throw new Error('Dependency missing: Underscore.');
 
-
-  // Require *Extendable* if it's not already present.
-  var Extendable = root.Extendable;
-  if (!Extendable && req) Extendable = require('micro-extendable');
-  if (!Extendable) throw new Error('Dependency missing: Extendable.');
-
-
-  // Require *EventEmitter2* if it's not already present.
-  var EventEmitter2 = root.EventEmitter2;
-  if (!EventEmitter2 && req) EventEmitter2 = require('micro-eventemiter');
-  if (!EventEmitter2) throw new Error('Dependency missing: EventEmitter.');
-
-
-  // Require "$" if it's not already present.
-  //
-  // TODO:
-  // - Check if and how this works on the server.
+  // Require *$* if it's not already present.
   var $ = root.$ || root.jQuery;
   if (!$ && req) $ = require('jquery');
   if (!$) throw new Error('Dependency missing: jQuery.');
 
-
-  // View
-  var View = root.View = function View(options) {
+  // MicroView
+  var MicroView = root.MicroView = function MicroView(options) {
     this.cid = _.uniqueId('view');
     this._configure(options || {});
     this._ensureElement();
@@ -44,9 +25,8 @@
     this.initialize(options);
   };
 
-
-  // Set up all inheritable *View* properties and methods.
-  _.extend(View.prototype, EventEmitter2.prototype, {
+  // Set up all inheritable *MicroView* properties and methods.
+  _.extend(MicroView.prototype, {
 
     // The default `tagName` of a View's element is `"div"`.
     tagName: 'div',
@@ -146,7 +126,7 @@
 
 
   // Extend View with Extendable properties and methods.
-  _.extend(View, Extendable);
+  _.extend(MicroView, Extendable);
 
 
 

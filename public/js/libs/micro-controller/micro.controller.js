@@ -24,6 +24,8 @@
     initialize: function() {}
   });
 
+  // The self mixin function making it easy to extend *MicroController*
+  // whatever is needed.
   MicroController.mixin = function(props, protoProps) {
     for (var objs in props) {
       var obj = props[objs];

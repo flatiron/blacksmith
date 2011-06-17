@@ -124,9 +124,27 @@
 
   });
 
+  // The self mixin function making it easy to extend *MicroController*
+  // whatever is needed.
+  MicroView.mixin = function(props, protoProps) {
+    for (var objs in props) {
+      var obj = props[objs];
+      _.extend(this, obj);
+    }
+    for (var objs in protoProps) {
+      var obj = protoProps[objs];
+      _.extend(this.prototype, obj.prototype);
+    }
+    return this;
+  };
 
-  // Extend View with Extendable properties and methods.
-  _.extend(MicroView, Extendable);
+
+
+
+
+
+
+
 
 
 

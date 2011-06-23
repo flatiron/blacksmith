@@ -78,7 +78,7 @@ Once you have it, give it a try - it can really be a life-saver.
      
 The last line was included to let you see how Optimist handles your arguments.  Here's a quick reference:
 
-- `argv.$0` contains the first two elements joined together - "node ./myapp.js".
+- `argv.$0` contains the first two elements of `process.argv` joined together - "node ./myapp.js".
 - `argv._` is an array containing each element not attached to a flag.
 - Individual flags become properties of `argv`, such as with `myArgs.h` and `myArgs.help`.  Note that non-single-letter flags must be passed in as `--flag`.  
 

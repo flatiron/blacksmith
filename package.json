@@ -1,0 +1,9 @@
+{
+  "name": "nodedocs",
+  "description": "The node documentation project",
+  "version": "0.0.0",
+  "author": "Nodejitsu Inc. <info@nodejitsu.com>",
+  "dependencies": {
+    "dnode": "0.7.x"
+  }
+}

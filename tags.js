@@ -17,6 +17,8 @@ var generate_tag_data_ = function (callback) {
           var obj = JSON.parse(json);
         }
         catch (e) {
+          e.file = dir+'/metadata.json';
+          console.log(e);
           return callback(e);
         }
 

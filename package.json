@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "author": "Nodejitsu Inc. <info@nodejitsu.com>",
   "dependencies": {
-    "dnode": "0.7.x"
+    "dnode": "0.7.x",
+    "async": "x.x.x"
   }
 }

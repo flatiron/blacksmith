@@ -1,11 +1,11 @@
 var dnode = require('dnode');
 
-dnode.connect(5050, function (remote) {
+dnode.connect(8080, function (remote) {
   remote.getGuide('what-are-callbacks', function () {
     console.log(arguments);
   });
 
-  remote.getGuides('awe', function () {
+  remote.getGuides('core', function () {
     console.log(arguments);
   });
 

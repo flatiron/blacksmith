@@ -1,0 +1,11 @@
+# How to store local configuration data for your application
+
+Storing local configuration data for a Node.js app is easy, since every object in Javascript can be rendered as JSON, and vice versa.  This can be done by hand:
+
+- JSON.stringify() / fs.writeFile() example to save config
+- fs.readFile() / JSON.parse() example to load config (mention the need to try/catch JSON.parse)
+
+This can also be done with nconf.  (Link nconf.)  Nconf is a module to aid in configuration storage and access.  It supports in-memory storage, local file storage, and redis support for storing configuration.  We'll focus on local file and in-memory storage for now.  
+
+- Enumerate and describe nconf methods - set, get, save
+- describe local file storage - nconf.use, nconf.load

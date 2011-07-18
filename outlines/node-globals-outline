@@ -1,0 +1,13 @@
+# Built-in Global variables in Node.js
+
+There are a number of built-in globals in Node.js that every developer should be aware of.  
+
+- global - the global namespace.  Adding properties to the `global` object makes them process-visible.
+- process - the built-in process object.  Link to process module article.
+- console - the built-in console object.  Link to console module article.
+- module/module.exports - Discuss/link to info about the modules system. The following are pseudo-globals, local to each module.  
+  - __filename - filename of the script currently being executed.
+  - __dirname - path of the script being executed.
+  - require()/require.cache/require.path/require.resolve() - interfaces for requiring other modules; link to article.  
+- set/clearTimeout(), set/clearInterval() - The timer functions are globals.  Describe or link.
+- It might be good to put a list of reserved words here, too.

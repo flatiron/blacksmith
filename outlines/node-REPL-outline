@@ -1,6 +1,7 @@
 # How to use the Node.js REPL
 
-This article should define and describe the Node.js Read-Eval-Print Loop (REPL), and enumerate some of its uses.
+
+Node.js ships with a REPL, which is short for 'Read-Eval-Print Loop'.  You can think of it like a Node.js shell - it executes Javascript for you, and you can access all of Node's built-in modules, as well as require your own for testing and debugging purposes.  
 
 - The Node REPL is a command interpreter - you can feed it JS
 - Good for testing and experimentation

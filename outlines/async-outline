@@ -1,7 +1,21 @@
 # How to deal with Asynchronous code
 
-This beginner-oriented article should discuss the pitfalls associated with writing asynchronous code, and also the strengths.
+Javascript is an asynchronous language, in contrast to many synchronous languages like PHP, Ruby, Python, Perl, C, etc.  There are a number of important things to be aware of if you don't want your code to execute in extremely unexpected ways.
 
 - Examples of when asynchrnonicity becomes important
 - "The For Loop problem" - JS scope vs. asynchronicity
+  - This:
+
+     for (var i=0; i < 5; i++) {
+       console.log(i);
+     }
+
+  - versus:
+
+     for (var i=0; i < 5; i++) {
+       (function (i) {
+         console.log(i);  
+       })(i);
+     }
+
 - Callbacks - definition, and good-practice examples

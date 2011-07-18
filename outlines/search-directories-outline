@@ -1,0 +1,31 @@
+# How to search directories for files in Node.js
+
+Let's take a look at how to search for a given file in a directory, or a tree of directories.
+
+- First, fs.readdir() example.  Maybe include a Pro Tip about callbacks or file i/o.
+- Mention a case with complex recursion, then segue into findit.
+
+[Node-findit](https://github.com/substack/node-findit), by SubStack, is a helper module to make searching for files easier.  It has interfaces to let you work with callbacks, events, or just plain old synchronously, as you prefer.
+
+Callback:
+
+     require('findit').find(__dirname, function (file) {
+       console.log(file);
+     });
+
+Events:
+
+     var finder = require('findit').find(__dirname);
+
+     finder.on('directory', function (dir) {
+       console.log(dir + '/');
+     });
+
+     finder.on('file', function (file) {
+       console.log(file);
+     });
+
+Old School (Synchronously):
+
+     var files = require('findit').sync(__dirname);
+     console.dir(files);

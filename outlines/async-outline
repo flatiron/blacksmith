@@ -1,0 +1,7 @@
+# How to deal with Asynchronous code
+
+This beginner-oriented article should discuss the pitfalls associated with writing asynchronous code, and also the strengths.
+
+- Examples of when asynchrnonicity becomes important
+- "The For Loop problem" - JS scope vs. asynchronicity
+- Callbacks - definition, and good-practice examples

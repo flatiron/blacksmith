@@ -1,0 +1,8 @@
+# How to use the Node.js REPL
+
+This article should define and describe the Node.js Read-Eval-Print Loop (REPL), and enumerate some of its uses.
+
+- The Node REPL is a command interpreter - you can feed it JS
+- Good for testing and experimentation
+- Discuss REPL idiosyncrasies: `var x = 5` sets a value, `x = 5` sets and returns it; etc.
+- Give a use case or two

@@ -1,0 +1,5 @@
+# The Node.js Error Convention
+
+In Node.js, the customary method of handling asynchronous errors is to reserve the callback's first argument for any errors, and to pass in 'null' if no error occurred.  
+
+This article should provide some simple examples of both good and bad error handling, using something simple like one of the asynchronous functions in the 'fs' module as a demonstration.  

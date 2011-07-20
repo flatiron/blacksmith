@@ -1,13 +1,13 @@
-All npm package have a little file called `package.json` which holds metadata relevant to the project. This little file gives information to npm allowing it to handle the package's dependencies. It also contains other metadata such as its name, description, versions, license and configuration values which is useful to both npm and the user of the package. The package.json file is normally located at the root directory of a node.js project.
+All npm packages contain a file, usually in the project root, called `package.json` - this file holds various metadata relevant to the project.  This file is used to give information to `npm` that allows it to identify the project as well as handle the project's dependencies. It can also contain other metadata such as a project description, the version of the project in a particular distribution, license information, even configuration data - all of which can be vital to both `npm` and to the end users of the package. The `package.json` file is normally located at the root directory of a Node.js project.
 
-Now as an example of probably the most barebones package.json possible:
+Node itself is only aware of two fields in the `package.json`:
 
     {
       "name" : "barebones",
       "version" : "0.0.0",
     }
 
-The `name` field intuitively means the name of your project. The `version` field is used by npm to make sure the right version of the package is being installed. Generally, it takes the form of `major.minor.patch` where `major`, `minor`, and `patch` are integers which increase after each new release. For more details, look at this spec: http://semver.org.
+The `name` field should explain itself: this is the name of your project. The `version` field is used by npm to make sure the right version of the package is being installed. Generally, it takes the form of `major.minor.patch` where `major`, `minor`, and `patch` are integers which increase after each new release. For more details, look at this spec: http://semver.org.
 
 For a more complete package.json, we can check out `underscore`:
 
@@ -24,6 +24,10 @@ For a more complete package.json, we can check out `underscore`:
       "version" : "1.1.6"
     }
 
-As you can see, there are fields for the `description` and `keywords` of your projects. This allows people who find your project understand what it is in a few a few words. The fields `author`, `contributors`, `homepage` and `repository` all can used to reference who wrote the files, show how to contact the author, and gives links for additional references. The file listed in the `main` field is the file that exports the libary. So when someone runs `require(<library name>)`, require resolves this call to `require(<package.json:main>)`. Finally the `dependencies` field is used to list all the dependencies of your project. When someone installs your project through npm, all the dependencies listed will be installed as well. Also if someone runs `npm install` in the root directory of your project, it will install all the dependencies to `./node_modules`.
+As you can see, there are fields for the `description` and `keywords` of your projects. This allows people who find your project understand what it is in just a few words. The `author`, `contributors`, `homepage` and `repository` fields can all be used to credit the people who contributed to the project, show how to contact the author/maintainer, and give links for additional references. 
+
+The file listed in the `main` field is the main entry point for the libary; when someone runs `require(<library name>)`, require resolves this call to `require(<package.json:main>)`. 
+
+Finally, the `dependencies` field is used to list all the dependencies of your project that are available on `npm`. When someone installs your project through `npm`, all the dependencies listed will be installed as well.  Additionally, if someone runs `npm install` in the root directory of your project, it will install all the dependencies to `./node_modules`.
 
 For even more options, you can look through <https://github.com/isaacs/npm/blob/master/doc/json.md> or run `npm help json`

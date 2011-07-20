@@ -14,24 +14,23 @@ setInterval: It's been one second!
 ...
 =====
 
-As you can see the parameters two both are the same. The number second paramter says how long in milliseconds to wait before calling the function passed into the first parameter. The difference between the two functions is that `setTimeout` calls the callback only once while `setInterval` will call it over and over again.
+As you can see the parameters to both are the same. The number second paramter says how long in milliseconds to wait before calling the function passed into the first parameter. The difference between the two functions is that `setTimeout` calls the callback only once while `setInterval` will call it over and over again.
 
-Typically you want to be careful with setInterval because it can cause some undesireable effects. If for example, you want to make sure your server was up by pinging it every second. You might think that the best way is to do it like this:
+Typically you want to be careful with `setInterval` because it can cause some undesireable effects.  If, for example, you wanted to make sure your server was up by pinging it every second, you might think to try something like this:
 
 =======
 setInterval(ping, 1000);
 =======
 
-But an underdesirable problem is if your server is slow and say takes 3 seconds to respond to the first request. In the time it takes to get back the response, you would send off 3 more requests. This isn't bad with a small static file, but if you doing an expensive operation such as database query or any complicated computation this can have some undiserable results. So a common idiom looks like this:
+This can cause problems, however, if your server is slow and it takes, say, 3 seconds to respond to the first request. In the time it takes to get back the response, you would have sent off 3 more requests - not exactly desirable!  This isn't the end of the world when serving small static files, but if you doing an expensive operation such as database query or any complicated computation this can have some undiserable results. A common solution looks like this:
 
     var recursive = function () {
         console.log("It has been one second!");
         setTimeout(recursive,1000);
     }
+    recursive();
 
-    recursive()
-
-As you can see, it makes a call to the `recursive` function that as it completes everything it makes a call to `setTimeout(recursive,1000);` which makes it call `recursive` again in 1 second and thus having near the same effect as setInterval while being resilient to the unintended errors that can pile up.
+As you can see, it makes a call to the `recursive` function which, as it completes, makes a call to `setTimeout(recursive, 1000)` which makes it call `recursive` again in 1 second - thus having near the same effect as setInterval while being resilient to the unintended errors that can pile up.
 
 You can clear the timers you set with `clearTimeout` and `clearInterval`. Their usages are very simple:
 =========
@@ -50,10 +49,10 @@ So if you keep track of the return values of the timers, you can easily unhook t
 
 The final trick for the timer objects is you can pass parameters to the callback by passing more parameters to setTimeout and setInterval:
 ==========
-setTimeout(console.log, 1000, "This", "has", 4, "paramaters");
+setTimeout(console.log, 1000, "This", "has", 4, "parameters");
 setInterval(console.log, 1000, "This only has one");
 ==========
-This has 4 paramaters
+This has 4 parameters
 This only has one
 This only has one
 This only has one

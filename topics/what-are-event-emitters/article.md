@@ -1,6 +1,6 @@
 What are Event Emitters?
 
-In node.js an event is simply can be described as a string with a corresponding callback. An event can be "emitted" (or in other words, the corresponding callback be called) multiple times or you can choose to only listen for the first time it is emitted. So a simple example ran on the node REPL <link>:
+In node.js an event can be described simply as a string with a corresponding callback. An event can be "emitted" (or in other words, the corresponding callback be called) multiple times or you can choose to only listen for the first time it is emitted. So a simple example ran on the node REPL <link>:
 
     var example_emitter = new (require('events').EventEmitter);
     example_emitter.on("test", function () { console.log("test"); });
@@ -24,11 +24,15 @@ In node.js an event is simply can be described as a string with a corresponding 
     > example_emitter.emit("unhandled");
     false   //return value
 
-This demonstates all the basic functionality of an EventEmitter. The `on` or `addListener` method (basically the subscription method) allows you to choose the event to watch for and the callback to be called. While the `emit` method (the publish method) allows you to "emit" a event, meaning all callbacks registered to the event get called. So in the example, we first subscribe to both the `test` and `print` events. Then we emit the `test`, `print`, and `unhandled` events. Since `unhandled` has no callback, it just returns false, the other two run all the attached callbacks and returns true. As you can see in the `print` event, we pass an extra paramter, this is because all the extra paramaters get passed to the callback. 
+This demonstates all the basic functionality of an EventEmitter. The `on` or `addListener` method (basically the subscription method) allows you to choose the event to watch for and the callback to be called. The `emit` method (the publish method), on the other hand, allows you to "emit" an event, which causes all callbacks registered to the event to 'fire', (get called). 
 
-If you use the method `once` instead of `on`, then after the callback is fired, it is removed from the list of callbacks. A handy little function if you want to detect the first time an event has been emitted. 
+So in the example, we first subscribe to both the `test` and `print` events. Then we emit the `test`, `print`, and `unhandled` events. Since `unhandled` has no callback, it just returns false; the other two run all the attached callbacks and return true. 
 
-If you want remove a specific callback, you can use `removeListener`. If you want to simply nuke all callbacks to a specific event, you can use `removeAllListeners`. 
+In the `print` event, note that we pass an extra paramter - all the extra paramaters passed to 'emit' get passed to the callback function as arguments. 
+
+If you use the method `once` instead of `on`, after the callback is fired, it is removed from the list of callbacks. A handy little function if you want to detect only the first time an event has been emitted. 
+
+If you want remove a specific callback, you can use `removeListener`. If you want to remove all callbacks to a specific event, you can use `removeAllListeners`. 
 
     //This is probably more confusing that useful
     var ee = new (require('events').EventEmitter);

@@ -1,4 +1,4 @@
-This task is very simple because writing to a file is built into the node.js api. We can use the handy api call `writeFile` inside the `fs` module which makes the whole process very streamlined. 
+This task is very simple because writing to a file is built into the Node.js api. We can use the handy api call `writeFile` inside the `fs` module which makes the whole process very streamlined. 
 
     fs = require('fs');
     fs.writeFile(filename, data, [encoding], [callback])
@@ -22,7 +22,7 @@ So if we wanted to write "Hello World" to `helloworld.txt`:
     [contents of helloworld.txt]:
     Hello World!
 
-If we purposely want to make an error message, we can try to write a file we dont have permission to:
+If we purposely want to cause an error, we can try to write to a file that we don't have permission to access:
 
     fs = require('fs')
     fs.writeFile('/etc/doesntexist', 'abc', function (err,data) {

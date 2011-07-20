@@ -1,15 +1,15 @@
-This task is very simple because reading a file is built into the node.js api. We can use the handy api call `readFile` inside the `fs` module which is very easy to use thankfully. 
+Reading the contents of a file into memory is a very common programming task, and, as with many other things, the Node.js core API provides methods to make this trivial.  There are a variety of file system methods, all contained in the `fs` module.  The easiest way to read the entire contents of a file is with `fs.readFile`, as follows:
 
     fs = require('fs');
     fs.readFile(file, [encoding], [callback]);
 
-    file = (string) filepath of the file to read
+    // file = (string) filepath of the file to read
 
-`encoding = (optional string)` the type of encoding to read the file. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding provided, the raw buffer is returned.
+`encoding` is an optional parameter that specifies the type of encoding to read the file. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding provided, the raw buffer is returned - which is usually NOT human-readable data!
 
-`callback = (optional function (err, data) {})` If there is no error, `err === null` and `data` will contain the file contents, otherwise `err` contains the error message.
+`callback` is a function to call when the file has been read and the contents are ready - it is passed two arguments, `error` and `data`.  If there is no error, `error` will be `null` and `data` will contain the file contents; otherwise `err` contains the error message.
 
-So if we wanted to read `/etc/hosts` and print it to stdout:
+So if we wanted to read `/etc/hosts` and print it to stdout (just like UNIX `cat`):
 
     fs = require('fs')
     fs.readFile('/etc/hosts', 'utf8', function (err,data) {
@@ -19,18 +19,19 @@ So if we wanted to read `/etc/hosts` and print it to stdout:
       console.log(data);
     });
 
+The contents of `/etc/hosts` should now be visible to you, provided you have permission to read the file in the first place.
 
-    [prints: contents of '/etc/hosts']
+Let's now take a look at an example of what happens when you try to read an invalid file - the easiest example is one that doesn't exist.
 
-An example of what happens when you read an invalid file
-
-    fs = require('fs')
+    fs = require('fs');
     fs.readFile('/doesnt/exist', 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
       console.log(data);
     });
+
+This is the output:
 
     { stack: [Getter/Setter],
       arguments: undefined,
@@ -39,3 +40,5 @@ An example of what happens when you read an invalid file
       errno: 2,
       code: 'ENOENT',
       path: '/doesnt/exist' }
+
+This is a basic Node.js Error object - it can often be useful to log `err.stack` directly, since this contains a stack trace to the location in code at which the Error object was created.  (Link to article about stack traces?)

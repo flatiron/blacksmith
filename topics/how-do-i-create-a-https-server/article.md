@@ -1,14 +1,17 @@
+# How to create an HTTPS server
 
-To create a HTTPS server, you need to get an SSL certificate and then use the `https` module. Generally, you want to use a CA-signed certicate in a production environment, but for testing purpose, a self-signed certicate is enough.
+To create an HTTPS server, you need two things: an SSL certificate, and Node's built-in `https` module.
 
-To generate a self-signed certificate:
+We need to start out with a word about SSL certificates.  Speaking generally, there are two kinds of certificates: those signed by a 'Certificate Authority', or CA, and 'self-signed certificates'.  A Certificate Authority is a trusted source for an SSL certificate, and using a certificate from a CA allows your users to be sure of both the integrity of your cipher and the truth of the identity of your website.  In most cases, you would want to use a CA-signed certificate in a production environment - for testing purposes, however, a self-signed certicate will do just fine.
+
+To generate a self-signed certificate, run the following in your shell:
 
     openssl genrsa -out key.pem
     openssl req -new -key key.pem -out csr.pem
     openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
     rm csr.pem
 
-This should leave you with two files, `cert.pem` (the certificate) and `key.pem` (the private key). This is all you need for a SSL connection. So now you set up a quick hello world example (the main addition from http <link to article> is the options parameter):
+This should leave you with two files, `cert.pem` (the certificate) and `key.pem` (the private key). This is all you need for a SSL connection. So now you set up a quick hello world example (the biggest difference between https and http <link to article> is the `options` parameter):
 
     var https = require('https');
     var fs = require('fs');
@@ -23,7 +26,9 @@ This should leave you with two files, `cert.pem` (the certificate) and `key.pem`
       res.end("hello world\n");
     }).listen(8000);
 
-Now you should be able to get the file with curl:
+NODE PRO TIP: Note `fs.readFileSync` - unlike `fs.readFile`, `fs.readFileSync` will block the entire process until it completes.  In situations like this - loading vital configuration data - the `sync` functions are okay.  In a busy server, however, using a synchronous function during a request will force the server to deal with the requests one by one!
+
+Now that your server is set up and started, you should be able to get the file with curl:
 
     curl -k https://localhost:8000
 

@@ -29,7 +29,7 @@ As an example, we are going to preform a GET request to <www.random.org/integers
     http.request(options, callback).end();
 
 
-Make a POST request is just as easy. Unfortunately, there are no simple POST endpoints to use an example. You can use this script to spawn up a server that listens for POST requests and echos back the request. //If we can just run it on the nodedocs server, that would make things much easier
+Making a POST request is just as easy. Unfortunately, there are no simple POST endpoints to use as an example. You can use this script to spawn up a server that listens for POST requests and echos back the request. //If we can just run it on the nodedocs server, that would make things much easier
 
     var http = require('http');
     http.createServer(function (req, res) {

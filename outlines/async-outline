@@ -5,6 +5,8 @@ Javascript is an asynchronous language, in contrast to many synchronous language
 - Examples of when asynchrnonicity becomes important
 ///This is probably important soon
 
+Most functions have a syncronous version by prepending `Sync`. You normally want to stay away from these. Conventional node.js code uses the asyncronous code. //example of sync vs async and explanation why blocking isnt good
+
 A common mistake in asyncronous code with javascript is to write code that does something like this:
 
      for (var i = 0; i < 5; i++) {

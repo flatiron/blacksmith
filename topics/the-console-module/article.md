@@ -8,13 +8,18 @@ Because of this browser parallel, the `console` module has become home to quite 
      console.log('This script is:', __filename);
      console.log(__filename, process.title, process.argv);
 
-The first, simplest example just prints the provided string to `stdout`.  It can also be used to output the contents of variables, as evidenced in #2; furthermore, `console.dir()` is called on any objects passed in as arguments, enumerating their properties.  
+The first, simplest example just prints the provided string to `stdout`.  It can also be used to output the contents of variables, as evidenced in #2; furthermore, `console.dir()` is called on any objects passed in as arguments, enumerating their properties.
 
 NODE.JS PRO TIP:
-`console.log()` accepts printf-style format strings!  This is more advanced, but worth mentioning briefly.
+`console.log()` accepts three format characters, `%s`, `%d`, and `%j`.  These format characters can be used to insert string, integer, or JSON data into your output - the order of format characters must match the order of arguments.
 
-     var name = 'Harry';
-     console.log('My name is %s', name);
+     var name = 'Harry',
+         number = 17,
+         myObj = {
+           propOne: 'stuff',
+           propTwo: 'more stuff'
+         };
+     console.log('My name is %s, my number is %d, my object is %j', name, number, myObj);
 
 
 `console.dir()`, as mentioned above, is an alias for `util.inspect()` - it is used to enumerate object properties.  [Read More](link to util.inspect article)

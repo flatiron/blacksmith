@@ -1,4 +1,4 @@
-Suppose you want to list all the files in the current directory, you can use the builtin `fs.readdir` method <link to fs module>. This will get you a list of all the files and directories:
+Suppose you want to list all the files in the current directory.  One approach is to use the builtin `fs.readdir` method <link to fs module>. This will get you an array of all the files and directories on the specified path:
 
     fs = require('fs');
 
@@ -11,13 +11,13 @@ Suppose you want to list all the files in the current directory, you can use the
     });
 
 
-Unfortunately, if you want to do a recursive list of files, then things get much more complicated very quickly. To maintain complexity, it is recommended to use libraries. [Node-findit](https://github.com/substack/node-findit), by SubStack, is a helper module to make searching for files easier.  It has interfaces to let you work with callbacks, events, or just plain old synchronously (generally, keep away from using synchronously interfaces). Here we will create use the event interface to print a list of the directories and files.
+Unfortunately, if you want to do a recursive list of files, then things get much more complicated very quickly. To avoid all manner of complexity, this is one of the places where a Node.js `userland` library can save the day. [Node-findit](https://github.com/substack/node-findit), by SubStack, is a helper module to make searching for files easier.  It has interfaces to let you work with callbacks, events, or just plain old synchronously (not a good idea most of the time).
 
-To install `node-findit`, in the main folder of your project run:
+To install `node-findit`, simply use npm:
 
     npm install findit
 
-In the same folder, create a file called `example.js` with this inside of it and then run it with `node example.js`:
+In the same folder, create a file called `example.js`, and then add this code.  Run it with `node example.js`.  This example uses the `node-findit` event-based interface.
 
     //This sets up the file finder
     var finder = require('findit').find(__dirname);

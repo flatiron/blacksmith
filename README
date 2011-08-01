@@ -1,21 +1,3 @@
-To Run
-======
-npm install coffee-script -g
-coffee server.coffee
-
-Everything about this project is under flux
-
-Preliminary routes
-================
-GET /tags
-    -return all unique tags (these are the differing topics)
-
-GET /tag/:tagid
-    -return all articles with that tag
-
-GET /article/:article
-    -return "rendered" article content
-
 
 Directory Structure
 ===================

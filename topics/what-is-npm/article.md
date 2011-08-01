@@ -3,11 +3,7 @@
 
 Let's say you're hard at work one day, developing the Next Great Application.  You come across a problem, and you decide that it's time to use that cool library you keep hearing about - let's use Caolan McMahon's [async](http://github.com/caolan/async) as an example. Thankfully, `npm` is very simple to use: you only have to run `npm install async`, and the specified module will be installed in the current directory under `./node_modules/`.  Once installed to your `node_modules` folder, you'll be able to use `require()` on them just like they were built-ins.
 
-`npm` also contains a wide variety of CLI tools written in Node.js, but the recommended installation is a little bit different.  A CLI tool should be installed somewhere on the system `PATH` - this can be accomplished with `npm`'s `-g` option.  Please note that this may require superuser access (via `su`, `sudo`, or your local administrator) if Node is installed to a directory that you cannot access directly.
-
-Let's look at an example of a global install - let's say `coffee-script`. The npm command is simple: `npm install coffee-script -g`. This will install the program to the path where Node is installed - the default is `/usr/local/bin/`, but be advised that installing to this path will require superuser access.  This will then allow you to run the program from the console just like any other CLI tool.  In this case, running `coffee` will now work and allow you to use the coffee-script REPL. 
-
-
+Let's look at an example of a global install - let's say `coffee-script`. The npm command is simple: `npm-g install coffee-script`. This typically will install the program to /usr/local/bin/`.  This will then allow you to run the program from the console just like any other CLI tool.  In this case, running `coffee` will now work and allow you to use the coffee-script REPL. 
 
 Another important use for npm is dependency management.  When you have a node project with a <a href="package.json">package.json</a> file, you can run `npm install` from the project root and npm will install all the dependencies listed in the package.json. This makes installing a Node project from a git repo much easier! For example, `vows`, one of Node's testing frameworks, can be installed from git, and its single dependency, `eyes`, can be automatically handled:
 

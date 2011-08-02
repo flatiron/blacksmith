@@ -1,3 +1,10 @@
+To run the demo:
+
+    node bin/server.js
+
+Go to localhost:8080/index.htm
+
+
 To add an article:
 
 - make a directory in `topics` for your article: `mkdir topics/how-to-make-an-article` (use only letters and dashes)

@@ -1,5 +1,7 @@
 var dnode = require('dnode'),
-    fs = require('fs');
+    fs = require('fs'),
+    connect = require('connect'),
+    markdown = require('markdown');
 
 var tags = require('../lib/tags');
 
@@ -18,7 +20,7 @@ getGuide = function (name, callback) {
       catch (e) {
         return callback(new Error('Error parsing metadata.json'));
       }
-      context.content = article
+      context.content = markdown.parse(article);
       return callback(null, context);
     });
   });
@@ -45,9 +47,13 @@ var getTags = function (callback) {
   }
 }
 
-var server = dnode({
+var server = connect.createServer();
+server.use(connect.static(__dirname+"/../public"));
+server.listen(8080);
+console.log("http://localhost:8080/");
+
+dnode({
   getGuide: getGuide,
   getGuides: getGuides,
   getTags: getTags
-});
-server.listen(8080);
+}).listen(server);

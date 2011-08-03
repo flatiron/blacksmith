@@ -6,6 +6,7 @@ var dnode = require('dnode'),
 var tags = require('../lib/tags'),
     articles = require('../lib/articles');
 
+// This gets the article data and parses the markdown
 var getGuide = function (name, callback) {
   var obj = articles[name].metadata;
   obj.content = markdown.parse(articles[name].article);
@@ -13,11 +14,9 @@ var getGuide = function (name, callback) {
   callback(null, obj);
 }
 
+// This gets the list of articles with a specific tag
 var getGuides = function (tagId, callback) {
-  if (tags.error) {
-    return callback(tags.error);
-  }
-  else if (tags.tagid[tagId] == undefined) {
+  if (tags.tagid[tagId] == undefined) {
     return callback("Undefined tag");
   }
   else {
@@ -25,13 +24,9 @@ var getGuides = function (tagId, callback) {
   }
 }
 
+// This gets the list of tags
 var getTags = function (callback) {
-  if (tags.error) {
-    return callback(tags.error);
-  }
-  else {
-    return callback(null, tags.names);
-  }
+  return callback(null, tags.names);
 }
 
 var server = connect.createServer();

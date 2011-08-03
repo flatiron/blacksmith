@@ -3,27 +3,14 @@ var dnode = require('dnode'),
     connect = require('connect'),
     markdown = require('markdown');
 
-var tags = require('../lib/tags');
+var tags = require('../lib/tags'),
+    articles = require('../lib/articles');
 
-getGuide = function (name, callback) {
-  fs.readFile('topics/'+name+'/article.md', 'utf8', function (err, article) {
-    if (err) {
-      return callback(err);
-    }
-    fs.readFile('topics/'+name+'/metadata.json', 'utf8', function (err, json) {
-      if (err) {
-        return callback(err);
-      }
-      try {
-        context = JSON.parse(json);
-      }
-      catch (e) {
-        return callback(new Error('Error parsing metadata.json'));
-      }
-      context.content = markdown.parse(article);
-      return callback(null, context);
-    });
-  });
+var getGuide = function (name, callback) {
+  var obj = articles[name].metadata;
+  obj.content = markdown.parse(articles[name].article);
+
+  callback(null, obj);
 }
 
 var getGuides = function (tagId, callback) {

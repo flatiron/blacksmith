@@ -1,7 +1,0 @@
-{
-    "title":"Console.log is asynchronous - watch out!",
-    "date": "Today",
-    "tags": ["cli", "output", "async"],
-    "author": "AvianFlu",
-    "difficulty": 1
-}

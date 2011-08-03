@@ -21,6 +21,7 @@
           document.getElementById("list-of-articles").innerHTML = err;
           return;
         }
+        document.getElementById("list-of-articles").innerHTML = "";
         for (var i = 0; i < list.length; ++i) {
           document.getElementById("list-of-articles").innerHTML +=
               "<a href='#' onclick='loadArticle(\""+list[i]+"\")'>"+list[i]+"</a> ";

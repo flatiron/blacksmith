@@ -29,6 +29,16 @@ var getTags = function (callback) {
   return callback(null, tags.names);
 }
 
+var getArticleList = function (callback) {
+  var list = [];
+  var paths = [];
+  for (article in articles) {
+    list.push(article);
+    paths.push(articles[article].path);
+  }
+  callback(null, list, paths);
+}
+
 var server = connect.createServer();
 server.use(connect.static(__dirname+"/../public"));
 server.listen(8080);
@@ -37,5 +47,6 @@ console.log("http://localhost:8080/");
 dnode({
   getGuide: getGuide,
   getGuides: getGuides,
-  getTags: getTags
+  getTags: getTags,
+  getArticleList: getArticleList
 }).listen(server);

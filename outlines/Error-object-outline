@@ -1,7 +1,0 @@
-# What is the Error object?
-
-The Error object is a built-in javascript object for dealing with errors.  It contains a number of useful properties:
-
-- Error.message - a one-sentence description of the error.  Make these clear in your own errors!
-- Error.stack - a stack trace to the location the error was created.  When using `new Error()`, the location in code at which the constructor was called will be where the stack trace points to.
-- `new Error()` - Throw your own errors the right way and pass them to the callback!

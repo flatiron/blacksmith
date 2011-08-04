@@ -1,7 +1,0 @@
-# How to use Try-Catch
-
-Node.js includes Javascript's Try-Catch-Finally construct for handling errors, similar to that encountered in C++.  First, your code is 'tried'; if an exception occurrs (is `thrown`), you provide code to 'catch' it, and then the `finally` block is executed after the try/catch, but before any subsequent code.
-
-- When to use / when not to use
-- JSON.parse() is the only place in Node.js that it's necessary
-- Discuss `throw` and why passing errors via callback is cleaner

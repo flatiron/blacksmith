@@ -1,8 +1,0 @@
-# How to use util.inspect
-
-Node provides a utility function, for debugging purposes, that returns a string representation of an object (a la JSON).  Knowledge of this method - `util.inspect()` - can be a true lifesaver while working with properties of large, complex objects.  
-
-- Provide an example of basic usage.  
-- Describe the 'depth' and 'showHidden' arguments.
-  - 'depth' is how many levels of nested properties to recurse; the default is 2.  'null' will recurse all the way.
-  - 'showHidden' - false by default; if enabled, the 'non-enumerable' properties of the object will be listed.  (More of an advanced topic - maybe link to an advanced article.)

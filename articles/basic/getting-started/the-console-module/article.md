@@ -2,7 +2,7 @@
 
 Anyone familiar with browser-side development has probably used `console.log` for debugging purposes - Node.js has implemented a built-in `console` object to mimic much of this experience.  Since we're working server-side, however, it wraps `stdout`, `stdin`, and `stderr` instead of the browser's debugging console.
 
-Because of this browser parallel, the `console` module has become home to quite a bit of Node's standard output functionality.  The simplest is `console.log()`. 
+Because of this browser parallel, the `console` module has become home to quite a bit of Node's standard output functionality.  The simplest is `console.log()`.
 
      console.log('Hi, everybody!');
      console.log('This script is:', __filename);
@@ -21,6 +21,8 @@ NODE.JS PRO TIP:
          };
      console.log('My name is %s, my number is %d, my object is %j', name, number, myObj);
 
+A gotcha with `console.log`, and all functions that depend on it, is that it buffers the output. So if your process ends suddenly whether it be from an exception or from `process.exit()`, it is entirely possible that the buffer will not drain. This can cause some of your output can get eaten, so watch out for this unfortunate situation. `console.error` is a blocking call that waits until the output has finished draining, so it avoids this situation.
+
 
 `console.dir()`, as mentioned above, is an alias for `util.inspect()` - it is used to enumerate object properties.  [Read More](/how-to-use-util-inspect)
 
@@ -36,7 +38,7 @@ That covers the basic `console` module functionality, but there are a few other 
        })(i);
      }
      console.timeEnd('myTimer');
-     
+
 This would determine the amount of time taken to perform the actions in between the `console.time` and `console.timeEnd` calls.
 
 One last function worth mentioning is `console.trace()`, which prints a stack trace to its location in your code without throwing an error.  This can occasionally be useful if you'd like to figure out where a particular failing function was called from. 

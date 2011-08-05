@@ -41,6 +41,14 @@ var getArticleList = function (callback) {
 }
 
 var server = connect.createServer();
+
+server.use(function(req, res, next) {
+  if (req.url==="/") {
+    req.url = "/index.htm";
+  }
+  next();
+});
+
 server.use(connect.static(__dirname+"/../public"));
 server.listen(8080);
 console.log("Main server is running on: http://localhost:8080/");

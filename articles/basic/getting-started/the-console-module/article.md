@@ -22,7 +22,7 @@ NODE.JS PRO TIP:
      console.log('My name is %s, my number is %d, my object is %j', name, number, myObj);
 
 
-`console.dir()`, as mentioned above, is an alias for `util.inspect()` - it is used to enumerate object properties.  [Read More](link to util.inspect article)
+`console.dir()`, as mentioned above, is an alias for `util.inspect()` - it is used to enumerate object properties.  [Read More](/how-to-use-util-inspect)
 
 `console.error()` is the same as `console.log`, except that the output is sent to `stderr` instead of `stdout`.
 

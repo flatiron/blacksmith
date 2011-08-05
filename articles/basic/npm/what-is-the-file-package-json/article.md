@@ -7,7 +7,7 @@ Node itself is only aware of two fields in the `package.json`:
       "version" : "0.0.0",
     }
 
-The `name` field should explain itself: this is the name of your project. The `version` field is used by npm to make sure the right version of the package is being installed. Generally, it takes the form of `major.minor.patch` where `major`, `minor`, and `patch` are integers which increase after each new release. For more details, look at this spec: http://semver.org.
+The `name` field should explain itself: this is the name of your project. The `version` field is used by npm to make sure the right version of the package is being installed. Generally, it takes the form of `major.minor.patch` where `major`, `minor`, and `patch` are integers which increase after each new release. For more details, look at this spec: [http://semver.org](http://semver.org/).
 
 For a more complete package.json, we can check out `underscore`:
 
@@ -32,4 +32,4 @@ Finally, the `dependencies` field is used to list all the dependencies of your p
 
 It is also possible to add a `devDependencies` field to your `package.json` - these are dependencies not required for normal operation, but required/recommended if you want to patch or modify the project.  If you built your unit tests using a testing framework, for example, it would be appropriate to put the testing framework you used in your `devDependencies` field.  To install a project's `devDependencies`, simply pass the `--dev` option when you use `npm install`.
 
-For even more options, you can look through <https://github.com/isaacs/npm/blob/master/doc/json.md> or run `npm help json`
+For even more options, you can look through the [online docs](https://github.com/isaacs/npm/blob/master/doc/json.md) or run `npm help json`

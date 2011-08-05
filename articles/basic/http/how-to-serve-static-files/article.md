@@ -1,4 +1,4 @@
-A basic necessity for most [link]http servers is to be able to serve static files. Thankfully, it is not that hard to do in Node.js. First you [link]read the file, then you serve the file.  Here is an example of a script that will serve the files in the current directory:
+A basic necessity for most [http servers](/how-do-i-create-a-https-server) is to be able to serve static files. Thankfully, it is not that hard to do in Node.js. First you [link]read the file, then you serve the file.  Here is an example of a script that will serve the files in the current directory:
 
     var fs = require('fs'),
         http = require('http');

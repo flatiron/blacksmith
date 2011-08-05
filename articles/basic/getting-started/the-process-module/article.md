@@ -41,7 +41,7 @@ STDOUT, or non-blocking functions: `console.log`, `console.info`, `util.puts`, `
 
 STDERR, or blocking functions: `console.warn`, `console.error`, `util.debug`
 
-Lastly, `process.stdin` is a readable stream for getting user input.  See (prompting users for CLI input article).
+Lastly, `process.stdin` is a readable stream for getting user input.  See [more on cli input](/how-to-prompt-for-cli-input).
 
 ##Other Properties
 
@@ -58,7 +58,7 @@ The `process` object additionally contains a variety of properties that allow yo
 
 The `pid` is the OS Process ID, `platform` is something general like 'linux' or 'darwin', and `version` refers to your Node version.  `process.title` is a little bit different - while set to `node` by default, it can be set to anything you want, and will be what gets displayed in lists of running processes.
 
-The `process` module also exposes `process.argv`, an array containing the command-line arguments to the current process, and `process.argc`, an integer representing the number of arguments passed in.  See (How to parse command line arguments).
+The `process` module also exposes `process.argv`, an array containing the command-line arguments to the current process, and `process.argc`, an integer representing the number of arguments passed in.  Read more on [how to parse comamnd line arguments](/how-to-parse-command-line-args)
 
 `process.execPath` will return the absolute path of the executable that started this process.
 

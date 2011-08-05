@@ -1,6 +1,6 @@
 How do I prompt users for input from a command-line script?
 
-So you've got a little CLI tool, but you want to be able to prompt a user for additional data after the script has started, rather than passing it in as a command line argument or putting it in a file.  To do this, you'll need to listen to STDIN ("standard input", i.e. your keyboard), which Node.js exposes for you as `process.stdin`, a Readable Stream.  
+So you've got a little CLI tool, but you want to be able to prompt a user for additional data after the script has started, rather than passing it in as a command line argument or putting it in a file.  To do this, you'll need to listen to STDIN ("standard input", i.e. your keyboard), which Node.js exposes for you as `process.stdin` which is a readable stream.  
 
 Streams are Node's way of dealing with evented I/O - they're a big topic, and you can read more about them (here).  For now, we're only going to deal with the Stream methods relevant to working with `process.stdin` so as to keep the examples easy.
 
@@ -9,9 +9,9 @@ The first two Readable Stream methods you'll need to know about here are `pause(
 Here's a simple example.  Try the following in a new file:
 
       process.stdin.resume();
+      process.stdin.setEncoding('utf8');
       
-      process.stdin.on('data', function (data) {
-        var text = data.toString();
+      process.stdin.on('data', function (text) {
         if (text === 'quit\n') { 
           process.stdin.pause();
           done();
@@ -24,7 +24,7 @@ Here's a simple example.  Try the following in a new file:
         process.exit();
       }
 
-NODE PRO TIP: A Readable Stream's `data` event usually returns instances of Node's `Buffer` object - remember to call `buffer.toString()` if you want human-readable data!
+NODE PRO TIP: Make sure to set the encoding type to `utf8` or else the `data` event will return instances of Node's `Buffer` object.
 
 If all of this sounds complicated, or if you want a higher-level interface to this sort of thing, don't worry - as usual, the Node.js community has come to the rescue.  One particularly friendly module to use for this is Prompt, maintained by Nodejitsu.  It's available on `npm`:
 

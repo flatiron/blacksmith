@@ -41,4 +41,4 @@ This is the output:
       code: 'ENOENT',
       path: '/doesnt/exist' }
 
-This is a basic Node.js Error object - it can often be useful to log `err.stack` directly, since this contains a stack trace to the location in code at which the Error object was created.  (Link to article about stack traces?)
+This is a basic Node.js [Error object](/what-is-the-error-object) - it can often be useful to log `err.stack` directly, since this contains a stack trace to the location in code at which the Error object was created.

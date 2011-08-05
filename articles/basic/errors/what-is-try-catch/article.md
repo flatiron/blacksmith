@@ -36,4 +36,4 @@ Note that you can omit the `catch` or `finally` block, but one of them must be p
 
 ## But wait, isn't it Node.js convention to not use try-catch?
 
-In the core node.js libraries, the only place that one needs to use a try-catch is around `JSON.parse()`. All of the other methods use either the standard Error object through the first parameter of the callback or emit an `error` event. Because of this, it is generally considered better to return errors through the callback than it is to throw. <link to error callback article>
+In the core node.js libraries, the only place that one needs to use a try-catch is around `JSON.parse()`. All of the other methods use either the standard Error object through the first parameter of the callback or emit an `error` event. Because of this, it is generally considered [standard](/what-are-the-error-conventions) to return errors through the callback than it is to throw.

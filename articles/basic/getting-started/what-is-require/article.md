@@ -1,4 +1,4 @@
-Node.js follows the CommonJS module system, and the builtin `require` function is the easiest way to include modules that exist in separate files. The basic functionality of `require` is that it reads a javascript file, executes the file, and then proceeds to return the `exports` object. An example module:
+ Node.js follows the CommonJS module system, and the builtin `require` function is the easiest way to include modules that exist in separate files. The basic functionality of `require` is that it reads a javascript file, executes the file, and then proceeds to return the `exports` object. An example module:
 
     console.log("evaluating example.js");
 
@@ -42,7 +42,7 @@ It is worth noting that each time you subsequently require an already-required f
 
 As you can see from the above, `example.js` is evaluated the first time, but all subsequent calls to `require()` only invoke the module cache, rather than reading the file again.  As seen above, this can occasionally produce side effects.
 
-The rules of where `require` finds the files can be a little complex, but a simple rule of thumb is that if the file doesn't start with "./" or "/", then it is either considered a core module (and the local Node path is checked), or a dependency in the local `node_modules` folder. If the file starts with "./" it is considered a relative file to the file that called `require`. If the file starts with "/", it is considered an absolute path. NOTE: you can omited ".js" and `require` will automatically append it if needed. For more detailed information, http://nodejs.org/docs/v0.4.2/api/modules.html#all_Together...
+The rules of where `require` finds the files can be a little complex, but a simple rule of thumb is that if the file doesn't start with "./" or "/", then it is either considered a core module (and the local Node path is checked), or a dependency in the local `node_modules` folder. If the file starts with "./" it is considered a relative file to the file that called `require`. If the file starts with "/", it is considered an absolute path. NOTE: you can omited ".js" and `require` will automatically append it if needed. For more detailed information, see [the official docs](http://nodejs.org/docs/v0.4.2/api/modules.html#all_Together...)
 
 An extra note: if the filename passed to `require` is actually a directory, it will first look for `package.json` in the directory and load the file referenced in the `main` property. Otherwise, it will look for an `index.js`.
 

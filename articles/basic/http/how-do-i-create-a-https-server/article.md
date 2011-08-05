@@ -11,7 +11,7 @@ To generate a self-signed certificate, run the following in your shell:
     openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
     rm csr.pem
 
-This should leave you with two files, `cert.pem` (the certificate) and `key.pem` (the private key). This is all you need for a SSL connection. So now you set up a quick hello world example (the biggest difference between https and http <link to article> is the `options` parameter):
+This should leave you with two files, `cert.pem` (the certificate) and `key.pem` (the private key). This is all you need for a SSL connection. So now you set up a quick hello world example (the biggest difference between https and [http](/how-do-i-create-a-http-server) is the `options` parameter):
 
     var https = require('https');
     var fs = require('fs');
@@ -32,4 +32,4 @@ Now that your server is set up and started, you should be able to get the file w
 
     curl -k https://localhost:8000
 
-or in your browser, by going to `https://localhost:8000`. 
+or in your browser, by going to [https://localhost:8000](https://localhost:8000). 

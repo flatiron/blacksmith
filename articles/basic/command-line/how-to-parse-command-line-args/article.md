@@ -49,7 +49,7 @@ JS PRO TIP: Remember to `break` after each `case` - otherwise you'll run the nex
 
 Referring to your command-line arguments by array index isn't very clean, and can quickly turn into a nightmare when you start working with flags and the like - imagine you made a server, and it needed a lot of arguments.  Imagine having to deal with something like `myapp -h host -p port -r -v -b --quiet -x -o outfile` - some flags need to know about what comes next, some don't, and most CLIs let users specify arguments in any order they want.  Sound like a fun string to parse?
 
-Luckily, there's a third party module that makes all of this trivial - it's called Optimist, written by one Mr. James Halliday (aka SubStack).  It's available via `npm`.  Use this command from your app's base path:
+Luckily, there's a third party module that makes all of this trivial - it's called [Optimist](https://github.com/substack/node-optimist), written by one Mr. James Halliday (aka SubStack).  It's available via `npm`.  Use this command from your app's base path:
 
      npm install optimist
      
@@ -82,4 +82,4 @@ The last line was included to let you see how Optimist handles your arguments.  
 - `argv._` is an array containing each element not attached to a flag.
 - Individual flags become properties of `argv`, such as with `myArgs.h` and `myArgs.help`.  Note that non-single-letter flags must be passed in as `--flag`.  
 
-For more information on Optimist and the many, many other things it can do for your command-line arguments, please see https://github.com/substack/node-optimist
+For more information on Optimist and the many, many other things it can do for your command-line arguments, please visit [https://github.com/substack/node-optimist](https://github.com/substack/node-optimist)

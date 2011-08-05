@@ -21,7 +21,7 @@ The simplest way is the "fire, forget, and buffer" method using `child_process.e
        console.log('Child process exited with exit code '+code);
      });
 
-NODE PRO TIP: `error.stack` is a stack trace to the point that the Error object was created.<link to error object>
+NODE PRO TIP: `error.stack` is a stack trace to the point that the [Error object](/what-is-the-error-object) was created.
 
 It should be noted that the `STDERR` of a given process is not exclusively reserved for error messages. Many programs use it as a channel for secondary data instead.  As such, when trying to work with a program that you have not previously spawned as a child process, it can be helpful to start out dumping both `STDOUT` and `STDERR`, as shown above, to avoid any surprises.
 

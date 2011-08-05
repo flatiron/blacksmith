@@ -1,7 +1,7 @@
 {
     "title":"What are the built-in timer functions?",
     "date": "Today",
-    "tags": ["timers", "core"],
+    "tags": ["core", "builtin", "globals"],
     "author": "nico",
     "difficulty": 1
 }

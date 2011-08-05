@@ -1,7 +1,7 @@
 {
     "title":"How do I use node's REPL?",
     "date": "Today",
-    "tags": ["REPL"],
+    "tags": ["cli", "repl"],
     "author": "nico",
     "difficulty": 1
 }

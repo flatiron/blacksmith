@@ -1,7 +1,7 @@
 {
     "title":"How to store local configuration data",
     "date": "Today",
-    "tags": ["userland", "configuration", "nconf"],
+    "tags": ["conventions", "filesystem"],
     "author": "AvianFlu",
     "difficulty": 1
 }

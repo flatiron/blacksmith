@@ -1,7 +1,7 @@
 {
     "title":"How to serve static files",
     "date": "Today",
-    "tags": ["node-static", "http", "server"],
+    "tags": ["http"],
     "author": "nico",
     "difficulty": 1
 }

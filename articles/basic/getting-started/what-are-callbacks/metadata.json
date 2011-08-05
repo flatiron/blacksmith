@@ -1,7 +1,7 @@
 {
     "title":"What are callbacks?",
     "date": "Today",
-    "tags": ["javascript", "core"],
+    "tags": ["javascript", "core", "asynchronous", "callbacks"],
     "author": "nico",
     "difficulty": 1
 }

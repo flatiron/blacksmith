@@ -1,7 +1,7 @@
 {
     "title":"What is require?",
     "date": "Today",
-    "tags": ["require", "core", "modules"],
+    "tags": ["npm", "core", "globals", "builtin"],
     "author": "nico",
     "difficulty":1
 }

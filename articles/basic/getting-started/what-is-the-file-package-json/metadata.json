@@ -1,7 +1,7 @@
 {
     "title":"What is the file `package.json`?",
     "date": "Today",
-    "tags": ["npm", "convention", "core", "modules"],
+    "tags": ["npm", "conventions", "core"],
     "author": "nico",
     "difficulty":2
 }

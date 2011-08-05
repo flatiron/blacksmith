@@ -29,27 +29,13 @@ As an example, we are going to preform a GET request to [www.random.org/integers
     http.request(options, callback).end();
 
 
-Making a POST request is just as easy. Unfortunately, there are no simple POST endpoints to use as an example. You can use this script to spawn up a server that listens for POST requests and echos back the request. //If we can just run it on the nodedocs server, that would make things much easier
-
-    var http = require('http');
-    http.createServer(function (req, res) {
-      var str = '';
-      req.on('data', function (chunk) {
-        str += chunk;
-      });
-      req.on('end', function () {
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end(str);
-      });
-    }).listen(1337);
-
-The code for making a POST request is almost identical to making a GET request. Just a few simple modifications:
+Making a POST request is just as easy. We will make a POST request to `www.nodedocs.org:1337` which is running a server that will echo back what we post. The code for making a POST request is almost identical to making a GET request, just a few simple modifications:
 
     var http = require('http');
 
-    //The url we want is `127.0.0.1:1337/`
+    //The url we want is `www.nodedocs.org:1337/`
     var options = {
-      host: '127.0.0.1',
+      host: 'www.nodedocs.org',
       path: '/',
       //since we are listening on a custom port, we need to specify it by hand
       port: '1337',
@@ -73,23 +59,14 @@ The code for making a POST request is almost identical to making a GET request. 
     req.write("hello world!");
     req.end();
 
-
-Finally, if you need to make a request with custom headers, things are just about the same. First run this script /*if we can run this server side, it would be awesome*/:
-
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end(req.headers.custom);
-    }).listen(1337);
-
-Now we can make requests with custom headers and it will echo back the header `custom`.
+Throwing in custom headers is just a tiny bit harder. On `www.nodedocs.org:1338` we are running a server that will print out the `custom` header.  So we will just make a quick request to it:
 
     var http = require('http');
 
     var options = {
-      host: '127.0.0.1',
+      host: 'www.nodedocs.org',
       path: '/',
-      port: '1337',
+      port: '1338',
       //This is the only line that is new. `headers` is an object with the headers to request
       headers: {'custom': 'Custom Header Demo works'}
     };

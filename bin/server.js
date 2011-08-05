@@ -1,7 +1,8 @@
 var dnode = require('dnode'),
     fs = require('fs'),
     connect = require('connect'),
-    markdown = require('markdown');
+    markdown = require('markdown'),
+    http = require('http');
 
 var tags = require('../lib/tags'),
     articles = require('../lib/articles');
@@ -42,7 +43,7 @@ var getArticleList = function (callback) {
 var server = connect.createServer();
 server.use(connect.static(__dirname+"/../public"));
 server.listen(8080);
-console.log("http://localhost:8080/");
+console.log("Main server is running on: http://localhost:8080/");
 
 dnode({
   getGuide: getGuide,
@@ -50,3 +51,23 @@ dnode({
   getTags: getTags,
   getArticleList: getArticleList
 }).listen(server);
+
+
+console.log("POST echo server is running on: http://localhost:1337");
+http.createServer(function (req, res) {
+  var str = '';
+  req.on('data', function (chunk) {
+    str += chunk;
+  });
+  req.on('end', function () {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end(str);
+  });
+}).listen(1337);
+
+
+console.log("HEADER echo server is running on: http://localhost:1338");
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end(req.headers.custom);
+}).listen(1338);

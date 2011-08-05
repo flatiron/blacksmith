@@ -3,7 +3,7 @@
     var options = {
       host: '127.0.0.1',
       path: '/',
-      port: '1337',
+      port: '1338',
       headers: {'custom': 'Custom Header Demo works'}
     };
 

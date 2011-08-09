@@ -21,12 +21,11 @@ NODE.JS PRO TIP:
          };
      console.log('My name is %s, my number is %d, my object is %j', name, number, myObj);
 
-A gotcha with `console.log`, and all functions that depend on it, is that it buffers the output. So if your process ends suddenly whether it be from an exception or from `process.exit()`, it is entirely possible that the buffer will not drain. This can cause some of your output can get eaten, so watch out for this unfortunate situation. `console.error` is a blocking call that waits until the output has finished draining, so it avoids this situation.
+A gotcha with `console.log`, and all functions that depend on it, is that it buffers the output. So if your process ends suddenly, whether it be from an exception or from `process.exit()`, it is entirely possible that the buffered output will never reach the screen. This can cause a great deal of frustration, so watch out for this unfortunate situation. 
 
+`console.error()` works the same as `console.log`, except that the output is sent to `stderr` instead of `stdout`.  This is actually an extremely important difference, as `stderr` is always written to synchronously.  Any use of `console.error`, or any of the other functions in Node.js core that write to `stderr`, will block your process until the output has all been written.  This is useful for error messages - you get them exactly when they occur - but if used everywhere, can greatly slow down your process.
 
 `console.dir()`, as mentioned above, is an alias for `util.inspect()` - it is used to enumerate object properties.  [Read More](/how-to-use-util-inspect)
-
-`console.error()` is the same as `console.log`, except that the output is sent to `stderr` instead of `stdout`.
 
 That covers the basic `console` module functionality, but there are a few other methods worth mentioning as well.  First, the `console` module allows for the marking of time via `console.time()` and `console.timeEnd()`.  Here is an example:
 

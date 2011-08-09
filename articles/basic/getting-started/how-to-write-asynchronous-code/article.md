@@ -1,10 +1,10 @@
 # How to deal with Asynchronous code
 
-Javascript is an asynchronous language, in contrast to many synchronous languages like PHP, Ruby, Python, Perl, C, etc.  There are a number of important things to be aware of when learning to write asynchronous code - otherwise, you will often find your code executing in extremely unexpected ways.
+Javascript is an asynchronous language, in contrast to many synchronous languages like PHP, Ruby, Python, Perl, C, etc.  There are a number of important things to be aware of when learning to write asynchronous code - otherwise, you will often find your code executing in extremely unexpected ways.  Take this (general) rule to heart:
 
-#Use the asynchronous functions, avoid the synchronous forms
+###Use the asynchronous functions, avoid the synchronous ones!
 
-Many of the functions in node core have both synchronous and asynchronous versions. Under most circumstances, it will be far better for you to use the asynchronous functions - otherwise, why are you using Node.js?
+Many of the functions in Node.js core have both synchronous and asynchronous versions. Under most circumstances, it will be far better for you to use the asynchronous functions - otherwise, why are you using Node.js?
 
 As a quick example comparing and contrasting the two, using `fs.readFile`:
 

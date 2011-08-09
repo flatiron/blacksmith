@@ -34,9 +34,13 @@ If you use the method `once` instead of `on`, after the callback is fired, it is
 
 If you want remove a specific callback, you can use `removeListener`. If you want to remove all callbacks to a specific event, you can use `removeAllListeners`. 
 
-    //This is probably more confusing that useful
-    var ee = new (require('events').EventEmitter);
-    var callback = function () { console.log("Callbacked!"); }
+    var EventEmitter = require('events').EventEmitter,
+        ee = new EventEmitter();
+    
+    function callback() { 
+      console.log("Callback has been called!"); 
+    }
+
     ee.once("event", callback);
     ee.emit("event");
     ee.emit("event");

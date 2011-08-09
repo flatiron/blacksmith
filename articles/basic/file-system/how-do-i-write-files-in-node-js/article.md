@@ -1,4 +1,4 @@
-This task is very simple because writing to a file is built into the Node.js api. We can use the handy api call `writeFile` inside the `fs` module which makes the whole process very streamlined. 
+Writing to a file is another of the basic programming tasks that one usually needs to know about - luckily, this task is very simple in Node.js.  We can use the handy `writeFile` method inside the standard library's `fs` module, which can save all sorts of time and trouble.
 
     fs = require('fs');
     fs.writeFile(filename, data, [encoding], [callback])

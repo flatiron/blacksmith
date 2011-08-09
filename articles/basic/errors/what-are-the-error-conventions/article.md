@@ -1,5 +1,5 @@
 
-In node.js, it is considered standard practice to handle errors by returning them as the first argument to the current function's callback.  If there is an error, the first parameter is passed an `Error` object with all the details. Otherwise, the first parameter is null. 
+In node.js, it is considered standard practice to handle errors in asynchronous functions by returning them as the first argument to the current function's callback.  If there is an error, the first parameter is passed an `Error` object with all the details. Otherwise, the first parameter is null. 
 
 It's simpler than it sounds; let's demonstrate.
 
@@ -20,8 +20,9 @@ It's simpler than it sounds; let's demonstrate.
       console.log(retval);
     }
 
-    //Note: there is no race condition because all this code is going to be called synchronously
-    //    however, in proper asynchronous code, the order that the callbacks get called in is undefined.
+    // Note: when calling the same asynchronous function twice like this, you are in a race condition.
+    // You have no way of knowing for certain which callback will be called first when calling the functions in this manner.
+
     isTrue(false, callback);
     isTrue(true,  callback);
 

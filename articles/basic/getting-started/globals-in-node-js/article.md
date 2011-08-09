@@ -13,7 +13,7 @@ As mentioned above, there are also a number of 'pseudo-globals' included at the 
 
 - `module`, `module.exports`, `exports` - These objects all pertain to Node's module system.  [Read More](/what-is-require)
 - __filename - The `__filename` keyword contains the path of the currently executing file.  Note that this is not defined while running the [Node REPL](/how-do-i-use-nodes-repl).
-- __dirname - Like `__filename, the `__dirname` keyword contains the path to the root directory of the currently executing script.  Also not present in the Node REPL.
+- __dirname - Like `__filename`, the `__dirname` keyword contains the path to the root directory of the currently executing script.  Also not present in the Node REPL.
 - require() - The `require()` function is a built-in function, exposed per-module, that allows other valid modules to be included.  [Read More](/what-is-require)
 
 Much of this functionality can be extremely useful for a Node.js developer's daily life - but at the very least, remember these as bad names to use for your own functions! 

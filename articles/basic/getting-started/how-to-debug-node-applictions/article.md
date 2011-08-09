@@ -1,4 +1,4 @@
-Often times, in the node community people debug simply with a liberal sprinkle of `console.log` statements. This allows you to track down where unexpected values are being generated. However, this method can be slow or not robust enough.
+Often times, not just in the Node.js community but in software at large, people debug simply with a liberal sprinkle of standard output statements. This allows you to track down where unexpected values are being generated. However, this method can be tedious, or worse yet, not robust enough to detect the real problem.
 
 
 #Set up
@@ -55,7 +55,7 @@ To take a heap snapshot, just insert this line in the desired location and optio
 
     var snapshot = profiler.takeSnapshot(name);
 
-To take a cpu profile, just surround the code that you are profiling with these two lines and optionally a name to indentify the cpu profile.
+To take a cpu profile, just surround the code that you are profiling with the two lines shown below.  Optionally, a name can be included to indentify the cpu profile.
 
     profiler.startProfiling(name);
     //..lots and lots of methods and code called..//

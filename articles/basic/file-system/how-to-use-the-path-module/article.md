@@ -1,6 +1,6 @@
 The path module contains several helper functions to help make path manipulation easier.
 
-The first function worth mentioning is `path.normalize`.  This function takes a path (in the form of a string) and strips it of duplicate slashes and normalizes directories like `.` and `..`. For example:
+The first function worth mentioning is `path.normalize`.  This function takes a path (in the form of a string) and strips it of duplicate slashes and normalizes directory abbreviations, like '.' for 'this directory' and '..' for 'one level up'. For example:
 
     > var path = require('path');
     > path.normalize('/a/.///b/d/../c/')

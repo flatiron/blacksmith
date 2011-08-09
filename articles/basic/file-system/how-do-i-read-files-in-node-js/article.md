@@ -5,7 +5,7 @@ Reading the contents of a file into memory is a very common programming task, an
 
     // file = (string) filepath of the file to read
 
-`encoding` is an optional parameter that specifies the type of encoding to read the file. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding provided, the raw buffer is returned - which is usually NOT human-readable data!
+`encoding` is an optional parameter that specifies the type of encoding to read the file. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding is provided, the default is `utf8`.
 
 `callback` is a function to call when the file has been read and the contents are ready - it is passed two arguments, `error` and `data`.  If there is no error, `error` will be `null` and `data` will contain the file contents; otherwise `err` contains the error message.
 

@@ -1,8 +1,8 @@
 To run the demo:
 
-    node bin/server.js
+    node bin/server
 
-Go to localhost:8080/index.htm
+Go to localhost:8080/index.html
 
 
 To add an article:

@@ -15,9 +15,9 @@ A closely related function to `normalize` is `join`.  This function takes a vari
 A possible use of `join` is to manipulate paths when serving urls:
 
     > var path = require('path');
-    > var url = '/index.htm';
+    > var url = '/index.html';
     > path.join(process.cwd(), 'static', url);
-    '/home/nico/static/index.htm'
+    '/home/nico/static/index.html'
 
 There are three functions which are used to extract the various parts of the path name: `basename`, `extname`, and `dirname`. 
 - `basename` returns the last portion of the path passed in. 
@@ -26,18 +26,18 @@ There are three functions which are used to extract the various parts of the pat
 For example:
 
     > var path = require('path')
-    > var a = '/a/b/c.htm'
+    > var a = '/a/b/c.html'
     > path.basename(a)
-    'c.htm'
+    'c.html'
     > path.extname(a)
-    '.htm'
+    '.html'
     > path.dirname(a)
     '/a/b'
 
 Note that `basename` has an optional second parameter that will strip out the extension if you pass the correct extension.
 
     > var path = require('path')
-    > var a = '/a/b/c.htm'
+    > var a = '/a/b/c.html'
     > path.basename(a, path.extname(a))
     'c'
 

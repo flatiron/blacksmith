@@ -1,8 +1,10 @@
 var docs = require('../lib/docs');
 
 var toc = docs.generateTOC();
-
-
 require('fs').writeFileSync('./public/toc.html', toc);
 
-console.log(JSON.stringify(toc, true, 2));
+var articles = docs.getArticlesMarkdown();
+
+//console.log(articles);
+
+//console.log(JSON.stringify(toc, true, 2));

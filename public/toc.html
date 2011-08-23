@@ -1,1 +1,126 @@
-<ul><h1>.</h1><ul><h2>articles</h2><ul><h3>advanced</h3><ul><h4>how-to-access-module-package-info</h4></ul><ul><h4>how-to-use-stream-pipe</h4></ul></ul><ul><h3>basic</h3><ul><h4>child-processes</h4><ul><h5>how-to-spawn-a-child-process</h5></ul></ul><ul><h4>command-line</h4><ul><h5>how-do-i-use-nodes-repl</h5></ul><ul><h5>how-to-parse-command-line-args</h5></ul><ul><h5>how-to-prompt-for-cli-input</h5></ul><ul><h5>how-to-use-colors-js</h5></ul><ul><h5>how-to-use-util-inspect</h5></ul></ul><ul><h4>errors</h4><ul><h5>what-are-the-error-conventions</h5></ul><ul><h5>what-is-the-error-object</h5></ul><ul><h5>what-is-try-catch</h5></ul></ul><ul><h4>file-system</h4><ul><h5>how-do-i-read-files-in-node-js</h5></ul><ul><h5>how-do-i-search-files-and-directories</h5></ul><ul><h5>how-do-i-write-files-in-node-js</h5></ul><ul><h5>how-to-store-local-config-data</h5></ul><ul><h5>how-to-use-the-path-module</h5></ul></ul><ul><h4>getting-started</h4><ul><h5>globals-in-node-js</h5></ul><ul><h5>how-to-debug-node-applictions</h5></ul><ul><h5>how-to-write-asynchronous-code</h5><ul><h6>example</h6></ul></ul><ul><h5>the-console-module</h5></ul><ul><h5>the-process-module</h5></ul><ul><h5>what-are-callbacks</h5></ul><ul><h5>what-are-event-emitters</h5></ul><ul><h5>what-is-npm</h5></ul><ul><h5>what-is-require</h5></ul><ul><h5>what-is-the-file-package-json</h5></ul></ul><ul><h4>http</h4><ul><h5>how-can-i-read-POST-data</h5></ul><ul><h5>how-do-i-create-a-http-server</h5></ul><ul><h5>how-do-i-create-a-https-server</h5></ul><ul><h5>how-do-i-make-a-http-request</h5></ul><ul><h5>how-to-access-query-string-parameters</h5></ul><ul><h5>how-to-serve-static-files</h5></ul></ul><ul><h4>what-are-truthy-and-falsy-values</h4></ul><ul><h4>what-is-the-arguments-object</h4></ul></ul><ul><h3>javascript-conventions</h3><ul><h4>how-to-create-default-parameters-for-functions</h4></ul><ul><h4>what-are-the-built-in-timer-functions</h4></ul><ul><h4>what-is-the-arguments-variable</h4></ul></ul></ul></ul>
+
+<!-- required content -->
+
+<link rel="stylesheet" href="nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+<header>
+  <div class="title">nodedocs.org</div>
+</header>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+$(function() {
+  
+  var originalTopic = $('body > ul > li.selected');
+  var originalArticle = $('body > ul > li.selected');
+  var t;
+  
+  $('body > ul > li').mouseenter(function() {
+    clearTimeout(t);
+    $('body > ul > ul').hide().css({'opacity': 0, 'left': 0});
+    $(this).next('ul').show().animate({'opacity': 1, 'left': 200}, 200);
+    $('#mask').fadeIn('fast');
+  });
+
+  $('body > ul').mouseleave(function() {
+    clearTimeout(t);
+    t = setTimeout(function() {
+      $('body > ul > ul').hide().css({'opacity': 0, 'left': 0});
+      $('#mask').fadeOut('fast');
+
+      $('li').removeClass('selected');
+      originalTopic.addClass('selected');
+      originalArticle.addClass('selected');
+    }, 400);
+  });
+
+  $('li:not(body > ul > ul > li)').mouseenter(function() {
+    clearTimeout(t);
+    $(this).parent().parent().find('li').removeClass('selected');
+    $(this).addClass('selected');
+
+  }).click(function() {
+    /*
+      TODO: the URL should now change and this item should become the
+      selected item once the page has loaded.
+    */
+    alert('link to another page');
+  })
+});
+
+</script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- generated content -->
+
+  <div id="content">
+
+    <img src="img/logo.png" width="396" height="270" alt="Logo">
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <br/><br/><br/><br/><br/><br/><br/><br/>
+  </div>
+
+<!-- end generated content -->
+
+<!-- generated toc -->
+
+  <ul>
+    <!-- Topics -->
+    <li class="selected">about</li>
+    <li>templating</li>
+    <li>networking</li>
+      <!-- Subtopics -->
+      <ul>
+        <li>how-to-spawn-a-child-process</li>
+          <!-- Articles -->
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+            <li>how-to-spawn-a-child-process</li>
+          </ul>
+        <li>how-to-spawn-a-child-process</li>
+          <!-- Articles -->
+          <ul>
+            <li>how-to-spawn-a-child-process</li>
+            <li>how-to-spawn-a-child-process</li>
+          </ul>
+        <li>how-to-spawn-a-child-process</li>
+          <!-- Articles -->
+          <ul>
+            <li>how-to-spawn-a-child-process</li>
+            <li>how-to-spawn-a-child-process</li>
+          </ul>
+      </ul>
+    <li>security</li>
+      <!-- Subtopics -->
+      <ul>
+        <li>how-to-spawn-a-child-process</li>
+          <!-- Articles -->
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+            <li>how-to-spawn-a-child-process</li>
+          </ul>
+        <li>how-to-spawn-a-child-process</li>
+          <!-- Articles -->
+          <ul>
+            <li>how-to-spawn-a-child-process</li>
+            <li>how-to-spawn-a-child-process</li>
+          </ul>
+
+
+      </ul>
+  </ul>
+
+<!-- end generated toc -->

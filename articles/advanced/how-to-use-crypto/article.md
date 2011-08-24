@@ -1,6 +1,6 @@
-# The Crypto Module
+The [crypto](http://nodejs.org/docs/v0.4.10/api/crypto.html) module is a wrapper for [OpenSSL](http://en.wikipedia.org/wiki/Openssl) cryptographic functions. It supports calculating hashes, authentication with HMAC, ciphers, and more!
 
-The crypto module is a wrapper for [OpenSSL](http://en.wikipedia.org/wiki/Openssl) cryptographic functions. It supports calculating hashes, message authentication with HMAC, ciphers, and more!
+The crypto module is mostly useful as a tool for implementing [cryptographic protocols](http://en.wikipedia.org/wiki/Cryptographic_protocol) such as [TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security) and [https](http://en.wikipedia.org/wiki/Https). For most users, Node's built-in [tls module](http://nodejs.org/docs/v0.4.10/api/tls.html) and [https module](http://nodejs.org/docs/v0.4.10/api/https.html) should more than suffice. However, for the user that only wants to use small parts of what's needed for full-scale cryptography or is crazy/desperate enough to implement a protocol using OpenSSL and Node: Read on.
 
 ## Hashes
 
@@ -105,12 +105,12 @@ Now, if I gave somebody the same script, my encoded message and the password, th
 
 You should know that what I buried behind Carl's Jr was just a cigarette butt, and that this script is obviously not for serious use.
 
-## Certificates
+## Signing and Verification
 
-Crypto has other methods used mostly for TLS/SSL:
+Crypto has other methods used for dealing with certificates and credentials, as used for TLS:
 
 * `crypto.createCredentials`
 * `crypto.createSign`
 * `crypto.createVerify`
 
-These methods require an advanced knowledge of real-world cryptography to be useful, and are typically used to build more abstracted tools like Node's [tls module](http://nodejs.org/docs/v0.4.10/api/tls.html) or, even easier, Node's [https module](http://nodejs.org/docs/v0.4.10/api/https.html) which has an api very similar to Node's standard http module.
+These methods supply the last building blocks for a complete cryptographic protocol, and require an advanced knowledge of real-world cryptographic protocols to be useful. Again, it is recommended that developers use either the [tls](http://nodejs.org/docs/v0.4.10/api/tls.html) module or the [https](http://nodejs.org/docs/v0.4.10/api/https.html) module if applicable.

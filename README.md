@@ -1,9 +1,3 @@
-To run the demo:
-
-    node bin/server
-
-Go to localhost:8080/index.html
-
 
 To add an article:
 

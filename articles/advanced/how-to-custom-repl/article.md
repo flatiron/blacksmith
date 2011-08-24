@@ -11,63 +11,80 @@ However, the repl is pretty flexible. Here's an example that shows this off:
     var net = require("net"),
         repl = require("repl");
 
-    // Just a globally-defined function that returns a random emoticon...
-    mood = function () {
+    var mood = function () {
         var m = [ "^__^", "-___-;", ">.<", "<_>" ];
         return m[Math.floor(Math.random()*m.length)];
     };
 
-
     //A remote node repl that you can telnet to!
     net.createServer(function (socket) {
-      repl.start("node::remote> ", socket);
+      var remote = repl.start("node::remote> ", socket);
+      //Adding "mood" and "bonus" to the remote REPL's context.
+      remote.context.mood = mood;
+      remote.context.bonus = "UNLOCKED";
     }).listen(5001);
 
     console.log("Remote REPL started on port 5001.");
 
     //A "local" node repl with a custom prompt
-    repl.start("node::local> ");
+    var local = repl.start("node::local> ");
 
-This script defines a global variable (in this case a function), then creates
-*two* REPLs: One is normal excepting for its custom prompt, but the *other* is
-exposed via the net module so I can telnet to it!
+    // Exposing the function "mood" to the local REPL's context.
+    local.context.mood = mood;
+
+This script creates *two* REPLs: One is normal excepting for its custom prompt, but the *other* is exposed via the net module so I can telnet to it! In addition, it uses the `context` property to expose the function "mood" to both REPLs, and the "bonus" string to the remote REPL only. As you will see, this approach of trying to expose objects to one REPL and not the other *doesn't really work*.
+
+In addition, all objects in the global scope will also be accessible to your REPLs.
 
 Here's what happens when I run the script:
 
     $ node repl.js 
     Remote REPL started on port 5001.
+    node::local> .exit
+    ^Cjosh@pidgey:/tmp/telnet$ node repl.js 
+    Remote REPL started on port 5001.
     node::local> mood()
-    '<_>'
-    node::local> 
+    '^__^'
+    node::local> bonus
+    ReferenceError: bonus is not defined
+        at [object Context]:1:1
+        at Interface.<anonymous> (repl.js:171:22)
+        at Interface.emit (events.js:64:17)
+        at Interface._onLine (readline.js:153:10)
+        at Interface._line (readline.js:408:8)
+        at Interface._ttyWrite (readline.js:585:14)
+        at ReadStream.<anonymous> (readline.js:73:12)
+        at ReadStream.emit (events.js:81:20)
+        at ReadStream._emitKey (tty_posix.js:307:10)
+        at ReadStream.onData (tty_posix.js:70:12)
 
-Notice that I was able to access the `mood` function. This is because *all globally-defined functions are accessible from all REPLs.*
+As may be seen, the `mood` function is usable within the local REPL, but the
+`bonus` string is not. This is as expected.
 
 Now, here's what happens when I try to telnet to port 5001:
 
-    $ telnet localhost 5001
+    josh@pidgey:/tmp/telnet$ telnet localhost 5001
     Trying ::1...
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
     node::remote> mood()
-    '^__^'
-    node::remote> 
+    '>.<'
+    node::remote> bonus
+    'UNLOCKED'
 
-As you can see, the `mood` function is *also* available over telnet!
+As you can see, the `mood` function is *also* available over telnet! In addition, so is "bonus".
 
-I can also edit these variables over telnet too:
+As an interesting consequence of my actions, bonus is now also defined on the local REPL:
 
-    node::remote> mood = function () {
-    ...     var m = [ ":D", ":|", ">:C", "D:" ];
-    ...     return m[Math.floor(Math.random()*m.length)];
-    ... };
-    [Function]
-    node::remote> 
+    node::local> bonus
+    'UNLOCKED'
 
-This is reflected by the local prompt:
+It seems we "unlocked" the `bonus` string on the local REPL as well. As it turns out, any variables created in one REPL are also available to the other:
 
-    node::local> mood()
-    ':D'
-    node::local> 
+    node::local> var node = "AWESOME!"
+
+    node::remote> node
+    'AWESOME!'
 
 As you can see, the node REPL is powerful and flexible.

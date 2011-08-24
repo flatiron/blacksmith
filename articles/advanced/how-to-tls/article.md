@@ -12,7 +12,7 @@ In TLS connections, the public key is called a *[certificate](http://en.wikipedi
 
 TLS support in node is relatively new. The first stable version of node.js to support TSL and HTTPS was the v0.4 branch, which was released in early 2011. Since then, the primary focus of the core developers has shifted from TLS/HTTPS to Windows support in the v0.5 branch. As such, the TSL APIs in node are still a little rough around the edges, and documentation leaves something to be desired.
 
-## The `tls` Module
+## The tls Module
 
 ### tls.createServer
 
@@ -141,7 +141,7 @@ This is what happens when the client is ran (with the server running):
     : :: :: :  : `' `' ;: :; :: :.`.: :__ : :; ::_;
     :_;:_;:_;   `.,`.,' `.__.':_;:_;:___.':___.':_;
 
-Note that self-signing the server certificate results in a non-authorized status.
+Note that self-signing the server certificate results in a non-authorized status because you're not listed as a trusted certificate authority.
 
 ## "starttls"
 

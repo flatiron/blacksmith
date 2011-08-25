@@ -1,0 +1,7 @@
+{
+  "title":"How to use fs.createReadStream?",
+  "date": "Today",
+  "tags": ["core", "streams", "fs"],
+  "author": "nico",
+  "difficulty": 3
+}

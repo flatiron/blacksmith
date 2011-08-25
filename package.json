@@ -10,6 +10,7 @@
     "markdown": "0.2.x",
     "traverse": "0.4.x",
     "mkdirp": "0.0.x",
+    "http-server": "0.2.x",
     "jsdom": "0.2.x",
     "weld": "0.2.1",
     "findit": "0.1.x"

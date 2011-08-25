@@ -1,9 +1,12 @@
 var docs = require('../lib/docs');
 
-var toc = docs.generateTOC();
-require('fs').writeFileSync('./public/toc.html', toc);
 
-var articles = docs.getArticlesMarkdown();
+docs.generate();
+
+//var toc = docs.generateTOC();
+//require('fs').writeFileSync('./public/toc.html', toc);
+
+//var articles = docs.getArticlesMarkdown();
 
 //console.log(articles);
 

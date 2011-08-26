@@ -7,8 +7,7 @@
 
 **Node Knockout Status, work in progress!**
 
-## Contributing articles
-
+## Usage
 
 ### To generate the docs
 
@@ -17,6 +16,11 @@
 ### To start the docs server
 
     node bin/server
+
+
+## Contributing articles
+
+*more documentation coming soon*
 
 ### To add an article:
 

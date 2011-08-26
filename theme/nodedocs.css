@@ -28,9 +28,9 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
-a { color: #00e; }
-a:visited { color: #551a8b; }
-a:hover { color: #06e; }
+a { color: #333333; text-decoration: none; font-family: 'typewriter';}
+a:visited { color: #333333; }
+a:hover { color: #333333; text-decoration: underline;}
 a:focus { outline: thin dotted; }
 a:hover, a:active { outline: 0; }
 
@@ -105,8 +105,28 @@ header div {
   margin: 10px;
 }
 
+header div a {
+  color: #eee;
+  text-decoration: none;
+}
+
+header div a:visited {
+  color: #eee;
+}
+
+header div a:hover {
+  color: #eee;
+  text-decoration: underline;
+}
+
 header div.title {
   font-size: 28px;
+}
+
+header div.subtitle {
+  float: right;
+  font-size: 28px;
+  position: relative;
 }
 
 #mask {
@@ -125,6 +145,11 @@ header div.title {
   margin-top: 100px;
   margin-left: 300px;
   margin-right: 100px;
+}
+
+#home {
+  margin-left: 25px;
+  margin-top: 70px;
 }
 
 body > ul {

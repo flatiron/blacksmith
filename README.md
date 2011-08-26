@@ -1,3 +1,15 @@
+# docs 
+
+**community powered rocket-fuel for node.js**
+
+
+## http://docs.nodejitsu.com
+
+
+## Contributing articles
+
+*more documentation coming*
+
 
 To add an article:
 

@@ -1,4 +1,3 @@
-# How to use colors.js
 
 When working on the command line, it can be both fun and extremely useful to colorize one's output. To colorize console output, you need to use ANSI escape codes. The module `colors.js`, available on `npm`, provides an extremely easy to use wrapper that makes adding colors a breeze.
 

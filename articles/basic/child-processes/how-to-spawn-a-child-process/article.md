@@ -1,4 +1,3 @@
-#How to spawn a child process - the basics
 
 If you find yourself wishing you could have your Node.js process start another program for you, then look no further than the `child_process` module.
 

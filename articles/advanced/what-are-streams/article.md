@@ -1,4 +1,4 @@
-# What are streams?
+
 
 Streams are another basic construct in node.js that encourages asynchronous coding. Streams allow you to process the data as it is generated or retrieved. Streams can be readable, writeable, or both. 
 

@@ -1,4 +1,3 @@
-# What is the `console` object?
 
 Anyone familiar with browser-side development has probably used `console.log` for debugging purposes - Node.js has implemented a built-in `console` object to mimic much of this experience.  Since we're working server-side, however, it wraps `stdout`, `stdin`, and `stderr` instead of the browser's debugging console.
 

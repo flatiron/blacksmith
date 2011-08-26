@@ -1,4 +1,3 @@
-# How to deal with Asynchronous code
 
 Javascript is an asynchronous language, in contrast to many synchronous languages like PHP, Ruby, Python, Perl, C, etc.  There are a number of important things to be aware of when learning to write asynchronous code - otherwise, you will often find your code executing in extremely unexpected ways.  Take this (general) rule to heart:
 
@@ -29,13 +28,13 @@ The asynchronous version, on the other hand, does not stop time - instead, the c
 When only reading a file or two, or saving something quickly, the difference between synchronous and asynchronous file I/O can be quite small. On the other hand, though, when you have multiple requests coming in per second that require file or database IO, trying to do that IO synchronously would be quite thoroughly disastrous for performance.
 
 
-#Callbacks
+###Callbacks
 Callbacks are a basic idiom in node.js for asynchronous operations. When most people talk about callbacks, they mean the a fuction that is passed as the last parameter to an asynchronous function. The callback is then later called with any return value or error message that the function produced. For more details, see the article on [callbacks](/what-are-callbacks)
 
-#Event Emitters
+###Event Emitters
 Event Emitters are another basic idiom in node.js. A constructor is provided in Node.js core: `require('events').EventEmitter`. An Event Emitter is typically used when there will be multiple parts to the response (since usually you only want to call a callback once). For more details, see the article on [EventEmitters](/what-are-event-emitters)
 
-#A gotcha with asynchronous code
+###A gotcha with asynchronous code
 A common mistake in asynchronous code with javascript is to write code that does something like this:
 
      for (var i = 0; i < 5; i++) {

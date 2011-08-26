@@ -1,4 +1,3 @@
-# How to use util.inspect
 
 Node provides a utility function, for debugging purposes, that returns a string representation of an object.  `util.inspect()` can be a true lifesaver while working with properties of large, complex objects. 
 

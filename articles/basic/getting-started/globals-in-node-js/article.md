@@ -1,4 +1,3 @@
-# The built-in globals in Node.js
 
 Node.js has a number of built-in global identifiers that every Node.js developer should have some familiarity with.  Some of these are true globals, being visible everywhere; others exist at the module level, but are inherent to every module, thus being pseudo-globals.
 

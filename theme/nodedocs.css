@@ -141,92 +141,24 @@ header div.subtitle {
   z-index: 1;
 }
 
-#content {
-  margin-top: 100px;
-  margin-left: 300px;
-  margin-right: 100px;
-}
-
 #home {
   margin-left: 25px;
   margin-top: 70px;
 }
 
-body > ul {
-  background-color: #fff;
-  padding-top: 20px;
-  position: absolute;
-  left: 0px;
-  top: 50px;
-  bottom: 0px;
-  width: 190px;
-  box-shadow: 3px -10px 5px #ccc;
-  z-index: 2;
+#article {
+  margin-top: 100px;
+  margin-left: 300px;
+  margin-right: 100px;
 }
 
-body > ul > li {
-  font-weight: bold;
-  min-height: 30px;
-  padding: 10px 0 0 10px;
-  padding-right: 30px;
-  margin-right: -20px;
+#toc {
+  float:left;
 }
 
-.selected {
-  color: #5F7890;
-  background: transparent url('img/right.png') no-repeat 200px center;
+#toc ul li {
+  padding-left:10px;
 }
-
-body > ul > li.selected {
-  background: transparent url('img/right.png') no-repeat 190px center;
-}
-
-body > ul > li:hover, .selected {
-  color: #5F7890;
-}
-
-body > ul > ul {
-  background-color: #fff;
-  padding-top: 20px;
-  display: none;
-  opacity: 0;
-  margin-left: 10px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 200px;
-  min-height: 500px;
-  box-shadow: 4px -10px 5px #ccc;
-  z-index: 2;
-}
-
-body > ul > ul > li {
-  padding: 8px;
-  font-weight: bold;
-  cursor: default;
-}
-
-body > ul > ul > ul > li {
-  font-size: 12px;
-  font-family: 'AllerLt';
-  min-height: 30px;
-  padding-left: 8px;
-  padding-top: 14px;
-  padding-right: 30px;
-  margin-right: -20px;
-  cursor: pointer;
-}
-
-body > ul > ul > ul > li:hover {
-  color: #5F7890;
-}
-
-
-
-
-
-
-
 
 /* ==|== non-semantic helper classes ======================================== */
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }

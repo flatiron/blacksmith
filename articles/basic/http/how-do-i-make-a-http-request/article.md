@@ -29,13 +29,13 @@ As an example, we are going to preform a GET request to [www.random.org/integers
     http.request(options, callback).end();
 
 
-Making a POST request is just as easy. We will make a POST request to `www.nodedocs.org:1337` which is running a server that will echo back what we post. The code for making a POST request is almost identical to making a GET request, just a few simple modifications:
+Making a POST request is just as easy. We will make a POST request to `www.nodejitsu.com:1337` which is running a server that will echo back what we post. The code for making a POST request is almost identical to making a GET request, just a few simple modifications:
 
     var http = require('http');
 
-    //The url we want is `www.nodedocs.org:1337/`
+    //The url we want is `www.nodejitsu.com:1337/`
     var options = {
-      host: 'www.nodedocs.org',
+      host: 'www.nodejitsu.com',
       path: '/',
       //since we are listening on a custom port, we need to specify it by hand
       port: '1337',
@@ -59,12 +59,12 @@ Making a POST request is just as easy. We will make a POST request to `www.noded
     req.write("hello world!");
     req.end();
 
-Throwing in custom headers is just a tiny bit harder. On `www.nodedocs.org:1338` we are running a server that will print out the `custom` header.  So we will just make a quick request to it:
+Throwing in custom headers is just a tiny bit harder. On `www.nodejitsu.com:1338` we are running a server that will print out the `custom` header.  So we will just make a quick request to it:
 
     var http = require('http');
 
     var options = {
-      host: 'www.nodedocs.org',
+      host: 'www.nodejitsu.com',
       path: '/',
       port: '1338',
       //This is the only line that is new. `headers` is an object with the headers to request

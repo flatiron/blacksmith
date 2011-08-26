@@ -9,7 +9,7 @@ As a quick example comparing and contrasting the two, using `fs.readFile`:
 
     fs = require('fs');
 
-    fs.readFile('example', 'utf8', function (err, data) {
+    fs.readFile('example.file', 'utf8', function (err, data) {
         if (err) {
           return console.log(err);
         }
@@ -18,7 +18,7 @@ As a quick example comparing and contrasting the two, using `fs.readFile`:
 
     //====================
 
-    var data = fs.readFileSync('example','utf8');
+    var data = fs.readFileSync('example.file','utf8');
     console.log(data);
 
 Just looking at these two blocks of code, the synchronous version appears to be more concise. However, the asynchronous version is more complicated for a very good reason. In the synchronous version, the world is paused until the file is finished reading - your process will just sit there, waiting for the OS (which handles all file system tasks).

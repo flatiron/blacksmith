@@ -1,0 +1,101 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">What are callbacks?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>What are callbacks?</p>
+
+<p>In a synchronous program, you would write something along the lines of:</p>
+
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">processData</span> <span class="params">()</span> {</span>
+  <span class="keyword">var</span> data = fetchData ();
+  data += <span class="number">1</span>;
+  <span class="keyword">return</span> data;
+}</code></pre>
+
+<p>This works just fine and is very typical in other development environments. However, if fetchData takes a long time to load the data (maybe it is streaming it off the drive or the internet), then this causes the whole program to 'block' - otherwise known as sitting still and waiting - until it loads the data. Node.js, being an asynchronous platform, doesn't wait around for things like file I/O to finish - Node.js uses callbacks.  A callback is a function called at the completion of a given task; this prevents any blocking, and allows other code to be run in the meantime.</p>
+
+<p>The node.js way to deal with the above would look a bit more like this:</p>
+
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">processData</span> <span class="params">(callback)</span> {</span>
+  fetchData(<span class="function"><span class="keyword">function</span> <span class="params">(err, data)</span> {</span>
+    <span class="keyword">if</span> (err) {
+      console.log(&quot;An error has occured. Abort everything!&quot;);
+      callback(err);
+    }
+    data += <span class="number">1</span>;
+    callback(data);
+  });
+}</code></pre>
+
+<p>At first glance, it may look unnecessarily complicated, but callbacks are the foundation of Node.js. Callbacks give you an interface with which to say, &quot;and when you're done doing that, do all this.&quot; This allows you to have as many IO operations as your OS can handle happening at the same time. For example, in a web server with hundreds or thousands of pending requests with multiple blocking queries, performing the blocking queries asynchronously gives you the ability to be able to continue working and not just sit still and wait until the blocking operations come back.  This is a major improvement. </p>
+
+<p>The typical convention with asynchronous functions (which almost all of your functions should be):</p>
+
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">asyncOperation</span> <span class="params">( a, b, c, callback )</span> {</span>
+  <span class="comment">// ... lots of hard work ...</span>
+  <span class="keyword">if</span> ( <span class="comment">/* an error occurs */</span> ) {
+    <span class="keyword">return</span> callback(<span class="keyword">new</span> Error(&quot;An error has occured&quot;));
+  }
+  <span class="comment">// ... more work ...</span>
+  callback(<span class="literal">null</span>, d, e, f);
+}
+
+asyncOperation ( params.., <span class="function"><span class="keyword">function</span> <span class="params">( err, returnValues.. )</span> {</span>
+   <span class="comment">//This code gets run after the async operation gets run</span>
+});</code></pre>
+
+<p>You will almost always want to follow the <a href="/what-are-the-error-conventions">error callback convention</a>, since most Node.js users will expect your project to follow them. The general idea is that the callback is the last parameter. The callback gets called after the function is done with all of its operations. Traditionally, the first parameter of the callback is the <code>error</code> value. If the function hits an error, then they typically call the callback with the first parameter being an Error object. If it cleanly exits, then they will call the callback with the first parameter being null and the rest being the return value(s).</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

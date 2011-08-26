@@ -1,0 +1,128 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How to write asynchronous code</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Javascript is an asynchronous language, in contrast to many synchronous languages like PHP, Ruby, Python, Perl, C, etc.  There are a number of important things to be aware of when learning to write asynchronous code - otherwise, you will often find your code executing in extremely unexpected ways.  Take this (general) rule to heart:</p>
+
+<h3>Use the asynchronous functions, avoid the synchronous ones!</h3>
+
+<p>Many of the functions in Node.js core have both synchronous and asynchronous versions. Under most circumstances, it will be far better for you to use the asynchronous functions - otherwise, why are you using Node.js?</p>
+
+<p>As a quick example comparing and contrasting the two, using <code>fs.readFile</code>:</p>
+
+<pre><code>fs = require(<span class="string">'fs'</span>);
+
+fs.readFile(<span class="string">'example.file'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, data)</span> {</span>
+    <span class="keyword">if</span> (err) {
+      <span class="keyword">return</span> console.log(err);
+    }
+    console.log(data);
+});
+
+<span class="comment">//====================</span>
+
+<span class="keyword">var</span> data = fs.readFileSync(<span class="string">'example.file'</span>,<span class="string">'utf8'</span>);
+console.log(data);</code></pre>
+
+<p>Just looking at these two blocks of code, the synchronous version appears to be more concise. However, the asynchronous version is more complicated for a very good reason. In the synchronous version, the world is paused until the file is finished reading - your process will just sit there, waiting for the OS (which handles all file system tasks).</p>
+
+<p>The asynchronous version, on the other hand, does not stop time - instead, the callback function gets called when the file is finished reading. This leaves your process free to execute other code in the meantime.</p>
+
+<p>When only reading a file or two, or saving something quickly, the difference between synchronous and asynchronous file I/O can be quite small. On the other hand, though, when you have multiple requests coming in per second that require file or database IO, trying to do that IO synchronously would be quite thoroughly disastrous for performance.</p>
+
+<h3>Callbacks</h3>
+
+<p>Callbacks are a basic idiom in node.js for asynchronous operations. When most people talk about callbacks, they mean the a fuction that is passed as the last parameter to an asynchronous function. The callback is then later called with any return value or error message that the function produced. For more details, see the article on <a href="/what-are-callbacks">callbacks</a></p>
+
+<h3>Event Emitters</h3>
+
+<p>Event Emitters are another basic idiom in node.js. A constructor is provided in Node.js core: <code><span class="identifier"><span class="keyword">require</span></span>(<span class="string">'events'</span>).<span class="constant">EventEmitter</span></code>. An Event Emitter is typically used when there will be multiple parts to the response (since usually you only want to call a callback once). For more details, see the article on <a href="/what-are-event-emitters">EventEmitters</a></p>
+
+<h3>A gotcha with asynchronous code</h3>
+
+<p>A common mistake in asynchronous code with javascript is to write code that does something like this:</p>
+
+<pre><code> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+   setTimeout(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+     console.log(i);
+   }, i);
+ }</code></pre>
+
+<p>The unexpected output is then:</p>
+
+<pre><code>5
+5
+5
+5
+5</code></pre>
+
+<p>The reason this happens is because each timeout is created and then <code>i</code> is incremented. Then when the callback is called, it looks for the value of <code>i</code> and it is 5. The solution is to create a closure so that the current value of <code>i</code> is stored. For example:</p>
+
+<pre><code> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+   (<span class="function"><span class="keyword">function</span><span class="params">(i)</span> {</span>
+     setTimeout(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+       console.log(i);
+     }, i);
+   })(i);</code></pre>
+
+<p>This gives the proper output:</p>
+
+<pre><code>0
+1
+2
+3
+4</code></pre></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

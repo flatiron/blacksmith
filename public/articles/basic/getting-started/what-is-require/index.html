@@ -1,0 +1,104 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">What is require?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p> Node.js follows the CommonJS module system, and the builtin <code><span class="identifier"><span class="keyword">require</span></span></code> function is the easiest way to include modules that exist in separate files. The basic functionality of <code><span class="identifier"><span class="keyword">require</span></span></code> is that it reads a javascript file, executes the file, and then proceeds to return the <code>exports</code> object. An example module:</p>
+
+<pre><code>console.log(&quot;evaluating example.js&quot;);
+
+<span class="keyword">var</span> invisible = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(&quot;invisible&quot;);
+}
+
+exports.message = &quot;hi&quot;;
+
+exports.say = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(message);
+}</code></pre>
+
+<p>So if you run <code><span class="keyword">var</span> example = require(<span class="string">'./example.js'</span>)</code>, then <code>example.js</code> will get evaluated and then <code>example</code> be an object equal to:</p>
+
+<pre><code>{
+  message: &quot;hi&quot;,
+  say: [Function]
+}</code></pre>
+
+<p>If you want to set the exports object to a function or a new object, you have to use the <code><span class="class"><span class="keyword">module</span>.<span class="title">exports</span></span></code> object. So for an example:</p>
+
+<pre><code>module.exports = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(&quot;hello world&quot;)
+}
+
+require(<span class="string">'./example2.js'</span>)() <span class="comment">//require itself and run the exports object</span></code></pre>
+
+<p>It is worth noting that each time you subsequently require an already-required file, the <code>exports</code> object is cached and reused. To illustrate this point: </p>
+
+<pre><code>node&gt; require('./example.js')
+evaluating example.js
+{ message: 'hi', say: [Function] }
+node&gt; require('./example.js')
+{ message: 'hi', say: [Function] }
+node&gt; require('./example.js').message = &quot;hey&quot; <span class="comment">//s</span>et the message to &quot;hey&quot;
+'hey'
+node&gt; require('./example.js') <span class="comment">//O</span>ne might think that this &quot;reloads&quot; the file...
+{ message: 'hey', say: [Function] } <span class="comment">//.</span>..but the message is still &quot;hey&quot; because of the module cache.</code></pre>
+
+<p>As you can see from the above, <code>example.js</code> is evaluated the first time, but all subsequent calls to <code><span class="identifier"><span class="keyword">require</span></span>()</code> only invoke the module cache, rather than reading the file again.  As seen above, this can occasionally produce side effects.</p>
+
+<p>The rules of where <code><span class="identifier"><span class="keyword">require</span></span></code> finds the files can be a little complex, but a simple rule of thumb is that if the file doesn't start with &quot;./&quot; or &quot;/&quot;, then it is either considered a core module (and the local Node path is checked), or a dependency in the local <code>node_modules</code> folder. If the file starts with &quot;./&quot; it is considered a relative file to the file that called <code><span class="identifier"><span class="keyword">require</span></span></code>. If the file starts with &quot;/&quot;, it is considered an absolute path. NOTE: you can omit &quot;.js&quot; and <code><span class="identifier"><span class="keyword">require</span></span></code> will automatically append it if needed. For more detailed information, see <a href="http://nodejs.org/docs/v0.4.2/api/modules.htmll#all_Together...">the official docs</a></p>
+
+<p>An extra note: if the filename passed to <code><span class="identifier"><span class="keyword">require</span></span></code> is actually a directory, it will first look for <code>package.json</code> in the directory and load the file referenced in the <code>main</code> property. Otherwise, it will look for an <code><span class="identifier"><span class="keymethods">index</span></span>.<span class="identifier">js</span></code>.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

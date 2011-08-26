@@ -1,0 +1,148 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How to create and use a custom REPL</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">Joshua Holbrook</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Node allows users to create their own REPLs with the <a href="http://nodejs.org/docs/v0.4.10/api/repl.html">repl module</a>. Its basic use looks like this:</p>
+
+<pre><code>repl.start(prompt, stream);</code></pre>
+
+<p><code>prompt</code> is a string that's used for the prompt of your REPL and defaults to &quot;&gt; &quot;. <code>stream</code> is the stream that the repl listens on and defaults to <code>process.stdin</code>. When you run <code>node</code> from the command prompt, what it's doing in the background is running <code>repl.start()</code> to give you the standard REPL.</p>
+
+<p>However, the repl is pretty flexible. Here's an example that shows this off:</p>
+
+<pre><code>#!<span class="regexp">/usr/</span>bin/env node
+
+<span class="keyword">var</span> net = require(&quot;net&quot;),
+    repl = require(&quot;repl&quot;);
+
+<span class="keyword">var</span> mood = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="keyword">var</span> m = [ &quot;^__^&quot;, &quot;-___-;&quot;, &quot;&gt;.&lt;&quot;, &quot;&lt;_&gt;&quot; ];
+    <span class="keyword">return</span> m[Math.floor(Math.random()*m.length)];
+};
+
+<span class="comment">//A remote node repl that you can telnet to!</span>
+net.createServer(<span class="function"><span class="keyword">function</span> <span class="params">(socket)</span> {</span>
+  <span class="keyword">var</span> remote = repl.start(&quot;node::remote&gt; &quot;, socket);
+  <span class="comment">//Adding &quot;mood&quot; and &quot;bonus&quot; to the remote REPL's context.</span>
+  remote.context.mood = mood;
+  remote.context.bonus = &quot;UNLOCKED&quot;;
+}).listen(<span class="number">5001</span>);
+
+console.log(&quot;Remote REPL started on port <span class="number">5001</span>.&quot;);
+
+<span class="comment">//A &quot;local&quot; node repl with a custom prompt</span>
+<span class="keyword">var</span> local = repl.start(&quot;node::local&gt; &quot;);
+
+<span class="comment">// Exposing the function &quot;mood&quot; to the local REPL's context.</span>
+local.context.mood = mood;</code></pre>
+
+<p>This script creates <em>two</em> REPLs: One is normal excepting for its custom prompt, but the <em>other</em> is exposed via the net module so I can telnet to it! In addition, it uses the <code>context</code> property to expose the function &quot;mood&quot; to both REPLs, and the &quot;bonus&quot; string to the remote REPL only. As you will see, this approach of trying to expose objects to one REPL and not the other <em>doesn't really work</em>.</p>
+
+<p>In addition, all objects in the global scope will also be accessible to your REPLs.</p>
+
+<p>Here's what happens when I run the script:</p>
+
+<pre><code><span class="variable">$ </span><span class="identifier">node</span> <span class="identifier">repl</span>.<span class="identifier">js</span> 
+<span class="constant">Remote</span> <span class="constant">REPL</span> <span class="identifier">started</span> <span class="identifier">on</span> <span class="identifier">port</span> <span class="number">5001</span>.
+<span class="identifier">node</span><span class="symbol">:</span><span class="symbol">:<span class="identifier">local</span></span>&amp;<span class="identifier">gt</span>; .<span class="identifier"><span class="keymethods">exit</span></span>
+^<span class="constant">Cjosh</span><span class="variable">@pidgey</span><span class="symbol">:</span>/<span class="identifier">tmp</span>/<span class="identifier">telnet</span><span class="variable">$ </span><span class="identifier">node</span> <span class="identifier">repl</span>.<span class="identifier">js</span> 
+<span class="constant">Remote</span> <span class="constant">REPL</span> <span class="identifier">started</span> <span class="identifier">on</span> <span class="identifier">port</span> <span class="number">5001</span>.
+<span class="identifier">node</span><span class="symbol">:</span><span class="symbol">:<span class="identifier">local</span></span>&amp;<span class="identifier">gt</span>; <span class="identifier">mood</span>()
+<span class="string">'^__^'</span>
+<span class="identifier">node</span><span class="symbol">:</span><span class="symbol">:<span class="identifier">local</span></span>&amp;<span class="identifier">gt</span>; <span class="identifier">bonus</span>
+<span class="constant">ReferenceError</span><span class="symbol">:</span> <span class="identifier">bonus</span> <span class="identifier">is</span> <span class="identifier"><span class="keyword">not</span></span> <span class="identifier"><span class="keyword">defined</span></span>
+    <span class="identifier"><span class="keymethods">at</span></span> [<span class="identifier">object</span> <span class="constant">Context</span>]<span class="symbol">:</span><span class="number">1</span><span class="symbol">:</span><span class="number">1</span>
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">Interface</span>.&amp;<span class="identifier">lt</span>;<span class="identifier">anonymous</span>&amp;<span class="identifier">gt</span>; (<span class="identifier">repl</span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">171</span><span class="symbol">:</span><span class="number">22</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">Interface</span>.<span class="identifier">emit</span> (<span class="identifier">events</span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">64</span><span class="symbol">:</span><span class="number">17</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">Interface</span>.<span class="constant">_onLine</span> (<span class="identifier"><span class="keymethods">readline</span></span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">153</span><span class="symbol">:</span><span class="number">10</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">Interface</span>.<span class="identifier">_line</span> (<span class="identifier"><span class="keymethods">readline</span></span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">408</span><span class="symbol">:</span><span class="number">8</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">Interface</span>.<span class="constant">_ttyWrite</span> (<span class="identifier"><span class="keymethods">readline</span></span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">585</span><span class="symbol">:</span><span class="number">14</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">ReadStream</span>.&amp;<span class="identifier">lt</span>;<span class="identifier">anonymous</span>&amp;<span class="identifier">gt</span>; (<span class="identifier"><span class="keymethods">readline</span></span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">73</span><span class="symbol">:</span><span class="number">12</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">ReadStream</span>.<span class="identifier">emit</span> (<span class="identifier">events</span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">81</span><span class="symbol">:</span><span class="number">20</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">ReadStream</span>.<span class="constant">_emitKey</span> (<span class="identifier">tty_posix</span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">307</span><span class="symbol">:</span><span class="number">10</span>)
+    <span class="identifier"><span class="keymethods">at</span></span> <span class="constant">ReadStream</span>.<span class="constant">onData</span> (<span class="identifier">tty_posix</span>.<span class="identifier">js</span><span class="symbol">:</span><span class="number">70</span><span class="symbol">:</span><span class="number">12</span>)</code></pre>
+
+<p>As may be seen, the <code>mood</code> function is usable within the local REPL, but the
+<code>bonus</code> string is not. This is as expected.</p>
+
+<p>Now, here's what happens when I try to telnet to port 5001:</p>
+
+<pre><code><span class="identifier">josh</span><span class="variable">@pidgey</span><span class="symbol">:</span>/<span class="identifier">tmp</span>/<span class="identifier">telnet</span><span class="variable">$ </span><span class="identifier">telnet</span> <span class="identifier">localhost</span> <span class="number">5001</span>
+<span class="constant">Trying</span> <span class="symbol">:</span><span class="symbol">:</span><span class="number">1</span>...
+<span class="constant">Trying</span> <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>...
+<span class="constant">Connected</span> <span class="identifier">to</span> <span class="identifier">localhost</span>.
+<span class="constant">Escape</span> <span class="identifier">character</span> <span class="identifier">is</span> <span class="string">'^]'</span>.
+<span class="identifier">node</span><span class="symbol">:</span><span class="symbol">:<span class="identifier">remote</span></span>&amp;<span class="identifier">gt</span>; <span class="identifier">mood</span>()
+<span class="string">'&gt;.&lt;'</span>
+<span class="identifier">node</span><span class="symbol">:</span><span class="symbol">:<span class="identifier">remote</span></span>&amp;<span class="identifier">gt</span>; <span class="identifier">bonus</span>
+<span class="string">'UNLOCKED'</span></code></pre>
+
+<p>As you can see, the <code>mood</code> function is <em>also</em> available over telnet! In addition, so is &quot;bonus&quot;.</p>
+
+<p>As an interesting consequence of my actions, bonus is now also defined on the local REPL:</p>
+
+<pre><code>node::local&gt; bonus
+'UNLOCKED'</code></pre>
+
+<p>It seems we &quot;unlocked&quot; the <code>bonus</code> string on the local REPL as well. As it turns out, any variables created in one REPL are also available to the other:</p>
+
+<pre><code>node::local&gt; <span class="keyword">var</span> node = &quot;AWESOME!&quot;
+
+node::remote&gt; node
+<span class="string">'AWESOME!'</span></code></pre>
+
+<p>As you can see, the node REPL is powerful and flexible.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

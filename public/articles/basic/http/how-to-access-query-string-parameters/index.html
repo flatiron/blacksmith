@@ -1,0 +1,73 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How to access query string parameters</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>In Node.js, functionality to aid in the accessing of URL query string parameters is built into the standard library. The built-in <code>url.parse</code> method takes care of most of the heavy lifting for us.  Here is an example script using this handy function and an explanation on how it works:</p>
+
+<pre><code><span class="keyword">var</span> fs = require(<span class="string">'fs'</span>);
+<span class="keyword">var</span> http = require(<span class="string">'http'</span>);
+<span class="keyword">var</span> url = require(<span class="string">'url'</span>) ;
+
+http.createServer(<span class="function"><span class="keyword">function</span> <span class="params">(req, res)</span> {</span>
+  <span class="keyword">var</span> queryObject = url.parse(req.url,<span class="literal">true</span>).query;
+  console.log(queryObject);
+
+  res.writeHead(<span class="number">200</span>);
+  res.end(<span class="string">'Feel free to add query parameters to the end of the url'</span>);
+}).listen(<span class="number">8080</span>);</code></pre>
+
+<p>The key part of this whole script is this line: <code><span class="keyword">var</span> queryObject = url.parse(req.url,<span class="literal">true</span>).query;</code>. Let's take a look at things from the inside-out.  First off, <code>req.url</code> will look like <code>/app.js?foo=bad&amp;baz=foo</code>. This is the part that is in the URL bar of the browser. Next, it gets passed to <code>url.parse</code> which parses out the various elements of the URL (NOTE: the second paramater is a boolean stating whether the method should parse the query string, so we set it to true). Finally, we access the <code>.query</code> property, which returns us a nice, friendly Javascript object with our query string data. </p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

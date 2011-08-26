@@ -1,0 +1,141 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How do I make a http request?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Another extremely common programming task is making an HTTP request to a web server.  Node.js provides an extremely simple API for this functionality in the form of <code>http.request</code>.</p>
+
+<p>As an example, we are going to preform a GET request to <a href="www.random.org/integers/?num=1&amp;min=1&amp;max=10&amp;col=1&amp;base=10&amp;format=plain&amp;rnd=new">www.random.org/integers/?num=1&amp;min=1&amp;max=10&amp;col=1&amp;base=10&amp;format=plain&amp;rnd=new</a> (which returns a random integer between 1 and 10) and print the result to the console.</p>
+
+<pre><code><span class="keyword">var</span> http = require(<span class="string">'http'</span>);
+
+<span class="comment">//The url we want is: 'www.random.org/integers/?num=1&amp;min=1&amp;max=10&amp;col=1&amp;base=10&amp;format=plain&amp;rnd=new'</span>
+<span class="keyword">var</span> options = {
+  host: <span class="string">'www.random.org'</span>,
+  path: <span class="string">'/integers/?num=1&amp;min=1&amp;max=10&amp;col=1&amp;base=10&amp;format=plain&amp;rnd=new'</span>
+};
+
+callback = <span class="function"><span class="keyword">function</span><span class="params">(response)</span> {</span>
+  <span class="keyword">var</span> str = <span class="string">''</span>;
+
+  <span class="comment">//another chunk of data has been recieved, so append it to `str`</span>
+  response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(chunk)</span> {</span>
+    str += chunk;
+  });
+
+  <span class="comment">//the whole response has been recieved, so we just print it out here</span>
+  response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(str);
+  });
+}
+
+http.request(options, callback).end();</code></pre>
+
+<p>Making a POST request is just as easy. We will make a POST request to <code>www.nodejitsu.com:1337</code> which is running a server that will echo back what we post. The code for making a POST request is almost identical to making a GET request, just a few simple modifications:</p>
+
+<pre><code><span class="keyword">var</span> http = require(<span class="string">'http'</span>);
+
+<span class="comment">//The url we want is `www.nodejitsu.com:1337/`</span>
+<span class="keyword">var</span> options = {
+  host: <span class="string">'www.nodejitsu.com'</span>,
+  path: <span class="string">'/'</span>,
+  <span class="comment">//since we are listening on a custom port, we need to specify it by hand</span>
+  port: <span class="string">'1337'</span>,
+  <span class="comment">//This is what changes the request to a POST request</span>
+  method: <span class="string">'POST'</span>
+};
+
+callback = <span class="function"><span class="keyword">function</span><span class="params">(response)</span> {</span>
+  <span class="keyword">var</span> str = <span class="string">''</span>
+  response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(chunk)</span> {</span>
+    str += chunk;
+  });
+
+  response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(str);
+  });
+}
+
+<span class="keyword">var</span> req = http.request(options, callback);
+<span class="comment">//This is the data we are posting, it needs to be a string or a buffer</span>
+req.write(&quot;hello world!&quot;);
+req.end();</code></pre>
+
+<p>Throwing in custom headers is just a tiny bit harder. On <code>www.nodejitsu.com:1338</code> we are running a server that will print out the <code>custom</code> header.  So we will just make a quick request to it:</p>
+
+<pre><code><span class="keyword">var</span> http = require(<span class="string">'http'</span>);
+
+<span class="keyword">var</span> options = {
+  host: <span class="string">'www.nodejitsu.com'</span>,
+  path: <span class="string">'/'</span>,
+  port: <span class="string">'1338'</span>,
+  <span class="comment">//This is the only line that is new. `headers` is an object with the headers to request</span>
+  headers: {<span class="string">'custom'</span>: <span class="string">'Custom Header Demo works'</span>}
+};
+
+callback = <span class="function"><span class="keyword">function</span><span class="params">(response)</span> {</span>
+  <span class="keyword">var</span> str = <span class="string">''</span>
+  response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(chunk)</span> {</span>
+    str += chunk;
+  });
+
+  response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(str);
+  });
+}
+
+<span class="keyword">var</span> req = http.request(options, callback);
+req.end();</code></pre></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

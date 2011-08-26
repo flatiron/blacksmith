@@ -1,0 +1,81 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How to use fs.createReadStream?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>The function <code>fs.createReadStream()</code> allows you to open up a readable stream in a very simple manner. All you have to do is pass the path of the file to start streaming in. It turns out that the response (as well as the request) objects are streams. So we will use this fact to create a http server that streams the files to the client. Since the code is simple enough, it is pretty easy just to read through it and comment why each line is necessary.</p>
+
+<pre><code><span class="keyword">var</span> http = require(<span class="string">'http'</span>);
+<span class="keyword">var</span> fs = require(<span class="string">'fs'</span>);
+
+http.createServer(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> {</span>
+  <span class="comment">// The filename is simple the local directory and tacks on the requested url</span>
+  <span class="keyword">var</span> filename = __dirname+req.url;
+
+  <span class="comment">// This line opens the file as a readable stream</span>
+  <span class="keyword">var</span> readStream = fs.createReadStream(filename);
+
+  <span class="comment">// This will wait until we know the readable stream is actually valid before piping</span>
+  readStream.on(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="comment">// This just pipes the read stream to the response object (which goes to the client)</span>
+    readStream.pipe(res);
+  });
+
+  <span class="comment">// This catches any errors that happen while creating the readable stream (usually invalid names)</span>
+  readStream.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(err)</span> {</span>
+    res.end(err);
+  });
+}).listen(<span class="number">8080</span>);</code></pre></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

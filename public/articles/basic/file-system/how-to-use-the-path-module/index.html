@@ -1,0 +1,115 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How to use the path module?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>The path module contains several helper functions to help make path manipulation easier.</p>
+
+<p>The first function worth mentioning is <code>path.normalize</code>.  This function takes a path (in the form of a string) and strips it of duplicate slashes and normalizes directory abbreviations, like '.' for 'this directory' and '..' for 'one level up'. For example:</p>
+
+<pre><code>&gt; var path = require('path');
+&gt; path.normalize('/a/.<span class="comment">///</span>b/d/../c/')
+'/a/b/c/'</code></pre>
+
+<p>A closely related function to <code>normalize</code> is <code><span class="identifier"><span class="keymethods">join</span></span></code>.  This function takes a variable number of arguments, joins them together, and normalizes the path.</p>
+
+<pre><code>&amp;<span class="identifier">gt</span>; <span class="identifier">var</span> <span class="identifier">path</span> = <span class="identifier"><span class="keyword">require</span></span>(<span class="string">'path'</span>);
+&amp;<span class="identifier">gt</span>; <span class="identifier">path</span>.<span class="identifier"><span class="keymethods">join</span></span>(<span class="string">'/a/.'</span>, <span class="string">'.///b/'</span>, <span class="string">'d/../c/'</span>)
+<span class="string">'/a/b/c'</span></code></pre>
+
+<p>A possible use of <code><span class="identifier"><span class="keymethods">join</span></span></code> is to manipulate paths when serving urls:</p>
+
+<pre><code>&gt; <span class="keyword">var</span> path = require(<span class="string">'path'</span>);
+&gt; <span class="keyword">var</span> url = <span class="string">'/index.html'</span>;
+&gt; path.join(process.cwd(), <span class="string">'static'</span>, url);
+<span class="string">'/home/nico/static/index.html'</span></code></pre>
+
+<p>There are three functions which are used to extract the various parts of the path name: <code>basename</code>, <code>extname</code>, and <code>dirname</code>. 
+- <code>basename</code> returns the last portion of the path passed in. 
+- <code>extname</code> returns the extension of the last portion. Generally for directories, <code>extname</code> just returns ''. 
+- Finally, <code>dirname</code> returns everything that <code>basename</code> does not return.
+For example:</p>
+
+<pre><code>&gt; <span class="keyword">var</span> path = require(<span class="string">'path'</span>)
+&gt; <span class="keyword">var</span> a = <span class="string">'/a/b/c.html'</span>
+&gt; path.basename(a)
+<span class="string">'c.html'</span>
+&gt; path.extname(a)
+<span class="string">'.html'</span>
+&gt; path.dirname(a)
+<span class="string">'/a/b'</span></code></pre>
+
+<p>Note that <code>basename</code> has an optional second parameter that will strip out the extension if you pass the correct extension.</p>
+
+<pre><code>&gt; <span class="keyword">var</span> path = require(<span class="string">'path'</span>)
+&gt; <span class="keyword">var</span> a = <span class="string">'/a/b/c.html'</span>
+&gt; path.basename(a, path.extname(a))
+<span class="string">'c'</span></code></pre>
+
+<p>Lastly, the <code>path</code> module provides methods to check whether or not a given path exists: <code>exists</code> and <code>existsSync</code> They both take the path of a file for the first parameter. </p>
+
+<p><code>exists</code> takes a callback as its second parameter, to which is returned a boolean representing the existance of the file. </p>
+
+<p><code>existsSync</code>, on the other hand, checks the given path synchronously, returning the boolean directly.  In Node.js, you will typically want to use the asynchronous functions for most file system I/O - the synchronous versions will block your entire process until they finish. </p>
+
+<p>Blocking isn't always a bad thing.  Checking the existence of a vital configuration file synchronously makes sense, for example - it doesn't matter much if your process is blocking for something it can't run without!  Conversely, though, in a busy HTTP server, any per-request file I/O <strong>MUST</strong> be asynchronous, or else you'll be responding to requests one by one. See the article on <a href="/how-to-write-asynchronous-code">asynchronous operations</a> for more details.</p>
+
+<pre><code>    &gt; <span class="keyword">var</span> path = require(<span class="string">'path'</span>)
+    &gt; path.exists(<span class="string">'/etc'</span>, <span class="function"><span class="keyword">function</span><span class="params">(exists)</span>{</span>console.log(&quot;Does the file exist?&quot;, exists)})
+    &gt; Does the file exist? <span class="literal">true</span>
+
+    &gt; path.existsSync(<span class="string">'/etc'</span>)
+    <span class="literal">true</span></code></pre></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

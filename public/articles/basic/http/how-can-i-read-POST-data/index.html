@@ -1,0 +1,92 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How can I read POST data?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Reading the data from a POST request (i.e. a form submission) can be a little bit of a pitfall in Node.js, so we're going to go through an example of how to do it properly.  The first step, obviously, is to listen for incoming data - the trick is to wait for the data to finish, so that you can process all the form data without losing anything. </p>
+
+<p>Here is a quick script that shows you how to do exactly that:</p>
+
+<pre><code><span class="keyword">var</span> http = require(<span class="string">'http'</span>);
+<span class="keyword">var</span> postHTML = 
+  <span class="string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Post Example&lt;/title&gt;&lt;/head&gt;'</span> +
+  <span class="string">'&lt;body&gt;'</span> +
+  <span class="string">'&lt;form method=&quot;post&quot;&gt;'</span> +
+  <span class="string">'Input 1: &lt;input name=&quot;input1&quot;&gt;&lt;br&gt;'</span> +
+  <span class="string">'Input 2: &lt;input name=&quot;input2&quot;&gt;&lt;br&gt;'</span> +
+  <span class="string">'&lt;input type=&quot;submit&quot;&gt;'</span> +
+  <span class="string">'&lt;/form&gt;'</span> +
+  <span class="string">'&lt;/body&gt;&lt;/html&gt;'</span>;
+
+http.createServer(<span class="function"><span class="keyword">function</span> <span class="params">(req, res)</span> {</span>
+  <span class="keyword">var</span> body = &quot;&quot;;
+  req.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(chunk)</span> {</span>
+    body += chunk;
+  });
+  req.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">'POSTed: '</span> + body);
+    res.writeHead(<span class="number">200</span>);
+    res.end(postHTML);
+  });
+}).listen(<span class="number">8080</span>);</code></pre>
+
+<p>The variable <code>postHTML</code> is a static string containing the HTML for two input boxes and a submit box - this HTML is provided so that you can <code>POST</code> example data. This is NOT the right way to serve static HTML - please see <a href="link">How to Serve Static Files</a> for a more proper example.</p>
+
+<p>With the HTML out of the way, we <a href="/how-do-i-create-a-http-server">create a server</a> to listen for requests. It is important to note, when listening for POST data, that the <code>req</code> object is also an <a href="/what-are-event-emitters">Event Emitter</a>.  <code>req</code>, therefore, will emit a <code>data</code> event whenever a 'chunk' of incoming data is received; when there is no more incoming data, the <code><span class="identifier"><span class="keyword">end</span></span></code> event is emitted. So, in our case, we listen for <code>data</code> events. Once all the data is recieved, we log the data to the console and send the response. </p>
+
+<p>Something important to note is that the event listeners are being added immediately after the request object is received. If you don't immediately set them, then there is a possibility of missing some of the events. If, for example, an event listener was attached from inside a callback, then the <code>data</code> and <code><span class="identifier"><span class="keyword">end</span></span></code> events might be fired in the meantime with no listeners attached!</p>
+
+<p>You can save this script to <code>server.js</code> and run it with <code>node server.js</code>. Once you run it you will notice that occassionally you will see lines with no data, e.g. <code>POSTed: </code>. This happens because regular <code>GET</code> requests go through the same codepath. In a more 'real-world' application, it would be proper practice to check the type of request and handle the different request types differently.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

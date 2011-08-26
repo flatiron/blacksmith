@@ -1,0 +1,119 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">What are &quot;truthy&quot; and &quot;falsy&quot; values?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">polotek</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Javascript is weakly typed language. That means different types can be
+used in operations and the language will try to convert the types
+until the operation makes sense.</p>
+
+<pre><code>console.log(&quot;<span class="number">1</span>&quot; &gt; <span class="number">0</span>); <span class="comment">// </span><span class="literal">true</span>, &quot;<span class="number">1</span>&quot; converted to number
+console.log(<span class="number">1</span> + &quot;<span class="number">1</span>&quot;); <span class="comment">// </span><span class="number">11</span>, <span class="number">1</span> converted to string</code></pre>
+
+<p>Type conversion also applys when values are used in unary boolean
+operations, most notably if statements. If a value converts to the
+boolean true, then it is said to be &quot;truthy&quot;. If it converts to false
+it is &quot;falsy&quot;.</p>
+
+<pre><code><span class="keyword">var</span> myval = &quot;value&quot;;
+<span class="keyword">if</span>(myval) {
+  console.log(&quot;This value is truthy&quot;);
+}
+
+myval = <span class="number">0</span>;
+<span class="keyword">if</span>(!myval) {
+  console.log(&quot;This value is falsy&quot;);
+}</code></pre>
+
+<p>Since most values in javascript are truthy, e.g. objects, arrays, most
+numbers and strings, it's easier to identify all of the falsy
+values. These are:</p>
+
+<pre><code><span class="literal">false</span> <span class="comment">// obviously</span>
+<span class="number">0</span>     <span class="comment">// The only falsy number</span>
+&quot;&quot;    <span class="comment">// the empty string</span>
+<span class="literal">null</span>
+undefined
+NaN</code></pre>
+
+<p>Note that all objects and arrays are truthy, even empty ones.</p>
+
+<p>Truthiness and Falsiness also come into play with logical
+operators. When using logical AND/OR, the values will be converted
+based on truthiness or falsyness and then the expression will resolve
+to the last truthy value. Short circuit rules apply. Here's an
+extended example.</p>
+
+<pre><code><span class="identifier">var</span> <span class="identifier"><span class="keymethods">first</span></span> = &amp;<span class="identifier">quot</span>;<span class="identifier">truthy</span>&amp;<span class="identifier">quot</span>;
+  , <span class="identifier">second</span> = &amp;<span class="identifier">quot</span>;<span class="identifier">also</span> <span class="identifier">truthy</span>&amp;<span class="identifier">quot</span>;;
+
+<span class="identifier">var</span> <span class="identifier">myvalue</span> = <span class="identifier"><span class="keymethods">first</span></span> &amp;<span class="identifier">amp</span>;&amp;<span class="identifier">amp</span>; <span class="identifier">second</span>;
+<span class="identifier">console</span>.<span class="identifier">log</span>(<span class="identifier">myvalue</span>); <span class="regexp">//</span> &amp;<span class="identifier">quot</span>;<span class="identifier">also</span> <span class="identifier">truthy</span>&amp;<span class="identifier">quot</span>;
+
+<span class="identifier"><span class="keymethods">first</span></span> = <span class="identifier">null</span>;
+<span class="identifier">second</span> = &amp;<span class="identifier">quot</span>;<span class="identifier">truthy</span>&amp;<span class="identifier">quot</span>;;
+
+<span class="identifier">myvalue</span> = <span class="identifier"><span class="keymethods">first</span></span> || <span class="identifier">second</span>;
+<span class="identifier">console</span>.<span class="identifier">log</span>(<span class="identifier">myvalue</span>); <span class="regexp">//</span> &amp;<span class="identifier">quot</span>;<span class="identifier">truthy</span>&amp;<span class="identifier">quot</span>;
+
+<span class="identifier">myvalue2</span> = <span class="identifier">second</span> || <span class="identifier"><span class="keymethods">first</span></span>;
+<span class="identifier">console</span>.<span class="identifier">log</span>(<span class="identifier">myvalue2</span>); <span class="regexp">//</span> &amp;<span class="identifier">quot</span>;<span class="identifier">truthy</span>&amp;<span class="identifier">quot</span>;
+
+<span class="identifier">var</span> <span class="identifier">truthy</span> = &amp;<span class="identifier">quot</span>;<span class="identifier">truthy</span>&amp;<span class="identifier">quot</span>;
+  , <span class="identifier">falsy</span> = <span class="number">0</span>;
+
+<span class="identifier">myvalue</span> = <span class="identifier">truthy</span> ? <span class="identifier"><span class="keyword">true</span></span> <span class="symbol">:</span> <span class="identifier"><span class="keyword">false</span></span>;
+<span class="identifier">myvalue</span> = <span class="identifier">falsy</span> ? <span class="identifier"><span class="keyword">true</span></span> <span class="symbol">:</span> <span class="identifier"><span class="keyword">false</span></span>;</code></pre></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

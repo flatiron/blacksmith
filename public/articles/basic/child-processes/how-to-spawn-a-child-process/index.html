@@ -1,0 +1,84 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How to spawn a child process - the basics</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">AvianFlu</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>If you find yourself wishing you could have your Node.js process start another program for you, then look no further than the <code>child_process</code> module.</p>
+
+<p>The simplest way is the &quot;fire, forget, and buffer&quot; method using <code><span class="identifier">child_process</span>.<span class="identifier"><span class="keymethods">exec</span></span></code>.  It runs your process, buffers its output (up to a default maximum of 200kb), and lets you access it from a callback when it is finished. Let us take a look at an example:</p>
+
+<pre><code> <span class="keyword">var</span> childProcess = require(<span class="string">'child_process'</span>),
+     ls;
+
+ ls = childProcess.exec(<span class="string">'ls -l'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(error, stdout, stderr)</span> {</span>
+   <span class="keyword">if</span> (error) {
+     console.log(error.stack);
+     console.log(<span class="string">'Error code: '</span>+error.code);
+     console.log(<span class="string">'Signal received: '</span>+error.signal);
+   }
+   console.log(<span class="string">'Child Process STDOUT: '</span>+stdout);
+   console.log(<span class="string">'Child Process STDERR: '</span>+stderr);
+ });
+
+ ls.on(<span class="string">'exit'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(code)</span> {</span>
+   console.log(<span class="string">'Child process exited with exit code '</span>+code);
+ });</code></pre>
+
+<p>NODE PRO TIP: <code>error.stack</code> is a stack trace to the point that the <a href="/what-is-the-error-object">Error object</a> was created.</p>
+
+<p>It should be noted that the <code>STDERR</code> of a given process is not exclusively reserved for error messages. Many programs use it as a channel for secondary data instead.  As such, when trying to work with a program that you have not previously spawned as a child process, it can be helpful to start out dumping both <code>STDOUT</code> and <code>STDERR</code>, as shown above, to avoid any surprises.</p>
+
+<p>While <code><span class="identifier">child_process</span>.<span class="identifier"><span class="keymethods">exec</span></span></code> buffers the output of the child process for you, it also returns a <code>ChildProcess</code> object, Node's way of wrapping a still-running process.  In the example above, since we are using <code>ls</code>, a program that will exit immediately regardless, the only part of the <code>ChildProcess</code> object worth worrying about is the <code>on <span class="keyword">exit</span></code> handler.  It is not necessary here - the process will still exit and the error code will still be shown on errors.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

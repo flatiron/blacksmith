@@ -1,0 +1,82 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How do I create a HTTP server?</h1>
+    <div class="date">today</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Making a simple HTTP server in Node.js has become the de facto 'hello world' for the platform.  On the one hand, Node.js provides extremely easy-to-use HTTP APIs; on the other hand, a simple web server also serves as an excellent demonstration of Node's asynchronous strengths.</p>
+
+<p>Let's take a look at a very simple example:</p>
+
+<pre><code><span class="keyword">var</span> http = require(<span class="string">'http'</span>);
+<span class="keyword">var</span> requestListener = <span class="function"><span class="keyword">function</span> <span class="params">(req, res)</span> {</span>
+  res.writeHead(<span class="number">200</span>);
+  res.end(<span class="string">'Hello, World!\n'</span>);
+}
+
+<span class="keyword">var</span> server = http.createServer(requestListener);
+server.listen(<span class="number">8080</span>);</code></pre>
+
+<p>Save this in a file called <code>server.js</code> - run <code>node server.js</code>, and your program will hang there... it's waiting for connections to respond to, so you'll have to give it one if you want to see it do anything.  Try opening up a browser, and typing <code>localhost:8080</code> into the location bar.  If everything has been set up correctly, you should see your server saying hello!</p>
+
+<p>Let's take a more in-depth look at what the above code is doing.  First, a function is defined called <code>requestListener</code> that takes a request object and a response object as parameters. </p>
+
+<p>The request object contains things such as the requested URL, but in this example we ignore it and always return &quot;Hello World&quot;. </p>
+
+<p>The response object is how we send the headers and contents of the response back to the user making the request. Here we return a 200 response code (signaling a successful response) with the body &quot;Hello World&quot;.  Other headers, such as <code><span class="constant">Content</span>-<span class="identifier"><span class="keymethods">type</span></span></code>, would also be set here.</p>
+
+<p>Next, the <code>http.createServer</code> method creates a server that calls <code>requestListener</code> whenever a request comes in. The next line, <code>server.listen(8080)</code>, calls the <code>listen</code> method, which causes the server to wait for incoming requests on the specified port - 8080, in this case. </p>
+
+<p>There you have it - your most basic Node.js HTTP server.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

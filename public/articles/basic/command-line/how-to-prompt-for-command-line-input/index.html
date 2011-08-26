@@ -1,0 +1,136 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How do I prompt users for input from a command-line script?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">AvianFlu</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>So you've got a little CLI tool, but you want to be able to prompt a user for additional data after the script has started, rather than passing it in as a command line argument or putting it in a file.  To do this, you'll need to listen to STDIN (&quot;standard input&quot;, i.e. your keyboard), which Node.js exposes for you as <code>process.stdin</code>, a readable stream.</p>
+
+<p>Streams are Node's way of dealing with evented I/O - they're a big topic, and you can read more about them (here).  For now, we're only going to deal with the Stream methods relevant to working with <code>process.stdin</code> so as to keep the examples easy.</p>
+
+<p>The first two Readable Stream methods you'll need to know about here are <code>pause()</code> and <code>resume()</code>.  Not every program needs to care whether or not you're pressing keys at a given moment, so <code>process.stdin</code> is paused by default. </p>
+
+<p>Here's a simple example.  Try the following in a new file:</p>
+
+<pre><code>  process.stdin.resume();
+  process.stdin.setEncoding(<span class="string">'utf8'</span>);
+
+  process.stdin.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(text)</span> {</span>
+    console.log(text);
+    <span class="keyword">if</span> (text === <span class="string">'quit'</span>) {
+      done();
+    }
+  });
+
+  <span class="function"><span class="keyword">function</span> <span class="title">done</span><span class="params">()</span> {</span>
+    console.log(<span class="string">'Now that process.stdin is paused, there is nothing more to do.'</span>);
+    process.exit();
+  }</code></pre>
+
+<p>If all of this sounds complicated, or if you want a higher-level interface to this sort of thing, don't worry - as usual, the Node.js community has come to the rescue.  One particularly friendly module to use for this is Prompt, maintained by Nodejitsu.  It's available on <code>npm</code>:</p>
+
+<pre><code> npm install prompt</code></pre>
+
+<p>Prompt is built to be easy - if your eyes started to glaze over as soon as you saw <code>Readable Stream</code>, then this is the section for you.  Compare the following to the example above:</p>
+
+<pre><code>  <span class="keyword">var</span> prompt = require(<span class="string">'prompt'</span>);
+
+  prompt.start();
+
+  prompt.get([<span class="string">'username'</span>, <span class="string">'email'</span>], <span class="function"><span class="keyword">function</span> <span class="params">(err, result)</span> {</span>
+    <span class="keyword">if</span> (err) { <span class="keyword">return</span> onErr(err); }
+    console.log(<span class="string">'Command-line input received:'</span>);
+    console.log(<span class="string">'  Username: '</span> + result.username);
+    console.log(<span class="string">'  Email: '</span> + result.email);
+  });
+
+  <span class="function"><span class="keyword">function</span> <span class="title">onErr</span><span class="params">(err)</span> {</span>
+    console.log(err);
+    <span class="keyword">return</span> <span class="number">1</span>;
+  }</code></pre>
+
+<p>NODE PRO TIP: This short script also demonstrates proper error handling in node - errors are a callback's first argument, and <code><span class="keyword">return</span></code> is used with the error handler so that the rest of the function doesn't execute when errors happen.  For more information, look (here).</p>
+
+<p>Prompt also makes it trivial to handle a certain set of recurring properties that one might want to attach. </p>
+
+<pre><code>  <span class="keyword">var</span> prompt = require(<span class="string">'prompt'</span>);
+
+  <span class="keyword">var</span> properties = [
+    {
+      name: <span class="string">'username'</span>, 
+      validator: <span class="regexp">/^[a-zA-Z\s\-]+$/</span>,
+      warning: <span class="string">'Username must be only letters, spaces, or dashes'</span>
+    },
+    {
+      name: <span class="string">'password'</span>,
+      hidden: <span class="literal">true</span>
+    }
+  ];
+
+  prompt.start();
+
+  prompt.get(properties, <span class="function"><span class="keyword">function</span> <span class="params">(err, result)</span> {</span>
+    <span class="keyword">if</span> (err) { <span class="keyword">return</span> onErr(err); }
+    console.log(<span class="string">'Command-line input received:'</span>);
+    console.log(<span class="string">'  Username: '</span> + result.username);
+    console.log(<span class="string">'  Password: '</span> + result.password);
+  });
+
+  <span class="function"><span class="keyword">function</span> <span class="title">onErr</span><span class="params">(err)</span> {</span>
+    console.log(err);
+    <span class="keyword">return</span> <span class="number">1</span>;
+  }</code></pre>
+
+<p>For more information on Prompt, please see <a href="http://github.com/nodejitsu/node-prompt">the project's GitHub page</a>.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

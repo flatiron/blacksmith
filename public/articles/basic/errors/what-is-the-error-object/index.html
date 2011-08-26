@@ -1,0 +1,90 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">What is the error object?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>The error object is a built-in object that provides a standard set of useful information when an error occurs, such as a stack trace and the error message. For example:</p>
+
+<p>Code:</p>
+
+<pre><code> <span class="keyword">var</span> error = <span class="keyword">new</span> Error(&quot;The error message&quot;);
+ console.log(error);
+ console.log(error.stack);</code></pre>
+
+<p>Result:</p>
+
+<pre><code> { stack: [Getter/Setter],
+   arguments: undefined,
+   type: undefined,
+   message: <span class="string">'The error message'</span> }
+ Error: The error message
+     at Object.&lt;anonymous&gt; (<span class="regexp">/home/</span>nico/example.js:<span class="number">1</span>:<span class="number">75</span>)
+     at Module._compile (module.js:<span class="number">407</span>:<span class="number">26</span>)
+     at Object..js (module.js:<span class="number">413</span>:<span class="number">10</span>)
+     at Module.load (module.js:<span class="number">339</span>:<span class="number">31</span>)
+     at Function._load (module.js:<span class="number">298</span>:<span class="number">12</span>)
+     at Array.<span class="number">0</span> (module.js:<span class="number">426</span>:<span class="number">10</span>)
+     at EventEmitter._tickCallback (node.js:<span class="number">126</span>:<span class="number">26</span>)</code></pre>
+
+<p><code>error.stack</code> shows you where an error came from, as well as a list of the function calls that preceded it - for your convenience, <code>error.stack</code> always prints <code>error.message</code> as the first line of its output, making <code>error.stack</code> a convenient single property to log during debugging.</p>
+
+<p>If you want to add more information to the Error object, you can always add properities, just as with any other Javascript object: </p>
+
+<pre><code><span class="keyword">var</span> error = <span class="keyword">new</span> Error(&quot;The error message&quot;);
+error.http_code = <span class="number">404</span>;
+console.log(error);</code></pre>
+
+<p>For more details how to use the Error object, check out the <a href="/what-are-the-error-conventions">article on error conventions</a></p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

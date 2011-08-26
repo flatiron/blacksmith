@@ -1,0 +1,99 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How do I write files in node.js?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Writing to a file is another of the basic programming tasks that one usually needs to know about - luckily, this task is very simple in Node.js.  We can use the handy <code>writeFile</code> method inside the standard library's <code>fs</code> module, which can save all sorts of time and trouble.</p>
+
+<pre><code><span class="identifier">fs</span> = <span class="identifier"><span class="keyword">require</span></span>(<span class="string">'fs'</span>);
+<span class="identifier">fs</span>.<span class="constant">writeFile</span>(<span class="identifier">filename</span>, <span class="identifier">data</span>, [<span class="identifier">encoding</span>], [<span class="identifier">callback</span>])</code></pre>
+
+<p><code>file = (string)</code> filepath of the file to read</p>
+
+<p><code><span class="identifier">data</span> = (<span class="identifier">string</span> <span class="identifier"><span class="keyword">or</span></span> <span class="identifier">buffer</span>)</code> the data you want to write to the file</p>
+
+<p><code>encoding = (optional string)</code> the encoding of the <code>data</code>. Possible encodings are 'ascii', 'utf8', and 'base64'. If no encoding provided, then 'utf8' is assumed.</p>
+
+<p><code>callback = (optional <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> {</span>})</code> If there is no error, <code>err === <span class="literal">null</span></code>, otherwise <code>err</code> contains the error message.</p>
+
+<p>So if we wanted to write &quot;Hello World&quot; to <code>helloworld.txt</code>:</p>
+
+<pre><code>fs = require(<span class="string">'fs'</span>);
+fs.writeFile(<span class="string">'helloworld.txt'</span>, <span class="string">'Hello World!'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> {</span>
+  <span class="keyword">if</span> (err) <span class="keyword">return</span> console.log(err);
+  console.log(<span class="string">'Hello World &gt; helloworld.txt'</span>);
+});
+
+[contents of helloworld.txt]:
+Hello World!</code></pre>
+
+<p>If we purposely want to cause an error, we can try to write to a file that we don't have permission to access:</p>
+
+<pre><code>fs = require(<span class="string">'fs'</span>)
+fs.writeFile(<span class="string">'/etc/doesntexist'</span>, <span class="string">'abc'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err,data)</span> {</span>
+  <span class="keyword">if</span> (err) {
+    <span class="keyword">return</span> console.log(err);
+  }
+  console.log(data);
+});
+
+{ stack: [Getter/Setter],
+  arguments: undefined,
+  type: undefined,
+  message: <span class="string">'EACCES, Permission denied \'/etc/doesntexist\''</span>,
+  errno: <span class="number">13</span>,
+  code: <span class="string">'EACCES'</span>,
+  path: <span class="string">'/etc/doesntexist'</span> }</code></pre></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

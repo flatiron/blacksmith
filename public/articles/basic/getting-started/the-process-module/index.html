@@ -1,0 +1,151 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">How to use the global process module</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">AvianFlu</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>Each Node.js process has a set of built-in functionality, accessible through the global <code>process</code> module.  The <code>process</code> module doesn't need to be required - it is somewhat literally a wrapper around the currently executing process, and many of the methods it exposes are actually wrappers around calls into some of Node's core C libraries.</p>
+
+<h2>Events</h2>
+
+<p>There are two built-in events worth noting in the <code>process</code> module, <code><span class="keyword">exit</span></code> and <code>uncaughtException</code>.</p>
+
+<p>The <code><span class="keyword">exit</span></code> event fires whenever the process is about to exit.</p>
+
+<pre><code> process.on(<span class="string">'exit'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  fs.writeFileSync(<span class="string">'/tmp/myfile'</span>, <span class="string">'This MUST be saved on exit.'</span>);
+ });</code></pre>
+
+<p>Code like the above can occasionally be useful for saving some kind of final report before you exit.  Note the use of a synchronous file system call - this is to make sure the I/O finishes before the process actually exits.</p>
+
+<p>The other built-in event is called <code>uncaughtException</code>.  It fires, as you might guess, whenever an exception has occurred that hasn't been caught or dealt with somewhere else in your program.  It's not the ideal way to handle errors, but it can be very useful as a last line of defense if a program needs to stay running indefinitely.</p>
+
+<pre><code> process.on(<span class="string">'uncaughtException'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> {</span>
+   console.error(<span class="string">'An uncaught error occurred!'</span>);
+   console.error(err.stack);
+ });</code></pre>
+
+<p>The default behavior on <code>uncaughtException</code> is to print a stack trace and exit - using the above, your program will display the message provided and the stack trace, but will <strong>not</strong> exit.</p>
+
+<h2>Streams</h2>
+
+<p>The <code>process</code> object also provides wrappings for the three <code>STDIO</code> streams, <code>stdin</code>, <code>stdout</code>, and <code>stderr</code>.  Put briefly, <code>stdin</code> is a readable stream (where one would read input from the user), <code>stdout</code> is a non-blocking writeable stream (writes to <code>stdout</code> are asynchronous, in other words), and <code>stderr</code> is a blocking (synchronous) writeable stream.</p>
+
+<p>The simplest one to describe is <code>process.stdout</code>.  Technically, most output in Node is accomplished by using <code><span class="identifier">process</span>.<span class="identifier">stdout</span>.<span class="identifier"><span class="keymethods">write</span></span>()</code> - though most people would never know it.  The following is from <code>console.js</code> in Node core:</p>
+
+<pre><code>  exports.log = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+    process.stdout.write(format.apply(<span class="keyword">this</span>, arguments) + <span class="string">'\n'</span>);
+  };</code></pre>
+
+<p>Since most people are used to the <code>console.log</code> syntax from browser development, it was provided as a convenient wrapper.</p>
+
+<p>Next we have <code>process.stderr</code>, which is very similar to <code>process.stdout</code> with one key exception - it blocks.  When you write to <code>stderr</code>, your process blocks until the write is completed.  Node.js provides a number of alias functions for output, most of which either end up using <code>stdout</code> or <code>stderr</code> under the hood.  Here's a quick reference list:</p>
+
+<p>STDOUT, or non-blocking functions: <code>console.log</code>, <code>console.info</code>, <code><span class="identifier">util</span>.<span class="identifier"><span class="keymethods">puts</span></span></code>, <code><span class="identifier">util</span>.<span class="identifier"><span class="keymethods">print</span></span></code></p>
+
+<p>STDERR, or blocking functions: <code><span class="identifier">console</span>.<span class="identifier"><span class="keymethods">warn</span></span></code>, <code>console.error</code>, <code>util.debug</code></p>
+
+<p>Lastly, <code>process.stdin</code> is a readable stream for getting user input.  See <a href="/how-to-prompt-for-cli-input">more on cli input</a>.</p>
+
+<h2>Other Properties</h2>
+
+<p>The <code>process</code> object additionally contains a variety of properties that allow you to access information about the running process.  Let's run through a few quick examples with the help of the REPL:</p>
+
+<pre><code>  &amp;<span class="identifier">gt</span>; <span class="identifier">process</span>.<span class="identifier"><span class="keymethods">pid</span></span>
+  <span class="number">3290</span>
+  &amp;<span class="identifier">gt</span>; <span class="identifier">process</span>.<span class="identifier">version</span>
+  <span class="string">'v0.4.9'</span>
+  &amp;<span class="identifier">gt</span>; <span class="identifier">process</span>.<span class="identifier">platform</span>
+  <span class="string">'linux'</span>
+  &amp;<span class="identifier">gt</span>; <span class="identifier">process</span>.<span class="identifier">title</span>
+  <span class="string">'node'</span></code></pre>
+
+<p>The <code><span class="identifier"><span class="keymethods">pid</span></span></code> is the OS Process ID, <code>platform</code> is something general like 'linux' or 'darwin', and <code>version</code> refers to your Node version.  <code>process.title</code> is a little bit different - while set to <code>node</code> by default, it can be set to anything you want, and will be what gets displayed in lists of running processes.</p>
+
+<p>The <code>process</code> module also exposes <code>process.argv</code>, an array containing the command-line arguments to the current process, and <code>process.argc</code>, an integer representing the number of arguments passed in.  Read more on <a href="/how-to-parse-command-line-args">how to parse comamnd line arguments</a></p>
+
+<p><code>process.execPath</code> will return the absolute path of the executable that started this process.</p>
+
+<p><code>process.env</code> contains your environment variables.  Try <code>process.env.HOME</code>, for example.</p>
+
+<h2>Methods</h2>
+
+<p>There are also a variety of methods attached to the <code>process</code> object, many of which deal with quite advanced aspects of a program.  We'll take a look at a few of the more commonly useful ones, while leaving the more advanced parts for another article.</p>
+
+<p><code>process.<span class="keyword">exit</span></code> exits the process.  If you call an asynchronous function and then call <code>process.<span class="keyword">exit</span>()</code> immediately afterwards, you will be in a race condition - the asynchronous call may or may not complete before the process is exited.  <code>process.<span class="keyword">exit</span></code> accepts one optional argument - an integer exit code.  <code>0</code>, by convention, is an exit with no errors.</p>
+
+<p><code>process.cwd</code> returns the 'current working directory' of the process - this is often the directory from which the command to start the process was issued.</p>
+
+<p><code>process.chdir</code> is used to change the current working directory.  For example:</p>
+
+<pre><code>  &gt; process.cwd()
+  '/home/avian/dev'
+  &gt; process.chdir('/home/avian')
+  &gt; process.cwd()
+  '/home/avian'</code></pre>
+
+<p>Finally, on a more advanced note, we have <code>process.nextTick</code>.  This method accepts one argument - a callback - and places it at the top of the next iteration of the event loop.  Some people do something like this:</p>
+
+<pre><code>  setTimeout(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="comment">// code here</span>
+  }, <span class="number">0</span>)</code></pre>
+
+<p>This, however, is not ideal.  In Node.js, this should be used instead:</p>
+
+<pre><code>  process.nextTick(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">'Next trip around the event loop, wheeee!'</span>)
+  });</code></pre>
+
+<p>It is much more efficient, and much more accurate.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

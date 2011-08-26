@@ -1,0 +1,150 @@
+
+<!-- required content -->
+
+<link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/highlight/github.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<header>
+  <div class="github title"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+  <div class="title"><a href="http://docs.nodejitsu.com">docs.nodejitsu.com</a></div>
+</header>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<div id="mask"></div>
+
+<!-- end required content -->
+
+<!-- <div id="toc"></div> -->
+
+<!-- generated content -->
+<div id="article">
+  <div id="metadata">
+    <h1 class="title">What are Event Emitters?</h1>
+    <div class="date">Fri Aug 26 2011 03:08:50 GMT-0700 (PST)</div>
+    <div class="author">nico</div>
+    <!--
+      <div class="tags"></div>
+      <div class="difficulty"></div>
+    -->
+  </div>
+  <div id="content"><p>What are Event Emitters?</p>
+
+<p>In node.js an event can be described simply as a string with a corresponding callback. An event can be &quot;emitted&quot; (or in other words, the corresponding callback be called) multiple times or you can choose to only listen for the first time it is emitted. So a simple example ran on the node REPL(/how-do-i-use-nodes-repl):</p>
+
+<pre><code><span class="keyword">var</span> example_emitter = <span class="keyword">new</span> (require(<span class="string">'events'</span>).EventEmitter);
+example_emitter.on(&quot;test&quot;, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span> console.log(&quot;test&quot;); });
+example_emitter.on(&quot;print&quot;, <span class="function"><span class="keyword">function</span> <span class="params">(message)</span> {</span> console.log(message); });
+example_emitter.emit(&quot;test&quot;);
+example_emitter.emit(&quot;print&quot;, &quot;message&quot;);
+example_emitter.emit(&quot;unhandled&quot;);
+
+&gt; <span class="keyword">var</span> example_emitter = <span class="keyword">new</span> (require(<span class="string">'events'</span>).EventEmitter);
+{}
+&gt; example_emitter.on(&quot;test&quot;, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span> console.log(&quot;test&quot;); });
+{ _events: { test: [Function] } }
+&gt; example_emitter.on(&quot;print&quot;, <span class="function"><span class="keyword">function</span> <span class="params">(message)</span> {</span> console.log(message); });
+{ _events: { test: [Function], print: [Function] } }
+&gt; example_emitter.emit(&quot;test&quot;);
+test <span class="comment">//console.log'd</span>
+<span class="literal">true</span> <span class="comment">//return value</span>
+&gt; example_emitter.emit(&quot;print&quot;, &quot;message&quot;);
+message <span class="comment">//console.log'd</span>
+<span class="literal">true</span>    <span class="comment">//return value</span>
+&gt; example_emitter.emit(&quot;unhandled&quot;);
+<span class="literal">false</span>   <span class="comment">//return value</span></code></pre>
+
+<p>This demonstates all the basic functionality of an EventEmitter. The <code>on</code> or <code>addListener</code> method (basically the subscription method) allows you to choose the event to watch for and the callback to be called. The <code>emit</code> method (the publish method), on the other hand, allows you to &quot;emit&quot; an event, which causes all callbacks registered to the event to 'fire', (get called). </p>
+
+<p>So in the example, we first subscribe to both the <code><span class="identifier"><span class="keymethods">test</span></span></code> and <code><span class="identifier"><span class="keymethods">print</span></span></code> events. Then we emit the <code><span class="identifier"><span class="keymethods">test</span></span></code>, <code><span class="identifier"><span class="keymethods">print</span></span></code>, and <code>unhandled</code> events. Since <code>unhandled</code> has no callback, it just returns false; the other two run all the attached callbacks and return true. </p>
+
+<p>In the <code><span class="identifier"><span class="keymethods">print</span></span></code> event, note that we pass an extra paramter - all the extra paramaters passed to 'emit' get passed to the callback function as arguments. </p>
+
+<p>If you use the method <code>once</code> instead of <code>on</code>, after the callback is fired, it is removed from the list of callbacks. A handy little function if you want to detect only the first time an event has been emitted. </p>
+
+<p>If you want remove a specific callback, you can use <code>removeListener</code>. If you want to remove all callbacks to a specific event, you can use <code>removeAllListeners</code>. </p>
+
+<pre><code><span class="keyword">var</span> EventEmitter = require(<span class="string">'events'</span>).EventEmitter,
+    ee = <span class="keyword">new</span> EventEmitter();
+
+<span class="function"><span class="keyword">function</span> <span class="title">callback</span><span class="params">()</span> {</span> 
+  console.log(&quot;Callback has been called!&quot;); 
+}
+
+ee.once(&quot;event&quot;, callback);
+ee.emit(&quot;event&quot;);
+ee.emit(&quot;event&quot;);
+
+ee.on(&quot;event&quot;, callback);
+ee.emit(&quot;event&quot;);
+ee.emit(&quot;event&quot;);
+ee.removeListener(&quot;event&quot;, callback);
+ee.emit(&quot;event&quot;);
+
+ee.on(&quot;event&quot;, callback);
+ee.emit(&quot;event&quot;);
+ee.removeAllListeners(&quot;event&quot;);
+ee.emit(&quot;event&quot;);
+
+&gt; <span class="keyword">var</span> ee = <span class="keyword">new</span> (require(<span class="string">'events'</span>).EventEmitter);
+&gt; <span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span> console.log(&quot;Callbacked!&quot;); }
+&gt; ee.once(&quot;event&quot;, callback);
+{ _events: { event: { [Function: g] listener: [Function] } } }
+&gt; ee.emit(&quot;event&quot;);
+Callbacked! <span class="comment">//console.log'd</span>
+<span class="literal">true</span>
+&gt; ee.emit(&quot;event&quot;);
+<span class="literal">false</span>
+
+&gt; ee.on(&quot;event&quot;, callback);
+{ _events: { event: [Function] } }
+&gt; ee.emit(&quot;event&quot;);
+Callbacked! <span class="comment">//console.log'd</span>
+<span class="literal">true</span>
+&gt; ee.emit(&quot;event&quot;);
+Callbacked! <span class="comment">//console.log'd</span>
+<span class="literal">true</span>
+&gt; ee.removeListener(&quot;event&quot;, callback);
+{ _events: {} }
+&gt; ee.emit(&quot;event&quot;);
+<span class="literal">false</span>
+
+&gt; ee.on(&quot;event&quot;, callback);
+{ _events: { event: [Function] } }
+&gt; ee.emit(&quot;event&quot;);
+Callbacked! <span class="comment">//console.log'd</span>
+<span class="literal">true</span>
+&gt; ee.removeAllListeners(&quot;event&quot;);
+{ _events: { event: <span class="literal">null</span> } }
+&gt; ee.emit(&quot;event&quot;);
+<span class="literal">false</span></code></pre>
+
+<p>NOTE: If you want create more than 10 listeners on a single event, you will have to make a call to <code>ee.setMaxListeners(n)</code> where n is the max numbers of listeners (with zero being unlimited number of listeners). This is used to make sure you aren't accidently leaking event listeners.</p></div>
+</div>
+
+<!-- end generated content -->
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>

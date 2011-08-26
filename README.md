@@ -9,7 +9,7 @@ To add an article:
 ```javascript
 {
   "title":"What is npm?",
-  "date": "Today",
+  "date": "Fri Aug 26 2011 03:08:50 GMT-0700 (PST)",
   "tags": ["npm", "modules"],
   "author": "nico",
   "difficulty": 1
@@ -34,7 +34,7 @@ Metadata Format
 ```javascript
 {
   "title":"What is npm?",
-  "date": "Today",
+  "date": "Fri Aug 26 2011 03:08:50 GMT-0700 (PST)",
   "tags": ["npm", "modules"],
   "author": "nico",
   "difficulty": 1

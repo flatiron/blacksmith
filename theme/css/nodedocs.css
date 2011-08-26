@@ -129,6 +129,10 @@ header div.subtitle {
   position: relative;
 }
 
+header div.github {
+  float: right;
+}
+
 #mask {
   display: none;
   position: fixed;

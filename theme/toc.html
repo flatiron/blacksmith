@@ -8,51 +8,6 @@
   <div class="title">docs.nodejitsu.com </div>
 </header>
 
-<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
-<script type="text/javascript" charset="utf-8">
-
-$(function() {
-  
-  var originalTopic = $('body > ul > li.selected');
-  var originalArticle = $('body > ul > li.selected');
-  var t;
-  
-  $('body > ul > li').mouseenter(function() {
-    clearTimeout(t);
-    $('body > ul > ul').hide().css({'opacity': 0, 'left': 0});
-    $(this).next('ul').show().animate({'opacity': 1, 'left': 200}, 200);
-    $('#mask').fadeIn('fast');
-  });
-
-  $('body > ul').mouseleave(function() {
-    clearTimeout(t);
-    t = setTimeout(function() {
-      $('body > ul > ul').hide().css({'opacity': 0, 'left': 0});
-      $('#mask').fadeOut('fast');
-
-      $('li').removeClass('selected');
-      originalTopic.addClass('selected');
-      originalArticle.addClass('selected');
-    }, 400);
-  });
-
-  $('li:not(body > ul > ul > li)').mouseenter(function() {
-    clearTimeout(t);
-    $(this).parent().parent().find('li').removeClass('selected');
-    $(this).addClass('selected');
-
-  }).click(function() {
-    /*
-      TODO: the URL should now change and this item should become the
-      selected item once the page has loaded.
-    */
-    alert('link to another page');
-  })
-});
-
-</script>
-
 <div id="mask"></div>
 
 <!-- end required content -->
@@ -112,7 +67,7 @@ $(function() {
           <ul>
             <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
             <li>how-to-spawn-a-child-process</li>
-          </ul>
+          </ul>a
         <li>how-to-spawn-a-child-process</li>
           <!-- Articles -->
           <ul>
@@ -125,3 +80,6 @@ $(function() {
   </ul>
 
 <!-- end generated toc -->
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/index.js"></script>

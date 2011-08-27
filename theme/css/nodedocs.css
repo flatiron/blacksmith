@@ -159,14 +159,9 @@ header div.github {
 }
 
 #article {
-  margin-left: 130px;
+  margin-left: 215px;
   margin-right: 100px;
   margin-top: 75px;
-}
-
-.selected {
-  color: #5F7890;
-  background: transparent url('img/right.png') no-repeat 200px center;
 }
 
 #toc {
@@ -176,6 +171,7 @@ header div.github {
 }
 
 #toc > ul {
+  text-transform: capitalize;
   background-color: #fff;
   padding-top: 20px;
   position: absolute;
@@ -230,11 +226,7 @@ header div.github {
 
 .selected {
   color: #5F7890;
-  background: transparent url('/img/right.png') no-repeat 200px center;
-}
-
-#toc > ul > li.selected {
-  background: transparent url('img/right.png') no-repeat 190px center;
+  background: transparent url('/img/right.png') no-repeat 190px center;
 }
 
 /* ==|== non-semantic helper classes ======================================== */

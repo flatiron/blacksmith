@@ -28,9 +28,9 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
-a { color: #333333; text-decoration: none; font-family: 'typewriter';}
+a { color: #333333; text-decoration: none;}
 a:visited { color: #333333; }
-a:hover { color: #333333; text-decoration: underline;}
+a:hover { color: #5F7890; }
 a:focus { outline: thin dotted; }
 a:hover, a:active { outline: 0; }
 
@@ -123,6 +123,14 @@ header div.title {
   font-size: 28px;
 }
 
+header div.link {
+  float: right;
+  font-family: 'AllerLt';
+  padding: 10px;
+}
+
+
+
 header div.subtitle {
   float: right;
   font-size: 28px;
@@ -151,17 +159,74 @@ header div.github {
 }
 
 #article {
-  margin-left: 30px;
+  margin-left: 215px;
   margin-right: 100px;
   margin-top: 75px;
 }
 
 #toc {
   float:left;
+  min-height: 1000px;
+  height: auto;
 }
 
-#toc ul li {
-  padding-left:10px;
+#toc > ul {
+  text-transform: capitalize;
+  background-color: #fff;
+  padding-top: 20px;
+  position: absolute;
+  left: 0px;
+  min-height: 1000px;
+  top: 50px;
+  width: 190px;
+  box-shadow: 3px -10px 5px #ccc;
+  z-index: 2;
+}
+
+#toc > ul > li > a {
+  display: inline-block;
+  width: 100%;
+  font-weight: bold;
+  min-height: 30px;
+  padding: 10px 0 0 10px;
+  padding-right: 30px;
+  margin-right: -20px;
+}
+
+#toc > ul > li > ul {
+  background-color: #fff;
+  padding-top: 20px;
+  display: none;
+  opacity: 0;
+  opacity: 1;
+  margin-left: 10px;
+  position: absolute;
+  top: 0px;
+  left: 200px;
+  width: 300px;
+  min-height: 1000px;
+  box-shadow: 4px -10px 5px #ccc;
+  z-index: 2;
+}
+
+#toc > ul > li > ul > li > a {
+  margin: 8px;
+  display: inline-block;
+  font-weight: bold;
+  cursor: default;
+}
+
+#toc > ul > li > ul > li > ul > li > a {
+  margin: 8px;
+  display: inline-block;
+  font-weight: normal;
+  cursor: default;
+  font-family: 'AllerLt'
+}
+
+.selected {
+  color: #5F7890;
+  background: transparent url('/img/right.png') no-repeat 190px center;
 }
 
 /* ==|== non-semantic helper classes ======================================== */

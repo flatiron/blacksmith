@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "author": "Nodejitsu Inc. <info@nodejitsu.com>",
   "dependencies": {
-    "dnode": "0.7.x",
     "async": "0.1.x",
-    "connect": "1.6.x",
     "markdown": "0.2.x",
     "traverse": "0.4.x",
     "mkdirp": "0.0.x",

@@ -213,14 +213,14 @@ header div.github {
   margin: 8px;
   display: inline-block;
   font-weight: bold;
-  cursor: default;
+  cursor: pointer;
 }
 
 #toc > ul > li > ul > li > ul > li > a {
   margin: 8px;
   display: inline-block;
   font-weight: normal;
-  cursor: default;
+  cursor: pointer;
   font-family: 'AllerLt'
 }
 

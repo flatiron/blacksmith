@@ -17,9 +17,9 @@ $(function() {
     $(this).next('ul').show().animate({'opacity': 1, 'left': 200}, 200);
     $('#mask').fadeIn('fast');
 
-  }).click(noop);
+  });
   
-  $('#toc > ul > li > ul > li > a').click(noop);
+  // $('#toc > ul > li > ul > li > a').click(noop);
 
   $('#toc > ul').mouseleave(function() {
     clearTimeout(t);

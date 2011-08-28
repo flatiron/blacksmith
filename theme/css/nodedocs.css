@@ -229,6 +229,11 @@ header div.github {
   background: transparent url('/img/right.png') no-repeat 190px center;
 }
 
+.breadcrumb {
+  padding-right:10px;
+  font-weight:bold;
+}
+
 /* ==|== non-semantic helper classes ======================================== */
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .ir br { display: none; }

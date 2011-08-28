@@ -213,16 +213,29 @@ header div.github {
   margin: 8px;
   display: inline-block;
   font-weight: bold;
-  cursor: default;
+  cursor: pointer;
 }
 
 #toc > ul > li > ul > li > ul > li > a {
   margin: 8px;
   display: inline-block;
   font-weight: normal;
-  cursor: default;
+  cursor: pointer;
   font-family: 'AllerLt'
 }
+
+#homeTOC {
+  padding-left: 250px;
+}
+
+#homeTOC ul {
+  padding-left: 10px;
+}
+
+#homeTOC li {
+  padding-left: 10px;
+}
+
 
 .selected {
   color: #5F7890;

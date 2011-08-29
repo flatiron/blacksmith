@@ -159,7 +159,7 @@ header div.github {
 }
 
 #article {
-  margin-left: 215px;
+  margin-left: 240px;
   margin-right: 100px;
   margin-top: 75px;
 }
@@ -188,9 +188,9 @@ header div.github {
   width: 100%;
   font-weight: bold;
   min-height: 30px;
-  padding: 10px 0 0 10px;
-  padding-right: 30px;
-  margin-right: -20px;
+  padding-left:  10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 
 #toc > ul > li > ul {

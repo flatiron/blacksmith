@@ -178,7 +178,7 @@ header div.github {
   left: 0px;
   min-height: 1000px;
   top: 50px;
-  width: 190px;
+  width: 193px;
   box-shadow: 3px -10px 5px #ccc;
   z-index: 2;
 }
@@ -198,10 +198,9 @@ header div.github {
   display: none;
   opacity: 0;
   opacity: 1;
-  margin-left: 10px;
   position: absolute;
   top: 0px;
-  left: 200px;
+  left: 220px;
   width: 300px;
   min-height: 1000px;
   box-shadow: 4px -10px 5px #ccc;

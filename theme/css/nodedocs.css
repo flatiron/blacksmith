@@ -189,7 +189,6 @@ header div.github {
   font-weight: bold;
   min-height: 30px;
   padding-left:  10px;
-  padding-right: 10px;
   padding-bottom: 10px;
 }
 
@@ -222,6 +221,12 @@ header div.github {
   font-weight: normal;
   cursor: pointer;
   font-family: 'AllerLt'
+}
+
+#readme {
+  margin-left: 240px;
+  margin-right: 100px;
+  margin-top: 75px;
 }
 
 .selected {

@@ -2,12 +2,13 @@
 
 **community powered rocket-fuel for node.js**
 
-
-## http://docs.nodejitsu.com
-
-**Node Knockout Status, work in progress!**
+[http://docs.nodejitsu.com](http://docs.nodejitsu.com)
 
 ## Usage
+
+### Read Articles, get good at Node.js
+
+Browse /articles/ folder or [http://docs.nodejitsu.com](http://docs.nodejitsu.com)
 
 ### To generate the docs
 
@@ -18,9 +19,9 @@
     node bin/server
 
 
-## Contributing articles
+## Contribution Guide
 
-*more documentation coming soon*
+*coming soon*
 
 ### To add an article:
 
@@ -41,8 +42,7 @@
 ```
 
 
-Directory Structure
-===================
+### Directory Structure
 
     topics/
         article-name/ //url version
@@ -52,8 +52,7 @@ Directory Structure
                 ...
         ...
 
-Metadata Format
-===============
+### Metadata Format
 
 ```javascript
 {

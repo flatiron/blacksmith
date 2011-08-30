@@ -16,7 +16,7 @@ $(function() {
 
   //
   // When the user's mouse enters a topic,
-  // assume the intent is to select a subtopic
+  // assume the intent is to select a topic
   //
   $('#toc > ul > li > a').mouseenter(function() {
 
@@ -26,7 +26,7 @@ $(function() {
     var topic = this;
 
     //
-    // Don't re-open the same item twice
+    // Don't re-open the same topic twice
     //
     if($(topic).hasClass('selected')) {
       // console.log('already selected, dont reopen');
@@ -44,7 +44,7 @@ $(function() {
 
     //
     // Instead of immediately opening a new topic,
-    // we assume the intent is actuallay to drill into a subtopic, and not a topic
+    // we assume the intent isto drill into a subtopic, and not a topic
     //
     selectingSubtopicTimer = setTimeout(function() {
       openTopic(topic);
@@ -100,13 +100,5 @@ $(function() {
     }
     return false
   }
-
-  function isSubtopicSelected() {
-    if($('#toc > ul > li > ul > li > a.selected').length === 1) {
-      return true;
-    }
-    return false
-  }
-
 
 });

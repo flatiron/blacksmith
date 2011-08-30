@@ -6,27 +6,26 @@ $(function() {
   
   var t;
 
-  $('#toc > ul > li > a').mouseenter(function() {
+  $('#toc > ul > li > a').click(function() {
     clearTimeout(t);
     if($(this).hasClass('selected')) {
       return;
     }
+    $('#toc > ul > li > ul').hide();
+    $(this).next('ul').show();
     $('#toc > ul > li > a').removeClass('selected');
     $(this).addClass('selected');
-    $('#toc > ul > li > ul').hide().css({'opacity': 0, 'left': 0});
-    $(this).next('ul').show().animate({'opacity': 1, 'left': 200}, 200);
     $('#mask').fadeIn('fast');
-
+    return false;
   });
   
-  // $('#toc > ul > li > ul > li > a').click(noop);
+  //$('#toc > ul > li > ul > li > a').click(noop);
 
-  $('#toc > ul').mouseleave(function() {
+  $('#toc').mouseleave(function() {
     clearTimeout(t);
     t = setTimeout(function() {
-      $('#toc > ul > li > ul').hide().css({'opacity': 0, 'left': 0});
+      $('#toc > ul > li > ul').hide();
       $('#mask').fadeOut('fast');
-
       $('a').removeClass('selected');
     }, 400);
   });

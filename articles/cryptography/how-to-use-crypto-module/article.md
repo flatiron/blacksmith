@@ -95,7 +95,7 @@ Here's an example, slightly less trivial than previous examples, that uses crypt
 
 Using this script to encode a message looks like this:
 
-   $ ./secretmsg.js -e --password="popcorn" "My treasure is buried behind Carl's Jr. on Telegraph."
+    $ ./secretmsg.js -e --password="popcorn" "My treasure is buried behind Carl's Jr. on Telegraph."
     6df66752b24f0886f8a6c55e56977788c2090bb657ff3bd645097f8abe11099963fb3bd9627986c60fa7e5120d8fead928cff620b37e3e79be8de519f490527a
 
 Now, if I gave somebody the same script, my encoded message and the password, they can decode the message and find out where I buried my treasure:

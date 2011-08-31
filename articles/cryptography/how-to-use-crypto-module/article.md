@@ -12,9 +12,9 @@ A hash is a fixed-length string of bits that is procedurally and deterministiall
 
 * **Deterministic:** For the same input, you should expect to be able to calculate exactly the same hash. This makes hashes useful for checksums.
 
-* **Collision-Resistant:** A collision is when the same hash is generated for two different input blocks of data. Some hash algorithms are guaranteed to never collide, but others are merely "excedingly unlikely" to collide. The importance of this property depends on the use case.
+* **Collision-Resistant:** A collision is when the same hash is generated for two different input blocks of data. Hash algorithms are designed to be extremely unlikely to have collisions -- just how unlikely is a property of the hash algorithm. The importance of this property depends on the use case.
 
-* **Easy to calculate, hard to undo:** A good hash algorithm is easy to apply, but hard to undo. This means that, given a hash, there isn't any reasonable way to find out what the original piece of data was.
+* **Unidirectional:** A good hash algorithm is easy to apply, but hard to undo. This means that, given a hash, there isn't any reasonable way to find out what the original piece of data was.
 
 ### Hash Algorithms That Work With Crypto
 

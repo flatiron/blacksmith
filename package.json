@@ -1,14 +1,18 @@
 {
-  "name": "nodedocs",
+  "name": "docs",
+  "subdomain": "docs",
   "description": "The node documentation project",
-  "version": "0.0.0",
-  "author": "Nodejitsu Inc. <info@nodejitsu.com>",
+  "version": "0.0.0-37",
+  "scripts": {
+    "start": "bin/server"
+  },
+  "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {
     "async": "0.1.x",
-    "markdown": "0.2.x",
+    "github-flavored-markdown": "0.1.x",
     "traverse": "0.4.x",
     "mkdirp": "0.0.x",
-    "http-server": "0.2.x",
+    "http-server": "0.2.4",
     "jsdom": "0.2.x",
     "weld": "0.2.1",
     "findit": "0.1.x"

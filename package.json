@@ -9,7 +9,7 @@
   "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {
     "async": "0.1.x",
-    "github-flavored-markdown": "0.1.x",
+    "github-flavored-markdown": "1.0.x",
     "traverse": "0.4.x",
     "mkdirp": "0.0.x",
     "http-server": "0.2.4",

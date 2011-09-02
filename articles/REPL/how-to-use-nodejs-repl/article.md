@@ -34,17 +34,17 @@ If you need to access any of the builtin modules, or any third party modules, th
 
 For example:
 
-  node
-  > path = require('path')
-  { resolve: [Function],
-    normalize: [Function],
-    join: [Function],
-    dirname: [Function],
-    basename: [Function],
-    extname: [Function],
-    exists: [Function],
-    existsSync: [Function] }
-  > path.basename("/a/b/c.txt")
-  'c.txt'
+     node
+     > path = require('path')
+     { resolve: [Function],
+       normalize: [Function],
+       join: [Function],
+       dirname: [Function],
+       basename: [Function],
+       extname: [Function],
+       exists: [Function],
+       existsSync: [Function] }
+     > path.basename("/a/b/c.txt")
+     'c.txt'
 
 Note once again that without the `var` keyword, the contents of the object are returned immediately and displayed to `stdout`.

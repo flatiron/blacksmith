@@ -5,23 +5,12 @@ $(function() {
   selected;
 
   //
-  // When the user's mouse enters a subtopic,
-  // assume the intent is to select the subtopic
+  // When the user clicks on a topic,
+  // assume the intent is top open the ToC
   //
-  $('#toc > ul > li > ul > li').mouseenter(function() {
-    clearInterval(selectingTopicTimer);
-    clearInterval(selectingSubtopicTimer);
-  });
-
-
-  //
-  // When the user's mouse enters a topic,
-  // assume the intent is to select a topic
-  //
-  $('#toc > ul > li > a').mouseenter(function() {
+  $('#toc > ul > li > a').click(function(e) {
 
     clearTimeout(selectingTopicTimer);
-    clearTimeout(selectingSubtopicTimer);
 
     var topic = this;
 
@@ -30,34 +19,20 @@ $(function() {
     //
     if($(topic).hasClass('selected')) {
       // console.log('already selected, dont reopen');
-      return;
-    }
-
-    //
-    // If there is no selected topic, immediately open one
-    //
-    if(!isTopicSelected()){
-      //console.log('no topic, just open it quickly');
-      openTopic(topic);
       return false;
     }
 
-    //
-    // Instead of immediately opening a new topic,
-    // we assume the intent isto drill into a subtopic, and not a topic
-    //
-    selectingSubtopicTimer = setTimeout(function() {
-      openTopic(topic);
-    }, 400);
-
+    openTopic(topic);
     return false;
+
   });
-  
+
+
   //
-  // When the user's mouse leaves the Table of Contents completely,
-  // after 400ms, assume the intent is to close the menu
+  // When the user's mouse leaves the ToC,
+  // assume the intent is to close the ToC
   //
-  $('#toc').mouseleave(function() {
+  $('#toc').mouseleave(function(e){
     clearTimeout(selectingTopicTimer);
     selectingTopicTimer = setTimeout(function() {
       closeTopic();
@@ -69,8 +44,10 @@ $(function() {
   // instantly close ToC if they click anywhere outside the ToC
   //
   $('body').click(function(e){
-    if(isTopicSelected()){
-      closeTopic();
+    if($(e.target).get(0).tagName !== 'UL'){
+      if(isTopicSelected()){
+        closeTopic();
+      }
     }
   });
 

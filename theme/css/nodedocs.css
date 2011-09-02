@@ -159,7 +159,7 @@ header div.github {
 }
 
 #article {
-  margin-left: 260px;
+  margin-left: 220px;
   margin-right: 100px;
   margin-top: 75px;
 }
@@ -198,7 +198,7 @@ header div.github {
   display: none;
   opacity: 0;
   opacity: 1;
-  padding-left: 10px;
+  padding-left: 0px;
   position: absolute;
   top: 0px;
   left: 205px;

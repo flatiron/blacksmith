@@ -36,6 +36,7 @@ a:hover, a:active { outline: 0; }
 
 abbr[title] { border-bottom: 1px dotted; }
 b, strong { font-weight: bold; }
+em { font-weight: bold; color: #666666; font-style: normal; }
 blockquote { margin: 1em 40px; }
 dfn { font-style: italic; }
 hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
@@ -237,6 +238,17 @@ header div.github {
 .breadcrumb {
   padding-right:10px;
   font-weight:bold;
+}
+
+.breadcrumbs {
+  display: inline;
+  float: right;
+  padding: 0 10px;
+  background-color: #cccccc;
+}
+
+.date, .author {
+  display: inline;
 }
 
 /* ==|== non-semantic helper classes ======================================== */

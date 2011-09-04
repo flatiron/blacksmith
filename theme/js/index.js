@@ -1,8 +1,8 @@
 $(function() {
   
   var selectingTopicTimer,
-  selectingSubtopicTimer,
-  selected;
+      selectingSubtopicTimer,
+      selected;
 
   //
   // When the user's mouse enters a subtopic,
@@ -13,6 +13,14 @@ $(function() {
     clearInterval(selectingSubtopicTimer);
   });
 
+  //
+  // Touch support. Since there is no mouse out on
+  // touch devices, we need to have an event to hide
+  // the toc.
+  //
+  $('#article').click(function() {
+    $('#toc').mouseleave();
+  });
 
   //
   // When the user's mouse enters a topic,

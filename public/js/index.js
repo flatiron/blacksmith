@@ -19,7 +19,7 @@ $(function() {
     return false;
   });
   
-  //$('#toc > ul > li > ul > li > a').click(noop);
+  $('#toc > ul > li > a').click(noop);
 
   $('#toc').mouseleave(function() {
     clearTimeout(t);

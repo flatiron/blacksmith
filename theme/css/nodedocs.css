@@ -180,6 +180,7 @@ header div.github {
   top: 50px;
   width: 193px;
   box-shadow: 3px -10px 5px #ccc;
+  webkit-box-shadow: 3px -10px 5px #ccc;
   z-index: 2;
 }
 
@@ -204,6 +205,7 @@ header div.github {
   width: 300px;
   min-height: 1000px;
   box-shadow: 4px -10px 5px #ccc;
+  webkit-box-shadow: 4px -10px 5px #ccc;
   z-index: 2;
 }
 

@@ -1,4 +1,3 @@
-How to use stream.pipe
 
 If you've been using node.js for a while, you've definitely run into streams.  HTTP connections are streams,  open files are streams;  stdin, stdout, and stderr are all streams as well.  A 'stream' is node's I/O abstraction - if you feel like you still need to understand them better, you can read more about them [here](http://nodejs.org/docs/v0.4.10/api/streams.html#streams)
 

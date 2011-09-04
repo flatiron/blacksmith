@@ -162,7 +162,7 @@ header div.github {
 #article {
   margin-left: 220px;
   margin-right: 100px;
-  margin-top: 75px;
+  margin-top: 100px;
 }
 
 #toc {
@@ -238,15 +238,23 @@ header div.github {
 }
 
 .breadcrumb {
-  padding-right:10px;
-  font-weight:bold;
+  padding-right: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  background: transparent url('../img/crumbtrail.png') no-repeat scroll center right;
+  margin-right: 10px;
 }
 
 .breadcrumbs {
-  display: inline;
-  float: right;
-  padding: 0 10px;
-  background-color: #F8F8FF;
+  position: absolute;
+  right: 0px;
+  top: 50px;
+  padding: 6px;
+  background-color: #fff;
+}
+
+.breadcrumbs a:last-child {
+  background: none;
 }
 
 .date, .author {

@@ -1,4 +1,3 @@
-What are callbacks?
 
 In a synchronous program, you would write something along the lines of:
 

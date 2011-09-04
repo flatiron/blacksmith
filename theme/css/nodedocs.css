@@ -247,8 +247,8 @@ header div.github {
 
 .breadcrumbs {
   position: absolute;
-  right: 0px;
-  top: 50px;
+  right: -15px;
+  top: 60px;
   padding: 6px;
   background-color: #fff;
 }

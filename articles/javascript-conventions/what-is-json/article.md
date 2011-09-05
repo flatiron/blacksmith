@@ -6,7 +6,7 @@ values, e.g. an Object.
     // a JSON array
     ["one", "two", "three"]
 
-    // a JSON array
+    // a JSON object
     { "one": 1, "two": 2, "three": 3 }
 
 ## Encoding and Decoding

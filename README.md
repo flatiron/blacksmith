@@ -43,7 +43,7 @@ Browse /articles/ folder or [http://docs.nodejitsu.com](http://docs.nodejitsu.co
   "title":"What is npm?",
   "date": "Fri Aug 26 2011 03:08:50 GMT-0700 (PST)",
   "tags": ["npm", "modules"],
-  "author": "nico",
+  "author": "Nico Reed",
   "difficulty": 1
 }
 ```
@@ -66,7 +66,7 @@ Browse /articles/ folder or [http://docs.nodejitsu.com](http://docs.nodejitsu.co
   "title":"What is npm?",
   "date": "Fri Aug 26 2011 03:08:50 GMT-0700 (PST)",
   "tags": ["npm", "modules"],
-  "author": "nico",
+  "author": "Nico Reed",
   "difficulty": 1
 }
 ```

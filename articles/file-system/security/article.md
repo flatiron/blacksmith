@@ -5,8 +5,7 @@ Poison Null Bytes
 Poison null bytes are a way to trick your code into seeing another filename than the one that will actually be opened. This can in many cases be used to circumvent directory traversal protections, to trick servers into delivering files with wrong file types and to circumvent restrictions on the file names that may be used. [A more detailed description is here.](http://groups.google.com/group/nodejs/browse_thread/thread/51f66075e249d767/85f647474b564fde) Always use code like this when accessing files with user-supplied names:
 
     if (filename.indexOf('\0') !== -1) {
-      respond('That was evil.');
-      return;
+      return respond('That was evil.');
     }
 
 Whitelisting
@@ -14,8 +13,7 @@ Whitelisting
 You won't always be able to use whitelisting, but if you are, do it - it's very easy to implement and hard to get wrong. For example, if you know that all filenames are lowercase alphanumeric strings:
 
     if (!/^[a-z0-9]+$/.test(filename)) {
-      respond('illegal character');
-      return;
+      return respond('illegal character');
     }
 
 However, note that whitelisting alone isn't sufficient anymore as soon as you allow dots and slashes - people could enter things like `../../etc/passwd` in order to get files from outside the allowed folder.
@@ -36,8 +34,7 @@ Make sure that you have a slash at the end of the allowed folders name - you don
 Now `filename` contains an absolute path and doesn't contain `..` sequences anymore - `path.join` takes care of that. However, it might be something like `/etc/passwd` now, so you have to check whether it starts with the `rootDirectory`:
 
     if (filename.indexOf(rootDirectory) !== 0) {
-      respond('trying to sneak out of the web root?');
-      return;
+      return respond('trying to sneak out of the web root?');
     }
 
 Now the `filename` variable should contain the name of a file or directory that's inside the allowed directory (unless it doesn't exist).

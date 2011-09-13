@@ -1,53 +1,81 @@
-Most web servers, in addition to responding to http requests, also write logs in one form or another. Reasons for logging include debugging and reporting application state.
+Many processes, including most servers, write logs in one form or another. Reasons for logging include debugging, keeping track of users and resource usage, and reporting application state.
 
-## Logging the Obvious Way
+### Simple Logging
 
-You likely log data already, using `console.log`. In this approach, any information is printed to stdout where it can either be read directly or, for example, piped to a file. Plus, it's really easy:
+The simplest form of logging involves simply using `console.log` or one of the other standard output methods. In this approach, any information is printed to `stdout` where it can either be read by the developer as it occurs, or, for example, redirected to a log file. 
 
-    console.log("Hello world!");
+    console.log('Web Server started, waiting for connections...');
 
 Because it's so simple, console.log is by far the most common way of logging data in node.js.
 
-## Custom Logging
+### Custom Logging
 
-An advanced technique involves writing your own logging function or method, and delegating all logging to it. For example, here's a minimal log function:
+Logging only with functions such as `console.log` is not ideal for every use case, however.  Many applications have some sort of 'debugging mode', for example, that shows the user much more output than normal execution.  To do something like this, a better idea is to write your own simple logger, and use it instead of `console.log`. 
 
-    exports.log = function(level, message) {
-        if (typeof message !== "string") {
+Here is an example of a basic custom logging module with configurable debugging levels.
+
+      var logger = exports;
+      logger.debugLevel = 'warn';
+      logger.log = function(level, message) {
+        var levels = ['error', 'warn', 'info'];
+        if (levels.indexOf(level) >= levels.indexOf(logger.debugLevel) ) {
+          if (typeof message !== 'string') {
             message = JSON.stringify(message);
-        };
-        console.log(level+": "+message);
-    }
+          };
+          console.log(level+': '+message);
+        }
+      }
 
-which can then be used like so:
+Usage would then look like the following:
 
-    > var logger = require("./logger");
-    > logger.log("info", { error: "flagrant"})
-    info: {"error":"flagrant"}
+      var logger = require('./logger');
+      logger.debugLevel = 'warn';
+      logger.log('info', 'Everything started properly.');
+      logger.log('warn', 'Running out of memory...');
+      logger.log('error', { error: 'flagrant'});
+    
+Because `logger.debugLevel` was set to `warn`, the warning message and the error would both be displayed, but the `info` message would not be.
 
-The advantage is that the behavior of our logging mechanisms can now be modified and controlled from a central part of your code. In this case, I added logging levels (such as "debug", "info" and "warning"), and messages are converted to JSON if they aren't already in string form. This also makes it really easy to add features like file-based logging, special text formats, or even pushing logs to a database!
+The advantage here is that the behavior of our logging mechanisms can now be modified and controlled from a central part of our code. In this case, logging levels were added, and messages are converted to JSON if they aren't already in string form. There is a lot more that could be done here - saving logs to a file, pushing them to a database, setting custom colors and formatting the output - but by the time you want that much functionality from your custom logging function, it might be time to use an already-existing library.
 
-## Production-Grade Logging with Winston
+### Winston - multi-transport logging made easy
 
-[Winston](https://github.com/indexzero/winston) is a production-grade, multi-transport, asynchronous logging library for node.js. Conceptually it is similar to our custom logger but comes with a bunch of great features and functionality baked in. In addition, winston is battle-hardened by internal use at Nodejitsu!
+[Winston](https://github.com/indexzero/winston) is a multi-transport, asynchronous logging library for node.js.  It is conceptually similar to our custom logger, but comes with a wide variety of useful features and functionality baked in. In addition, `winston` is battle-hardened by internal use at Nodejitsu!
 
-Here is an example of a configured winston logger:
+Here is an example of setting up a `winston` logger.  This example includes most of the transports one could ever possibly want - please note that most use cases will only warrant a few of these.
 
-    var winston = require("winston");
-    winston.add(winston.transports.File, { filename: 'somefile.log' });
+      var winston = require('winston');
 
-Here, we required winston, and then added a file transport so that logs get written to a flat file. Winston also has built-in support for configurable logging levels *and* aliases for the "log" so you don't have to type the logging level each time.
+      require('winston-riak').Riak;
+      require('winston-mongo').Mongo;
+      var logger = new (winston.Logger)({
+        transports: [
+          new winston.transports.Console()
+          new winston.transports.File({ filename: 'path/to/all-logs.log' })
+          new winston.transports.Couchdb({ 'host': 'localhost', 'db': 'logs' })
+          new winston.transports.Riak({ bucket: 'logs' })
+          new winston.transports.MongoDB({ db: 'db', level: 'info'})
+        ]
+        exceptionHandlers: [
+          new winston.transports.File({ filename: 'path/to/exceptions.log' })
+        ]
+      });
 
-For example, `warn(x)` is an alias for `log("warn", x)`. Using it from the REPL looks like this:
+Here, we have instantiated a new `winston` logger, and provided a number of logging transports.  Winston has built-in support for configurable logging levels, and provides alias methods for each configured logging level.  For example, `winston.warn(x)` is an alias for `winston.log('warn', x)`.  Thus, the following:
 
-    > winston.warn("Hull breach on deck 7!")
-    warn: Hull breach on deck 7!
+      logger.warn('Hull Breach Detected on Deck 7!'); 
 
-Winston then happily printed the logged message to the screen. However, because of the added file transport winston *also* logged the warning to "somefile.log"!
+Would output to the screen:
 
-    $ cat somefile.log 
-    {"level":"warn","message":"Hull breach on deck 7!"}
+      warn: Hull Breach Detected on Deck 7!
 
-Awesome! Note that winston's file logger formats the logs differently for file logging (JSON in this case) than it does for the console transport.
+Because of the file transport we set up, winston also logged the warning to 'somefile.log'.  After the `logger.warn` call we just used, the log file, `somefile.log`, would contain the following output:
 
-Winston also supports logging to Riak, MongoDB and even [Loggly](http://loggly.com). Winston is also [thoroughly documented](https://github.com/indexzero/winston).
+      $ cat somefile.log 
+      {'level':'warn','message':'Hull Breach Detected on Deck 7!'}
+
+Note that winston's file logger formats the logs differently for file logging (JSON in this case) than it does for the console transport.
+
+Winston also supports logging to Riak, CouchDB, MongoDB and even [Loggly](http://loggly.com).  The `logger.warn` call we used before also put the same message into each database, according to the options we gave to each transport.
+
+For further information, please see the [thorough documentation for Winston.](https://github.com/indexzero/winston).

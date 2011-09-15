@@ -7,7 +7,7 @@ Node itself is only aware of two fields in the `package.json`:
       "version" : "0.0.0",
     }
 
-The `name` field should explain itself: this is the name of your project. The `version` field is used by npm to make sure the right version of the package is being installed. Generally, it takes the form of `major.minor.patch` where `major`, `minor`, and `patch` are integers which increase after each new release. For more details, look at this spec: [http://semver.org](http://semver.org/).
+The `name` field should explain itself: this is the name of your project. The `version` field is used by npm to make sure the right version of the package is being installed. Generally, it takes the form of `major.minor.patch` where `major`, `minor`, and `patch` are integers which increase after each new release. For more details, look at this spec: http://semver.org .
 
 For a more complete package.json, we can check out `underscore`:
 

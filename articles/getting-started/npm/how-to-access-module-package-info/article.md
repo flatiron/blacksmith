@@ -19,4 +19,4 @@ That would show us the entire contents of the package.json, neatly displayed to 
 
 And only the fields we specify will be shown to us.
 
-For more information, see [http://github.com/indexzero/pkginfo](http://github.com/indexzero/pkginfo)
+For more information, see http://github.com/indexzero/ .

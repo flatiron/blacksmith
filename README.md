@@ -1,6 +1,6 @@
 # docs
 
-[http://docs.nodejitsu.com](http://docs.nodejitsu.com)
+http://docs.nodejitsu.com
 
 **community powered rocket-fuel for node.js**
 
@@ -15,7 +15,7 @@ docs.nodejitsu.com is an [open source project](http://github.com/nodejitsu/docs)
 
 ### Read Articles, get good at Node.js
 
-Browse /articles/ folder or [http://docs.nodejitsu.com](http://docs.nodejitsu.com)
+Browse /articles/ folder or http://docs.nodejitsu.com
 
 ### To generate the docs
 

@@ -9,7 +9,7 @@
 We believe in sharing knowledge. So we have assembled this growing collection of node.js how-to articles. These articles range from basic to advanced. They provide relevant code samples and insights into the design and philosophy of node itself. 
 
 
-docs.nodejitsu.com is an [open source project](http://github.com/nodejitsu/docs) and is curated by the [Nodejitsu](http:/www.nodejitsu.com) team and friends. If you have articles or ideas that you would like to contribute, we'd very much like to accept your pull request!
+docs.nodejitsu.com is an [open source project](http://github.com/nodejitsu/docs) and is curated by the [Nodejitsu](http://www.nodejitsu.com) team and friends. If you have articles or ideas that you would like to contribute, we'd very much like to accept your pull request!
 
 ## Usage
 

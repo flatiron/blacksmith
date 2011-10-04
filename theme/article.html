@@ -27,14 +27,14 @@
     //This changes the "edit this page" link to go to the "fork and edit" url of the docs.
     document.ready = function () {
         var edit = document.getElementById("edit");
-        edit.innerHTML = "<a href='https://github.com/nodejitsu/docs/edit/master/"+window.location.pathname+"/article.md'>Edit this page on GitHub</a>";
+        edit.innerHTML = "<a href='https://github.com/nodejitsu/docs/edit/master"+window.location.pathname+"/article.md'>Edit this page on GitHub</a>";
     }
   </script>
 
 </head>
 <body>
   <header>
-    <div class="link"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
+    <div class="link" id="edit"><a href="http://github.com/nodejitsu/docs">Edit this page on GitHub</a></div>
     <div class="title">docs.nodejitsu.com</div>
   </header>
 

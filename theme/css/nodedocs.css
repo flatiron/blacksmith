@@ -165,6 +165,10 @@ header div.github {
   margin-top: 100px;
 }
 
+#article h1 {
+  font-size: 2em;
+}
+
 #toc {
   float:left;
   min-height: 1000px;

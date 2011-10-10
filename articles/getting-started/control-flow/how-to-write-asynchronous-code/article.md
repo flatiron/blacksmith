@@ -1,5 +1,4 @@
-
-Javascript is an asynchronous language, in contrast to many synchronous languages like PHP, Ruby, Python, Perl, C, etc.  There are a number of important things to be aware of when learning to write asynchronous code - otherwise, you will often find your code executing in extremely unexpected ways.  Take this (general) rule to heart:
+Nodejs promotes an asynchronous coding style from the ground up, in contrast to many of the most popular web frameworks. There are a number of important things to be aware of when learning to write asynchronous code - otherwise, you will often find your code executing in extremely unexpected ways.  Take this (general) rule to heart:
 
 ###Use the asynchronous functions, avoid the synchronous ones!
 

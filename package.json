@@ -1,8 +1,8 @@
 {
-  "name": "docs",
+  "name": "nodedocs",
   "subdomain": "docs",
   "description": "The node documentation project",
-  "version": "0.0.0-37",
+  "version": "0.0.0-64",
   "scripts": {
     "start": "bin/server"
   },
@@ -15,6 +15,9 @@
     "http-server": "0.2.4",
     "jsdom": "0.2.x",
     "weld": "0.2.1",
-    "findit": "0.1.x"
+    "findit": "0.1.x",
+    "colors": "*",
+    "optimist": "*",
+    "wordwrap": "*"
   }
 }

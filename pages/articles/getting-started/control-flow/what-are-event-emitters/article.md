@@ -27,7 +27,7 @@ This demonstates all the basic functionality of an EventEmitter. The `on` or `ad
 
 So in the example, we first subscribe to both the `test` and `print` events. Then we emit the `test`, `print`, and `unhandled` events. Since `unhandled` has no callback, it just returns false; the other two run all the attached callbacks and return true.
 
-In the `print` event, note that we pass an extra paramter - all the extra paramaters passed to 'emit' get passed to the callback function as arguments.
+In the `print` event, note that we pass an extra parameter - all the extra parameters passed to 'emit' get passed to the callback function as arguments.
 
 If you use the method `once` instead of `on`, after the callback is fired, it is removed from the list of callbacks. A handy little function if you want to detect only the first time an event has been emitted.
 

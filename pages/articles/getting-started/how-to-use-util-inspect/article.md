@@ -1,4 +1,3 @@
-
 Node provides a utility function, for debugging purposes, that returns a string representation of an object.  `util.inspect()` can be a true lifesaver while working with properties of large, complex objects. 
 
 Let's provide a basic example. `util.inspect()` can be used on any object - a good demonstration will be one of Node's built-in objects.  Try this in the REPL (type `node` at your command line with no arguments):
@@ -33,7 +32,7 @@ The optional argument `showHidden` is a boolean that determines whether or not t
      var util = require('util');
      util.inspect(console, true);
 
-Finally, the optional argument `colorize` is a boolean that adds anscii escape codes to the string output. When logged to a terminal window, it should be pretty printed with colors.
+Finally, the optional argument `colorize` is a boolean that adds ANSI escape codes to the string output. When logged to a terminal window, it should be pretty printed with colors.
 
      var util = require('util');
      console.log(util.inspect({a:1, b:"b"}, false,2,true));

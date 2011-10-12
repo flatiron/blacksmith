@@ -81,4 +81,4 @@ Note that despite these apis returning objects, it is much easier to sort throug
 
 ###Console tab
 
-Finally, the console tab allows you to use node's REPL in your program's global scope. This has a few gotchas since that means you can not access in local variables. Thus the variables you can read or write are variables that were defined without a `var` statement. The other gotcha is when you use `console.log` refersto node's `console.log` and not webkit's console.log. This means the output goes to stdout and not to your console tab. Otherwise it is a very straightforward node REPL.
+Finally, the console tab allows you to use node's REPL in your program's global scope. This has a few gotchas since that means you can not access in local variables. Thus the variables you can read or write are variables that were defined without a `var` statement. The other gotcha is when you use `console.log` refers to node's `console.log` and not webkit's console.log. This means the output goes to stdout and not to your console tab. Otherwise it is a very straightforward node REPL.

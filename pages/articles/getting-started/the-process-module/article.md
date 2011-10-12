@@ -40,7 +40,7 @@ STDOUT, or non-blocking functions: `console.log`, `console.info`, `util.puts`, `
 
 STDERR, or blocking functions: `console.warn`, `console.error`, `util.debug`
 
-Lastly, `process.stdin` is a readable stream for getting user input.  See [more on cli input](/how-to-prompt-for-cli-input).
+Lastly, `process.stdin` is a readable stream for getting user input.  See [more on cli input](/articles/command-line/how-to-prompt-for-command-line-input).
 
 ##Other Properties
 

@@ -4,7 +4,7 @@ http://docs.nodejitsu.com
 
 **community powered rocket-fuel for node.js**
 
-![docs](/img/logo.png "docs")
+![docs](http://docs.nodejitsu.com/img/logo.png "docs")
 
 We believe in sharing knowledge. So we have assembled this growing collection of node.js how-to articles. These articles range from basic to advanced. They provide relevant code samples and insights into the design and philosophy of node itself. 
 

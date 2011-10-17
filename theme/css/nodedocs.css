@@ -81,6 +81,11 @@ td { vertical-align: top; }
    Author: Nodejitsu, Inc.
    ========================================================================== */
 
+table {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
 ul, li {
   list-style-type: none;
   margin: 0;

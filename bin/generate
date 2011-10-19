@@ -1,2 +1,7 @@
-var docs = require('../lib/docs');
-docs.generate();
+var docs = require('../lib/docs'),
+    path = require('path');
+
+var src = "./pages";
+var dst = "./public";
+
+docs.generate(src, dst);

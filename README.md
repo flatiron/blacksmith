@@ -1,5 +1,3 @@
-# docs
-
 http://docs.nodejitsu.com
 
 **community powered rocket-fuel for node.js**

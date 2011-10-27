@@ -18,7 +18,9 @@
     "findit": "0.1.x",
     "nconf": "0.4.3",
     "colors": "*",
-    "optimist": "*",
-    "wordwrap": "*"
+    "optimist": "0.2.x",
+    "wordwrap": "0.0.x",
+    "rss": "0.0.x",
+    "hashish": "0.0.x"
   }
 }

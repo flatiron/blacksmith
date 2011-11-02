@@ -19,11 +19,11 @@ Browse /articles/ folder or http://docs.nodejitsu.com
 
 ### To generate the docs
 
-    node bin/generate
+    node bin/docs generate
     
 ### To start the docs server
 
-    node bin/server
+    node bin/docs serve
 
 
 ## Contribution Guide
@@ -33,8 +33,8 @@ Browse /articles/ folder or http://docs.nodejitsu.com
 ### To add an article:
 
 - make a directory in `topics` for your article: `mkdir articles/how-to-make-an-article` (use only letters and dashes)
-- next write your article: `vim articles/how-to-make-an-article/article.md`
-- create a metadata with this data: `vim articles/how-to-make-an-article/metadata.json`
+- next write your article: `vim articles/how-to-make-an-article/content.md`
+- create a metadata with this data: `vim articles/how-to-make-an-article/page.json`
 
 **metadata.json**
 
@@ -53,8 +53,8 @@ Browse /articles/ folder or http://docs.nodejitsu.com
 
     topics/
         article-name/ //url version
-            metadata.json
-            article.md //file with the real article
+            page.json
+            content.md //file with the real article
             assets/
                 ...
         ...

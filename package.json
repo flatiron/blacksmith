@@ -1,10 +1,9 @@
 {
-  "name": "docs",
-  "subdomain": "docs",
+  "name": "blacksmith",
   "description": "The node documentation project",
   "version": "0.0.0",
   "scripts": {
-    "start": "bin/docs serve"
+    "start": "bin/blacksmith serve"
   },
   "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {

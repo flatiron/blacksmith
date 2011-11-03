@@ -1,72 +1,50 @@
-# docs
+# blacksmith
 
-http://docs.nodejitsu.com
+*A static site generator built with Node.js, JSDOM, and Weld.*
 
-**community powered rocket-fuel for node.js**
+Blacksmith is a static site generator designed for simplicity and ease of use. Blacksmith will generate your content in seconds as a stand-alone static site ( comprised of HTML / CSS ) that can be hosted anywhere with no dependencies. Articles are edited as Markdown files, and themes are just plain HTML and CSS files (no inane microtemplates or strange markup languages).
 
-![docs](http://docs.nodejitsu.com/img/logo.png "docs")
-
-We believe in sharing knowledge. So we have assembled this growing collection of node.js how-to articles. These articles range from basic to advanced. They provide relevant code samples and insights into the design and philosophy of node itself. 
+Static sites are generated using Weld and JSDOM. Blacksmith also ships with a built in Node.js static file server, so Blacksmith can host itself, if you'd like. 
 
 
-docs.nodejitsu.com is an [open source project](http://github.com/nodejitsu/docs) and is curated by the [Nodejitsu](http://www.nodejitsu.com) team and friends. If you have articles or ideas that you would like to contribute, we'd very much like to accept your pull request!
+## Features
 
+ * Easy to use
+ * Can be hosted anywhere, since it generates static HTML/CSS
+ * Write and Edit articles on the file system using Github Flavored Markdown
+ * JSDOM / Weld based
+ * Easily create custom themes using plain HTML and CSS ( no micro-templating ! )
+ * Ships with a port of the beautiful [Scribbish](http://quotedprintable.com/pages/scribbish) theme by Jeffrey Allan Hardy
+ * Ships with a robust node.js static server suitable for production
+
+## Installation
+
+    git clone https://github.com/nodejitsu/blacksmith.git 
+    cd blacksmith
+    
 ## Usage
 
-### Read Articles, get good at Node.js
+Now that you have cloned your own copy of Blacksmith, getting started is easy!
 
-Browse /articles/ folder or http://docs.nodejitsu.com
+### Generating a new static site
 
-### To generate the docs
+    node bin/blacksmith generate
 
-    node bin/docs generate
+*This command will generate a new version of your blog using source files from the `./pages` folder and put the generated content into `./public/`.*
     
-### To start the docs server
+### Serving your static site
 
-    node bin/docs serve
+Now simply drop `./public` into any public HTTP server and your site is good to go!
 
+If you need a HTTP server, just use Blacksmith's built-in Node.js HTTP server with:
 
-## Contribution Guide
-
-*coming soon*
-
-### To add an article:
-
-- make a directory in `topics` for your article: `mkdir articles/how-to-make-an-article` (use only letters and dashes)
-- next write your article: `vim articles/how-to-make-an-article/content.md`
-- create a metadata with this data: `vim articles/how-to-make-an-article/page.json`
-
-**metadata.json**
-
-```javascript
-{
-  "title":"What is npm?",
-  "date": "Fri Aug 26 2011 03:08:50 GMT-0700 (PST)",
-  "tags": ["npm", "modules"],
-  "author": "Nico Reed",
-  "difficulty": 1
-}
-```
+    node bin/blacksmith serve
+   
+*This command will start up a static http server that will serve the contents of `./pages`.*
 
 
-### Directory Structure
+# Want to learn more?
 
-    topics/
-        article-name/ //url version
-            page.json
-            content.md //file with the real article
-            assets/
-                ...
-        ...
+The documentation for blacksmith is hosted as a blacksmith site. To view it, simply build and serve the default blacksmith site!
 
-### Metadata Format
-
-```javascript
-{
-  "title":"What is npm?",
-  "date": "Fri Aug 26 2011 03:08:50 GMT-0700 (PST)",
-  "tags": ["npm", "modules"],
-  "author": "Nico Reed",
-  "difficulty": 1
-}
-```
+#### Author: Nodejitsu Inc.

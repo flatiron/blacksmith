@@ -1,37 +1,43 @@
 All the HTML in the `./themes` folder is turned into content pages using [weld](https://github.com/hij1nx/weld)! This means that, instead of using typical templating techniques, all you have to do is use CSS element classes for Weld to grab onto.
 
-**WARNING: Out of date!** All of these properties are from a much older iteration of this project.
+## article.html
 
-### article.html
+This is the html file used to template "content" pages. Here is a broad overview of article.html's structure:
 
-This is the html file used to build up article pages.
+### weld object:
 
-* "gravatar": The element containing your gravatar
-* "title": The title of the article
-* "markdown": The rendered markdown of the article
-* "author": Contains information about the author, in the form of a [data list](http://www.w3.org/TR/html401/struct/lists.html)
-    - "aboutAuthorK": Keys in the author listings (ex: "twitter: ")
-    - "aboutAuthorV": Values in the author listings (ex: "[jesusabdullah](http://twitter.com/jesusabdullah/)")
-* "aboutArticleDL": Contains information about the article, in the form of a data list.
-    - "aboutArticleK": Keys in the article listings (ex: "Date Released: ")
-    - "aboutArticleV": Values in the author listings (ex: "Tuesday March 29, 2011")
+* "content": This is populated by blacksmith's gfm parser/generator.
+* "metadata"
+    * "title": The title of the article.
+    * "author": Information about the author of the article.
+        * "name": The author's name
+        * "email": The author's email address
+        * "github": The author's github username
+    * "date": The date on which the article was written.
+    * "breadcrumb": A list representing the path. This is used to build a "breadcrumb" link.
+* "toc": This is populated by blacksmith's Table of Contents generator, and is a nested tree of `<ul>` elements.
 
-### index.html
+### other important html classes:
 
-This is the html file used to build the main page of your blog.
+* ".about": This class is used to surround metadata-display elements, such as ".date", so that these elements may be removed if the particular piece of metadata is unspecified. For example:
 
-* "article": Each instance of this div contains an article.
-    - "title": The title of the article
-    - "markdown": The rendered markdown of the article
-* "archiveListItem": Each instance of this element contains a link to one of the blog articles.
+> *&lt;span class="about"&gt;by &lt;strong class="author"&gt;&lt;span class="name"&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;*
 
-### archive.html
+If `author.name` does not exist, then the resulting rendering (or lack thereof) leaves behind:
 
-This is the html file used to build the archives page of your blog.
+> *by*
 
-* "article": Each instance of this element contains a summarized article.
-    - "gravatar": The element containing the author's gravatar
-    - "author": The name of the author
-    - "date": The date the article was written
-    - "title": The title of the article
-    - "markdown": The rendered markdown of the article
+Surrounding this block with *&lt;span class="about"&gt;&lt;/span&gt;* allows for its removal.
+
+
+## directory.html
+
+This is the html file used to template directory views, in the case where there is no article at this level. Here is a broad overview of directory.html's structure:
+
+### weld object:
+
+* "pwd": The path to the current directory.
+* "ls": A list of the current directory's child directories.
+* "metadata"
+    * "breadcrumb": A list representing the path. This is used to build a "breadcrumb" link.
+* "toc": This is populated by blacksmith's Table of Contents generator, and is a nested tree of `<ul>` elements.

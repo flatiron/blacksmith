@@ -10,3 +10,5 @@ Authors specified in the `page.json` are cross-referenced against `_id` paramete
       "location": "Worldwide",
       "bio": "Nodejitsu is the creator of what is arguably the best Node.js platform as a service in existence."
     }
+
+These properties are passed to your themes as an object assigned to `metadata.author`.

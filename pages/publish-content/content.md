@@ -27,3 +27,5 @@ The articles themselves are parsed as [github-flavored markdown](http://github.g
 
      ## Part 2:
      *This text is emphasized!*
+
+# That's it!

@@ -1,7 +1,0 @@
-{
-    "title":"How to write asynchronous code",
-    "date": "Fri Aug 26 2011 03:08:50 GMT-0700 (PST)",
-    "tags": ["asynchronous", "callbacks", "event-emitters"],
-    "author": "Nico Reed",
-    "difficulty": 1
-}

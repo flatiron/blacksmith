@@ -1,11 +1,4 @@
 {
-  "difficulty": 1,
-  "index": false,
-  "order": {
-    "intermediate": -3,
-    "advanced": -2,
-    "cryptography": -1,
-    "getting-started": 0,
-    "javascript-conventions": 1
-  }
+  "author": "nodejitsu",
+  "date": "2011-11-03T18:55:54.294Z"
 }

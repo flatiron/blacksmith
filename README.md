@@ -14,7 +14,6 @@ Static sites are generated using Weld and JSDOM. Blacksmith also ships with a bu
  * Write and Edit articles on the file system using Github Flavored Markdown
  * JSDOM / Weld based
  * Easily create custom themes using plain HTML and CSS ( no micro-templating ! )
- * Ships with a port of the beautiful [Scribbish](http://quotedprintable.com/pages/scribbish) theme by Jeffrey Allan Hardy
  * Ships with a robust node.js static server suitable for production
 
 ## Installation

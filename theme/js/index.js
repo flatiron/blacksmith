@@ -10,21 +10,27 @@ $(function() {
   //
   $('#toc > ul > li > a').click(function(e) {
 
-    clearTimeout(selectingTopicTimer);
-
-    var topic = this;
-
     //
-    // Don't re-open the same topic twice
+    // If the ToC is shallow enough, the "top" will actually be an article and
+    // not a category.
     //
-    if($(topic).hasClass('selected')) {
-      // console.log('already selected, dont reopen');
+    if ($(e).html() !== null) {
+      clearTimeout(selectingTopicTimer);
+
+      var topic = this;
+
+      //
+      // Don't re-open the same topic twice
+      //
+      if($(topic).hasClass('selected')) {
+        // console.log('already selected, dont reopen');
+        return false;
+      }
+
+      openTopic(topic);
       return false;
     }
-
-    openTopic(topic);
-    return false;
-
+    return true;
   });
 
   //

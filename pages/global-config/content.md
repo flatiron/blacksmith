@@ -1,3 +1,5 @@
-Blacksmith configuration is stored in the ./conf folder.
+Blacksmith configuration is stored in ./config.json.
 
-** More coming soon! **
+## Properties used by Blacksmith:
+
+* **tags**: A list of tags. This is used to list meta tags that should be on *all* pages.

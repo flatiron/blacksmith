@@ -6,56 +6,33 @@
     <meta name="keywords" content="">
     <title>Blacksmith</title>
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
-    <link rel="stylesheet" href="/css/nodedocs.css" type="text/css" media="screen">
-    <!--Google analytics-->
-    <script type="text/javascript">
+    <link rel="stylesheet" href="/css/application.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/blacksmith.css" type="text/css">
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-24971485-4']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
   </head>
   <body>
-    <header>
-      <div class="title"><a href="/">Blacksmith</a></div>
-    </header>
+    <div id="container">
+      <header id="header">
+        <h1 class="title"><a href="/">Blacksmith</a></h1>
+      </header>
 
-  <div id="mask"></div>
-  <nav id="toc"></nav>
-  <div id="article">
-    <h1>Error <span class="status">404</span>: <span class="message">Page Not Found</span></h1>
-    <h3>Try exploring one of the links to the left!<h3>
-  </div>
+      <div id="page">
 
-    <script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/js/index.js"></script>
-
-    <script type="text/javascript">
-    var _sf_async_config={uid:11119,domain:"docs.nodejitsu.com"};
-    (function(){
-      function loadChartbeat() {
-        window._sf_endpt=(new Date()).getTime();
-        var e = document.createElement('script');
-        e.setAttribute('language', 'javascript');
-        e.setAttribute('type', 'text/javascript');
-        e.setAttribute('src',
-           (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
-           "js/chartbeat.js");
-        document.body.appendChild(e);
-      }
-      var oldonload = window.onload;
-      window.onload = (typeof window.onload != 'function') ?
-         loadChartbeat : function() { oldonload(); loadChartbeat(); };
-    })();
-
-    </script>
-
+        <div id="sidebar">
+          <nav id="sidebar-node" class="breadcrumbs">
+            <a href="" class="breadcrumb"></a>
+          </nav>
+          <div id="sidebar-node">
+            <h2>Table of Contents</h2>
+            <nav id="toc"></nav>
+          </div>
+        </div>
+        <div id="article">
+          <h1>Error <span class="status">404</span>: <span class="message">Page Not Found</span></h1>
+          <h3>Try exploring one of the links to the left!<h3>
+        </div>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+      </div>
+    </div>
   </body>
 </html>

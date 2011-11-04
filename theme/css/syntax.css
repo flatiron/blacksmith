@@ -1,0 +1,51 @@
+/*--------------------------------------------------------------
+ Syntax Highlighting - contributed by James Wilford
+ Closely matches TextMate's "All Hallow's Eve" theme
+ --------------------------------------------------------------*/
+
+#content .typocode     { margin: 0.9em 0; padding: 8px; background: #000; }
+#content .typocode pre { margin: 0; padding: 0;}
+
+#content .typocode_linenumber .lineno     { text-align: right; }
+#content .typocode_linenumber .lineno pre { width: 23px; padding-right: 3px; color: #777; background: #222; }
+
+#content .typocode_ruby .normal    {}
+#content .typocode_ruby .comment   { color: #9933cc; }
+#content .typocode_ruby .keyword   { color: #cc7833; }
+#content .typocode_ruby .method    { color: #fff; }
+#content .typocode_ruby .class     { color: #fff; text-decoration: underline; }
+#content .typocode_ruby .module    { color: #fff; text-decoration: underline; }
+#content .typocode_ruby .punct     { color: #fff; }
+#content .typocode_ruby .symbol    { color: #3387cc; }
+#content .typocode_ruby .string    { color: #66cc33; }
+#content .typocode_ruby .char      { color: #f07; }
+#content .typocode_ruby .ident     { color: #fff; }
+#content .typocode_ruby .constant  { color: #fff; }
+#content .typocode_ruby .regex     { color: #cccc33; }
+#content .typocode_ruby .number    { color: #3387cc; }
+#content .typocode_ruby .attribute { color: #fff; }
+#content .typocode_ruby .global    { color: #7fb; }
+#content .typocode_ruby .expr      { color: #fff; }
+#content .typocode_ruby .escape    { color: #277; }
+
+#content .typocode_xml  .normal    {}
+#content .typocode_xml  .namespace { color: #c60; font-weight: bold; }
+#content .typocode_xml  .tag       { color: #9ff; }
+#content .typocode_xml  .comment   { color: #ccc; font-style: italic; }
+#content .typocode_xml  .punct     { color: #0d0; font-weight: bold; }
+#content .typocode_xml  .string    { color: #c03; }
+#content .typocode_xml  .number    { color: #ff0; }
+#content .typocode_xml  .attribute { color: #bb7; }
+                                             
+#content .typocode_yaml .normal    {}        
+#content .typocode_yaml .document  { color: #07f; font-weight: bold; }
+#content .typocode_yaml .type      { color: #c60; font-weight: bold; }
+#content .typocode_yaml .key       { color: #c60; }
+#content .typocode_yaml .comment   { color: #ccc; font-style: italic; }
+#content .typocode_yaml .punct     { color: #0d0; font-weight: bold; }
+#content .typocode_yaml .string    { color: #c03; }
+#content .typocode_yaml .number    { color: #ff0; }
+#content .typocode_yaml .time      { color: #ff0; }
+#content .typocode_yaml .date      { color: #ff0; }
+#content .typocode_yaml .ref       { color: #944; }
+#content .typocode_yaml .anchor    { color: #944; }

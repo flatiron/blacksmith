@@ -42,6 +42,6 @@ If you need a HTTP server, just use Blacksmith's built-in Node.js HTTP server wi
 
 # Want to learn more?
 
-Check out the links on the left!
+The documentation for blacksmith is hosted as a blacksmith site. If you're reading this, all you have to do is click the links in the Table of Contents in the sidebar!
 
 #### Author: Nodejitsu Inc.

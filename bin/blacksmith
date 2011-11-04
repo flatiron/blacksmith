@@ -1,6 +1,6 @@
 var argv = require("optimist").argv,
     path = require("path"),
-    docs = require("../lib/docs");
+    smith = require("../lib/blacksmith");
 require("colors");
 
 var task = argv._[0],
@@ -9,7 +9,7 @@ var task = argv._[0],
 switch (task) {
   case "generate":
     console.log("GENERATING YOUR FILES".yellow);
-    docs.generate(dir+"/pages", dir+"/public");
+    smith.generate(dir+"/pages", dir+"/public");
     break;
 
   case "serve":

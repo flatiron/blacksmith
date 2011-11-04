@@ -1,4 +1,4 @@
-Blacksmith configuration is stored in ./config.json.
+The global blacksmith configuration is stored in ./config.json.
 
 #### Properties used by Blacksmith:
 

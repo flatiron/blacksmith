@@ -35,86 +35,90 @@
  Content
  --------------------------------------------------------------*/
 
-#content {}
+article {}
 
-#content h1,
-#content h2,
-#content h3,
-#content h4,
-#content h5 { 
+article h1,
+article h2,
+article h3,
+article h4,
+article h5 { 
   font-family: georgia, times;
   font-weight: normal;
   letter-spacing: -1px;
 }
 
-#content h1 { 
+article h1 { 
   font-size: 28px;
   margin: 0 0 0.3em;  
 }
 
-#content h2 { 
+article h1 small {
+  font-size: 18px;
+}
+
+article h2 { 
   font-size: 24px;
   margin: 0 0 0.3em;  
 }
 
-#content h3 { 
+article h3 { 
   font-size: 22px;
   margin: 1.2em 0 0.3em;  
 }
 
-#content h4 { 
+article h4 { 
   font-size: 20px;
   margin: 1.2em 0 0.3em;  
   border-bottom: 1px dotted #bbb;
 }
 
-#content h5 {
+article h5 {
   font-size: 20px;
   background: #ffd;
   margin: 1.2em 0 0.3em;  
   border-bottom: 1px dotted #aaa;
 }
 
-#content p {
+article p {
   line-height: 14px; 
   margin: 0 0 1.2em;
 }
 
-#content ul,
-#content ol {
+article ul,
+article ol {
   margin: 1em;
   padding:0;
 }
 
-#content ul {
+article ul {
   list-style-type: square;
 }
 
-#content li {
+article li {
   line-height: 15px; 
   margin: 0 0 0 1em; padding: 0;
 }
 
-#content blockquote {
+article blockquote {
   color: #555;
   border-left: 5px solid #ccc; 
   margin: 1.3em 1em; padding: 0 1em;
 }
 
-#content code { 
+article code { 
   font: normal 12px "bitstream vera sans mono", monaco "lucida console", "courier new", courier, serif;
 }
 
-#content code a {
+article code a {
   color: #63FF00;
 }
 
-#content code a:hover {
+article code a:hover {
   color: white;
 }
 
 
-#content pre {
+article pre {
   color: #63FF00;
   background: #000;
   overflow: auto;
@@ -123,33 +127,33 @@
 }
 
 /* Article Entries - class names based on http://microformats.org/wiki/hatom] */
-#content .hentry { 
+article .hentry { 
   margin: 0 0 3em 0;
 }
 
-#content .hentry .entry-title {
+article .hentry .entry-title {
   font-size: 30px;
   line-height: 99%;
   letter-spacing: -1.5px; 
   margin: 0;
 }
 
-#content .hentry .entry-title a:link,
-#content .hentry .entry-title a:visited { 
+article .hentry .entry-title a:link,
+article .hentry .entry-title a:visited { 
   color: #111;
   text-decoration: none;
 }
 
-#content .hentry .entry-title a:hover,
-#content .hentry .entry-title a:active { 
+article .hentry .entry-title a:hover,
+article .hentry .entry-title a:active { 
   background: transparent;
   text-decoration: underline;
 }
 
-#content .hentry .entry-title .comment_count { color: #eee; }
+article .hentry .entry-title .comment_count { color: #eee; }
 
-#content .hentry .vcard,
-#content .hentry .published {
+article .hentry .vcard,
+article .hentry .published {
   float: left;
   color: #a9a9a9;
   font: normal 16px/14px helvetica, arial, verdana, sans-serif;
@@ -157,22 +161,22 @@
   margin: 1px 0 0.6em 2px;
 }
 
-#content .hentry .fn {
+article .hentry .fn {
   font-weight:bold;
   margin-right: 5px;
 }
 
-#content .hentry .fn a,
-#content .hentry .fn a:hover {
+article .hentry .fn a,
+article .hentry .fn a:hover {
   color: #aaa; background: transparent;
   text-decoration: none;
 }
 
-#content .hentry .clear { clear: both; }
+article .hentry .clear { clear: both; }
 
-#content .hentry .entry-content { }
+article .hentry .entry-content { }
 
-#content .hentry ul.meta { 
+article .hentry ul.meta { 
   font-size: 10px;
   background: #eee;
   margin: 0; padding: 5px;
@@ -180,89 +184,89 @@
   list-style-type: none;
 }
 
-#content .hentry ul.meta li { 
+article .hentry ul.meta li { 
   line-height: 13px;
   margin: 0; padding: 0;
 }
 
-#content .hentry .meta a:link,
-#content .hentry .meta a:visited {
+article .hentry .meta a:link,
+article .hentry .meta a:visited {
   color: #555;
   text-decoration: none;
   border-bottom: 1px dotted #aaa;
 }
 
-#content .hentry .meta a:hover,
-#content .hentry .meta a:active  {
+article .hentry .meta a:hover,
+article .hentry .meta a:active  {
   color: #fff;
 }
 
 
 /* Comments and Trackbacks */
-#content ol.comments,
-#content ol.trackbacks {
+article ol.comments,
+article ol.trackbacks {
   list-style-type: none;
   margin: 0; padding: 0;
 }
 
-#content li.comment,
-#content li.trackback {
+article li.comment,
+article li.trackback {
   border: 2px solid #ddd;
   margin: 0 0 1.5em; padding: 1em;
 }
 
-#content li.comment.preview { 
+article li.comment.preview { 
   background: #ffc;
   border: 3px solid #fab444;
   margin: 0 0 1.5em; padding: 1em;
 }
 
-#content li.comment   .author,
-#content li.trackback .author { 
+article li.comment   .author,
+article li.trackback .author { 
   font-weight: bold;
   margin-bottom: 1em;
 }
 
-#content li.comment   .author cite,
-#content li.trackback .author cite {
+article li.comment   .author cite,
+article li.trackback .author cite {
   font-size: 16px;
   letter-spacing: -1px;
 }
 
-#content li.comment   .author abbr, 
-#content li.trackback .author abbr { color: #999; }
+article li.comment   .author abbr, 
+article li.trackback .author abbr { color: #999; }
 
-#content li.comment .author .gravatar { 
+article li.comment .author .gravatar { 
   margin: 0 0 0.5em 0.5em;
   float: right; 
 }
 
-#content li.comment .author div {
+article li.comment .author div {
   margin: 0 0 0.5em 0.5em;
   width: 60px; height: 60px;
   background: url(../../images/theme/gravatar.gif) no-repeat left top;
   float: right; 
 }
 
-#content form.comments {
+article form.comments {
   background: #f2f2f2;
   border-top: 1px solid #ddd;
   padding: 1em 0.5em;
 }
 
-#content form.comments fieldset { 
+article form.comments fieldset { 
   border: none;
 }
 
-#content form.comments legend { 
+article form.comments legend { 
   display: none;
 }
 
-#content form.comments label { 
+article form.comments label { 
   font-weight: bold;
 }
 
-#content form.comments textarea { 
+article form.comments textarea { 
   width: 90%; height: 150px;
   padding: 3px;
 }

@@ -26,7 +26,7 @@ body {
 
 #page {}
 
-#content {
+article {
   float: left;
   width: 662px;
   text-align: left;

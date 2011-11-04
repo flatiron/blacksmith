@@ -8,9 +8,9 @@
 @import 'syntax.css';
 
 @media print { #sidebar { display: none; }
-               #content { float: none; width: 90%;}
-               #content pre { color: #000; background: #eee; }
-               #content form.comments { display: none; } }
+               article { float: none; width: 90%;}
+               article pre { color: #000; background: #eee; }
+               article form.comments { display: none; } }
 
 body {
   background: url(../../images/theme/background.gif) repeat-x left top;

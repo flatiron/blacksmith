@@ -36,6 +36,6 @@ Here is a list of metadata tags that Blacksmith may use:
     * **all**: Render a page that shows *all* the articles.
 * **title**: The title of the article.
 * **author**: The author of the article. Cross-referenced with [authors metadata](/manage-authors).
-* **date**: The date on which the article was published. This string should be parseable by javascript's `Date` constructor.
+* **date**: The date on which the article was published. This string should be parseable by javascript's [`Date` constructor](http://www.hunlock.com/blogs/Javascript_Dates-The_Complete_Reference).
 * **tags**: A list of meta tags to attach to your article page.
 * **preview**: If the renderer is set to **all** and **preview** is truthy, then Blacksmith will render the page with short "preview" versions of all the articles, with a link to the main article page.

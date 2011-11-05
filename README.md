@@ -2,6 +2,8 @@
 
 *A static site generator built with Node.js, JSDOM, and Weld.*
 
+![](https://github.com/nodejitsu/blacksmith/raw/master/theme/img/screenshot.png)
+
 Blacksmith is a static site generator designed for simplicity and ease of use. Blacksmith will generate your content in seconds as a stand-alone static site ( comprised of HTML / CSS ) that can be hosted anywhere with no dependencies. Articles are edited as Markdown files, and themes are just plain HTML and CSS files (no inane microtemplates or strange markup languages).
 
 Static sites are generated using Weld and JSDOM. Blacksmith also ships with a built in Node.js static file server, so Blacksmith can host itself, if you'd like. 

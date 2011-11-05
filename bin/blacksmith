@@ -1,5 +1,9 @@
+#!/usr/bin/env node
+
 var argv = require("optimist").argv,
     path = require("path"),
+    fs = require("fs"),
+    prompt = require("prompt"),
     smith = require("../lib/blacksmith");
 require("colors");
 
@@ -10,6 +14,39 @@ switch (task) {
   case "generate":
     console.log("GENERATING YOUR FILES".yellow);
     smith.generate(dir+"/pages", dir+"/public");
+    break;
+
+  case "init":
+    prompt.start();
+    prompt.get([ "title", "author" ], function (err, res) {
+      if (err) {
+        throw err;
+      }
+
+      //TODO: Check authors
+
+      fs.writeFile("page.json", JSON.stringify({
+        title: res.title,
+        author: res.author,
+        date: new Date()
+      }), function (err) {
+        if (err) {
+          throw err;
+        }
+        console.log(" - Created `page.json`.".green);
+
+        fs.writeFile("content.md", "Dear diary,\n\n\n", function (err) {
+          if (err) {
+            throw err;
+          }
+          console.log(" - Created `content.md`.".green);
+
+          console.log("Done.\n");
+
+        });
+      });
+
+    });
     break;
 
   case "serve":

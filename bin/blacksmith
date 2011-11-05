@@ -4,72 +4,96 @@ var argv = require("optimist").argv,
     path = require("path"),
     fs = require("fs"),
     prompt = require("prompt"),
-    smith = require("../lib/blacksmith");
-require("colors");
+    winston = require("winston"),
+    smith = require("../lib/blacksmith"),
+    cliff = require("cliff"), // cliff turns on colors in winston
+    colors = require("colors"),
+    asciimo = require("asciimo").Figlet;
 
 var task = argv._[0],
     dir = (argv.length - 1) ? (argv._[argv._.length - 1]) : ".";
 
+winston.info("Welcome to "+"Blacksmith".yellow);
+winston.info("It worked if it ends with " + "Blacksmith".yellow + " ok".green.bold);
+
+var done = function(status) {
+  if (status) {
+    winston.info("Blacksmith".yellow + " not ok".red.bold);
+  } else {
+    winston.info("Blacksmith".yellow + " ok".green.bold);
+  }
+  process.exit(status || 0);
+}
+
+winston.info("Executing command "+(task || "help").magenta);
 switch (task) {
   case "generate":
-    console.log("GENERATING YOUR FILES".yellow);
     smith.generate(dir+"/pages", dir+"/public");
     break;
 
   case "init":
-    prompt.start();
-    prompt.get([ "title", "author" ], function (err, res) {
-      if (err) {
-        throw err;
-      }
-
-      //TODO: Check authors
-
-      fs.writeFile("page.json", JSON.stringify({
-        title: res.title,
-        author: res.author,
-        date: new Date()
-      }), function (err) {
-        if (err) {
-          throw err;
-        }
-        console.log(" - Created `page.json`.".green);
-
-        fs.writeFile("content.md", "Dear diary,\n\n\n", function (err) {
-          if (err) {
-            throw err;
-          }
-          console.log(" - Created `content.md`.".green);
-
-          console.log("Done.\n");
-
-        });
-      });
-
-    });
+    smith.init(done);
     break;
 
-  case "serve":
-
-    console.log("SERVING YOUR FILES".yellow);
-
+  case "preview":
     var HTTPServer = require('http-server').HTTPServer;
     var httpServer = new HTTPServer({root: dir+'/public/'});
+
+    httpServer.log = winston.info;
 
     httpServer.start();
 
     process.on('SIGINT', function() {
-      httpServer.log('http-server stopped.'.red);
-      return process.exit();
+      winston.warn('http-server stopped.'.red);
+      return done();
     });
-
     break;
+
+  case "help":
+  case undefined:
+
+    // What, like I was going to copy-paste that?
+    asciimo.write("blacksmith", "Gothic", function(art) {
+      art.split("\n").forEach(function(row) {
+        winston.help(row.yellow);
+      });
+
+      winston.help("The static site generator and content management system "
+        + "from "+"Nodejitsu".grey+"!"
+      );
+      winston.help("A component of "+"flatiron".grey);
+      winston.help("http://github.com/flatiron/blacksmith");
+      winston.help("");
+      winston.help("Usage:".yellow.bold);
+      winston.help("");
+      winston.help("    blacksmith <task> <param1> <param2> ...");
+      winston.help("");
+      winston.help("Commands:".yellow.bold);
+      winston.help("");
+      winston.help("* "+"`blacksmith generate`".yellow+": Generate your blog");
+      winston.help("* "+"`blacksmith preview`".yellow
+        +": Serve your blog up on localhost"
+      );
+      winston.help("* "+"`blacksmith init`".yellow+": Initialize a blog post");
+      winston.help("");
+      winston.help("For more help, visit:");
+      winston.help("");
+      winston.help("* "+"http://blacksmith.nodejitsu.com".yellow.bold);
+      winston.help("* "+"https://github.com/flatiron/blacksmith".yellow.bold);
+      winston.help("");
+      done();
+    });
+    break;
+
   default:
-    console.log("Invalid instructions!".red);
-    console.log();
-    console.log("You may either:");
-    console.log();
-    console.log("* blacksmith generate <folder>");
-    console.log("* blacksmith serve <folder>");
-    console.log();
+    winston.error("Error running command "+task.magenta);
+    winston.error("Unknown task "+task.magenta);
+    winston.help("");
+    winston.help("Valid commands are:".yellow.bold);
+    winston.help("");
+    winston.help("* blacksmith init");
+    winston.help("* blacksmith preview");
+    winston.help("* blacksmith generate");
+    winston.help("");
+    done(1);
 }

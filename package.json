@@ -5,6 +5,9 @@
   "scripts": {
     "start": "bin/server"
   },
+  "bin": {
+    "blacksmith": "bin/blacksmith"
+  },
   "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {
     "async": "0.1.x",

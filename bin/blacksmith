@@ -10,8 +10,7 @@ var argv = require("optimist").argv,
     colors = require("colors"),
     asciimo = require("asciimo").Figlet;
 
-var task = argv._[0],
-    dir = (argv.length - 1) ? (argv._[argv._.length - 1]) : ".";
+var task = argv._[0];
 
 winston.info("Welcome to "+"Blacksmith".yellow);
 winston.info("It worked if it ends with " + "Blacksmith".yellow + " ok".green.bold);
@@ -28,7 +27,44 @@ var done = function(status) {
 winston.info("Executing command "+(task || "help").magenta);
 switch (task) {
   case "generate":
-    smith.generate(dir+"/pages", dir+"/public");
+    // Check to see if the right dirs exist.
+
+    var exists = {};
+    [ "./pages", "./public", "./authors", "./theme" ].forEach(function(dir) {
+      exists[dir] = path.existsSync("./pages")
+        && fs.statSync("./pages").isDirectory();
+    });
+
+    if (Object.keys(exists).every(function(k) {
+      return exists[k];
+    })) {
+
+      smith.generate("./pages", "./public", done);
+
+    } else {
+      winston.error([
+        "Missing blacksmith site folders: "
+        + Object.keys(exists).filter(function(f) {
+            return !exists[f];
+          }).join(", ").bold.yellow,
+      ].join("\n"));
+
+      [
+        "",
+        "The easiest way to start a " + "blacksmith".yellow
+          + " site is to use " + "jitsu".cyan + ":",
+        "",
+        "    jitsu install blog".yellow,
+        "",
+        "You can learn more about jitsu at "
+          + "http://github.com/nodejitsu/jitsu".yellow,
+        ""
+      ].forEach(winston.help);
+      
+      done(1);
+    }
+
+
     break;
 
   case "init":
@@ -37,7 +73,7 @@ switch (task) {
 
   case "preview":
     var HTTPServer = require('http-server').HTTPServer;
-    var httpServer = new HTTPServer({root: dir+'/public/'});
+    var httpServer = new HTTPServer({root: './public/'});
 
     httpServer.log = winston.info;
 
@@ -58,7 +94,7 @@ switch (task) {
         winston.help(row.yellow);
       });
 
-      winston.help("The static site generator and content management system "
+      winston.help("The static site generator "
         + "from "+"Nodejitsu".grey+"!"
       );
       winston.help("A component of "+"flatiron".grey);

@@ -23,6 +23,10 @@
     "optimist": "0.2.x",
     "wordwrap": "0.0.x",
     "rss": "0.0.x",
-    "hashish": "0.0.x"
+    "hashish": "0.0.x",
+    "prompt": "0.1.x",
+    "winston": "0.5.x",
+    "cliff": "0.1.x",
+    "asciimo": "0.3.x"
   }
 }

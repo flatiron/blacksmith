@@ -38,8 +38,16 @@ switch (task) {
     if (Object.keys(exists).every(function(k) {
       return exists[k];
     })) {
-
-      smith.generate("./pages", "./public", done);
+      smith.generate("./pages", "./public", function (status) {
+        // Because writes are fire-and-forget, we can't process.exit until they
+        // are all done. So, instead, let's just print "blacksmith ok" for now,
+        // and figure out how to do it the "right way" later.
+        if (status) {
+          winston.info("Blacksmith".yellow + " not ok".red.bold);
+        } else {
+          winston.info("Blacksmith".yellow + " ok".green.bold);
+        }
+      });
 
     } else {
       winston.error([
@@ -75,7 +83,7 @@ switch (task) {
     var HTTPServer = require('http-server').HTTPServer;
     var httpServer = new HTTPServer({
         root: './public/',
-        port: process.env.PORT || process.env.C9_PORT || 80
+        port: process.env.PORT || process.env.C9_PORT || 8080
     });
 
     httpServer.log = winston.info;

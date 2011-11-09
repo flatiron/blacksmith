@@ -30,9 +30,9 @@ switch (task) {
     // Check to see if the right dirs exist.
 
     var exists = {};
-    [ "./pages", "./public", "./authors", "./theme" ].forEach(function(dir) {
-      exists[dir] = path.existsSync("./pages")
-        && fs.statSync("./pages").isDirectory();
+    [ "./pages", "./authors", "./theme" ].forEach(function(dir) {
+      exists[dir] = path.existsSync(dir)
+        && fs.statSync(dir).isDirectory();
     });
 
     if (Object.keys(exists).every(function(k) {

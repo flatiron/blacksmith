@@ -1,146 +1,55 @@
 #!/usr/bin/env node
 
-var argv = require("optimist").argv,
+var flatiron = require("flatiron"),
     path = require("path"),
     fs = require("fs"),
-    prompt = require("prompt"),
-    winston = require("winston"),
     smith = require("../lib/blacksmith"),
-    cliff = require("cliff"), // cliff turns on colors in winston
+    winston = require("winston"), // TODO: Use log plugin
     colors = require("colors"),
-    asciimo = require("asciimo").Figlet;
+    cliff = require("cliff"),
+    asciimo = require("asciimo").Figlet,
+    app = flatiron.app;
 
-var task = argv._[0];
+app.use(flatiron.plugins.cli, {
+  dir: __dirname + "/../lib/commands",
+  usage: [
+    "",                                                      
+    ",,    ,,            ,,                       ,  ,,    ".yellow,
+    "||    ||   _        ||                   '  ||  ||    ".yellow,
+    "||/|, ||  < \\,  _-_ ||/\\  _-_, \\\\/\\\\/\\\\ \\\\ =||= ||/\\\\ ".yellow,
+    "|| || ||  /-|| ||   ||_< ||_.  || || || ||  ||  || || ".yellow,
+    "|| |' || (( || ||   || |  ~ || || || || ||  ||  || || ".yellow,
+    "\\\\/   \\\\  \\/\\\\ \\\\,/ \\\\,\\ ,-_-  \\\\ \\\\ \\\\ \\\\  \\\\, \\\\ |/ ".yellow,
+    "                                                  _/  ".yellow,
+    "",
+    "The static site generator " + "from "+"Nodejitsu".grey+"!",
+    "http://github.com/nodejitsu/blacksmith",
+    "",
+    "Usage:".yellow.bold,
+    "",
+    "    blacksmith <task> <param1> <param2> ...",
+    "",
+    "Commands:".yellow.bold,
+    "",
+    "* "+"`blacksmith generate`".yellow+": Generate your blog",
+    "* "+"`blacksmith preview`".yellow +": Serve your blog up on localhost",
+    "* "+"`blacksmith post`".yellow+": Initialize a blog post",
+    "",
+    "For more help, visit:",
+    "",
+    "* "+"https://github.com/nodejitsu/blacksmith".yellow.bold,
+    ""
+  ].join("\n")
+});
+
 
 winston.info("Welcome to "+"Blacksmith".yellow);
 winston.info("It worked if it ends with " + "Blacksmith".yellow + " ok".green.bold);
 
-var done = function(status) {
-  if (status) {
-    winston.info("Blacksmith".yellow + " not ok".red.bold);
-  } else {
-    winston.info("Blacksmith".yellow + " ok".green.bold);
+app.init(function (err) {
+  if (err) {
+    err.stack.forEach(winston.error);
   }
-  process.exit(status || 0);
-}
 
-winston.info("Executing command "+(task || "help").magenta);
-switch (task) {
-  case "generate":
-    // Check to see if the right dirs exist.
-
-    var exists = {};
-    [ "./pages", "./authors", "./theme" ].forEach(function(dir) {
-      exists[dir] = path.existsSync(dir)
-        && fs.statSync(dir).isDirectory();
-    });
-
-    if (Object.keys(exists).every(function(k) {
-      return exists[k];
-    })) {
-      smith.generate("./pages", "./public", function (status) {
-        // Because writes are fire-and-forget, we can't process.exit until they
-        // are all done. So, instead, let's just print "blacksmith ok" for now,
-        // and figure out how to do it the "right way" later.
-        if (status) {
-          winston.info("Blacksmith".yellow + " not ok".red.bold);
-        } else {
-          winston.info("Blacksmith".yellow + " ok".green.bold);
-        }
-      });
-
-    } else {
-      winston.error([
-        "Missing blacksmith site folders: "
-        + Object.keys(exists).filter(function(f) {
-            return !exists[f];
-          }).join(", ").bold.yellow,
-      ].join("\n"));
-
-      [
-        "",
-        "The easiest way to start a " + "blacksmith".yellow
-          + " site is to use " + "jitsu".cyan + ":",
-        "",
-        "    jitsu install blog".yellow,
-        "",
-        "You can learn more about jitsu at "
-          + "http://github.com/nodejitsu/jitsu".yellow,
-        ""
-      ].forEach(winston.help);
-      
-      done(1);
-    }
-
-
-    break;
-
-  case "init":
-    smith.init(done);
-    break;
-
-  case "preview":
-    var HTTPServer = require('http-server').HTTPServer;
-    var httpServer = new HTTPServer({
-        root: './public/',
-        port: process.env.PORT || process.env.C9_PORT || 8080
-    });
-
-    httpServer.log = winston.info;
-
-    httpServer.start();
-
-    process.on('SIGINT', function() {
-      winston.warn('http-server stopped.'.red);
-      return done();
-    });
-    break;
-
-  case "help":
-  case undefined:
-
-    // What, like I was going to copy-paste that?
-    asciimo.write("blacksmith", "Gothic", function(art) {
-      art.split("\n").forEach(function(row) {
-        winston.help(row.yellow);
-      });
-
-      winston.help("The static site generator "
-        + "from "+"Nodejitsu".grey+"!"
-      );
-      winston.help("A component of "+"flatiron".grey);
-      winston.help("http://github.com/flatiron/blacksmith");
-      winston.help("");
-      winston.help("Usage:".yellow.bold);
-      winston.help("");
-      winston.help("    blacksmith <task> <param1> <param2> ...");
-      winston.help("");
-      winston.help("Commands:".yellow.bold);
-      winston.help("");
-      winston.help("* "+"`blacksmith generate`".yellow+": Generate your blog");
-      winston.help("* "+"`blacksmith preview`".yellow
-        +": Serve your blog up on localhost"
-      );
-      winston.help("* "+"`blacksmith init`".yellow+": Initialize a blog post");
-      winston.help("");
-      winston.help("For more help, visit:");
-      winston.help("");
-      winston.help("* "+"http://blacksmith.nodejitsu.com".yellow.bold);
-      winston.help("* "+"https://github.com/flatiron/blacksmith".yellow.bold);
-      winston.help("");
-      done();
-    });
-    break;
-
-  default:
-    winston.error("Error running command "+task.magenta);
-    winston.error("Unknown task "+task.magenta);
-    winston.help("");
-    winston.help("Valid commands are:".yellow.bold);
-    winston.help("");
-    winston.help("* blacksmith init");
-    winston.help("* blacksmith preview");
-    winston.help("* blacksmith generate");
-    winston.help("");
-    done(1);
-}
+  app.start();
+});

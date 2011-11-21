@@ -28,6 +28,7 @@
     "prompt": "0.1.x",
     "winston": "0.5.x",
     "cliff": "0.1.x",
-    "asciimo": "0.3.x"
+    "asciimo": "0.3.x",
+    "blacksmith-sites": "0.0.x"
   }
 }

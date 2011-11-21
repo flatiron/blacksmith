@@ -33,6 +33,7 @@ app.use(flatiron.plugins.cli, {
     "",
     "* "+"`blacksmith generate`".yellow+": Generate your blog",
     "* "+"`blacksmith preview`".yellow +": Serve your blog up on localhost",
+    "* "+"`blacksmith init`".yellow +": Create a new blacksmith site",
     "* "+"`blacksmith post`".yellow+": Initialize a blog post",
     "",
     "For more help, visit:",

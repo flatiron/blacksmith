@@ -7,7 +7,6 @@ var flatiron = require("flatiron"),
     winston = require("winston"), // TODO: Use log plugin
     colors = require("colors"),
     cliff = require("cliff"),
-    asciimo = require("asciimo").Figlet,
     app = flatiron.app;
 
 app.use(flatiron.plugins.cli, {
@@ -38,7 +37,7 @@ app.use(flatiron.plugins.cli, {
     "",
     "For more help, visit:",
     "",
-    "* "+"https://github.com/nodejitsu/blacksmith".yellow.bold,
+    "* "+"https://github.com/facebook/blacksmith".yellow.bold,
     ""
   ].join("\n")
 });

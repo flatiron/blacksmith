@@ -10,7 +10,6 @@
   },
   "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {
-    "flatiron": "0.1.x",
     "async": "0.1.x",
     "github-flavored-markdown": "1.0.x",
     "traverse": "0.4.x",
@@ -29,6 +28,10 @@
     "winston": "0.5.x",
     "cliff": "0.1.x",
     "asciimo": "0.3.x",
-    "blacksmith-sites": "0.0.x"
-  }
+    "alists": "*"
+  },
+  "bundledDependencies": [
+    "blacksmith-sites",
+    "flatiron"
+  ]
 }

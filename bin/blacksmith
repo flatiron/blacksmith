@@ -37,7 +37,7 @@ app.use(flatiron.plugins.cli, {
     "",
     "For more help, visit:",
     "",
-    "* "+"https://github.com/facebook/blacksmith".yellow.bold,
+    "* "+"https://github.com/flatiron/blacksmith".yellow.bold,
     ""
   ].join("\n")
 });

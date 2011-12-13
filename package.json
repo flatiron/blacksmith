@@ -18,6 +18,7 @@
     "jsdom": "0.2.x",
     "weld": "0.2.1",
     "findit": "0.1.x",
+    "flatiron": "0.1.5-1",
     "nconf": "0.4.3",
     "colors": "*",
     "optimist": "0.2.x",
@@ -31,7 +32,6 @@
     "alists": "*"
   },
   "bundledDependencies": [
-    "blacksmith-sites",
-    "flatiron"
+    "blacksmith-sites"
   ]
 }

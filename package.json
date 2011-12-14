@@ -10,7 +10,6 @@
   },
   "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {
-    "ncp": "0.2.x",
     "async": "0.1.x",
     "github-flavored-markdown": "1.0.x",
     "traverse": "0.4.x",

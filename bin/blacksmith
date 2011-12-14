@@ -22,7 +22,7 @@ app.use(flatiron.plugins.cli, {
     "                                                  _/  ".yellow,
     "",
     "The static site generator " + "from "+"Nodejitsu".grey+"!",
-    "http://github.com/nodejitsu/blacksmith",
+    "https://github.com/flatiron/blacksmith",
     "",
     "Usage:".yellow.bold,
     "",

@@ -20,6 +20,7 @@
     "findit": "0.1.x",
     "flatiron": "0.1.5-1",
     "nconf": "0.4.3",
+    "ncp": "0.2.x",
     "colors": "*",
     "optimist": "0.2.x",
     "wordwrap": "0.0.x",

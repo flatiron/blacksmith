@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var flatiron = require("flatiron"),
+    util = require("utile"),
     path = require("path"),
     fs = require("fs"),
     smith = require("../lib/blacksmith"),
@@ -30,10 +31,10 @@ app.use(flatiron.plugins.cli, {
     "",
     "Commands:".yellow.bold,
     "",
-    "* "+"`blacksmith generate`".yellow+": Generate your blog",
-    "* "+"`blacksmith preview`".yellow +": Serve your blog up on localhost",
+    "* "+"`blacksmith generate`".yellow+": Generate a static site",
+    "* "+"`blacksmith preview`".yellow +": Serve your static site on localhost",
     "* "+"`blacksmith init`".yellow +": Create a new blacksmith site",
-    "* "+"`blacksmith post`".yellow+": Initialize a blog post",
+    "* "+"`blacksmith post`".yellow+": Create a new page for your site",
     "",
     "For more help, visit:",
     "",
@@ -42,13 +43,19 @@ app.use(flatiron.plugins.cli, {
   ].join("\n")
 });
 
+if (app.argv.v) {
+  // If version requested, print it and exit without doing anything else.
+  console.log(util.file.readJsonSync(__dirname + '/../package.json').version);
+  process.exit();
+}
+
 
 winston.info("Welcome to "+"Blacksmith".yellow);
 winston.info("It worked if it ends with " + "Blacksmith".yellow + " ok".green.bold);
 
 app.init(function (err) {
   if (err) {
-    err.stack.forEach(winston.error);
+    return err.stack.forEach(winston.error);
   }
 
   app.start();

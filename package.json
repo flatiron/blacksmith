@@ -30,6 +30,7 @@
     "winston": "0.5.x",
     "cliff": "0.1.x",
     "asciimo": "0.3.x",
+    "utile": "0.0.10",
     "alists": "*"
   },
   "bundledDependencies": [

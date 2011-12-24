@@ -50,8 +50,8 @@ if (app.argv.v) {
 }
 
 
-winston.info("Welcome to "+"Blacksmith".yellow);
-winston.info("It worked if it ends with " + "Blacksmith".yellow + " ok".green.bold);
+smith.log.info("Welcome to "+"Blacksmith".yellow);
+smith.log.info("It worked if it ends with " + "Blacksmith".yellow + " ok".green.bold);
 
 app.init(function (err) {
   if (err) {

@@ -1,7 +1,7 @@
 {
   "name": "blacksmith",
   "description": "The node documentation project",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "start": "bin/server"
   },
@@ -10,6 +10,7 @@
   },
   "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {
+    "blacksmith-sites": "0.0.1",
     "async": "0.1.x",
     "marked": "git+https://github.com/chjj/marked.git#gfm",
     "traverse": "0.4.x",
@@ -29,12 +30,8 @@
     "prompt": "0.1.x",
     "winston": "0.5.x",
     "cliff": "0.1.x",
-    "asciimo": "0.3.x",
     "utile": "0.0.10",
     "alists": "*"
-  },
-  "bundledDependencies": [
-    "blacksmith-sites"
-  ]
+  }
 }
 

@@ -10,7 +10,7 @@
   },
   "author": "Nodejitsu <info@nodejitsu.com>",
   "dependencies": {
-    "blacksmith-sites": "0.0.1",
+    "blacksmith-sites": "0.0.x",
     "async": "0.1.x",
     "marked": "git+https://github.com/chjj/marked.git#gfm",
     "traverse": "0.4.x",

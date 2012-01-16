@@ -12,7 +12,7 @@
   "dependencies": {
     "blacksmith-sites": "0.0.x",
     "async": "0.1.x",
-    "marked": "git+https://github.com/chjj/marked.git#gfm",
+    "marked": "0.1.x",
     "traverse": "0.4.x",
     "mkdirp": "0.0.x",
     "http-server": "0.2.4",

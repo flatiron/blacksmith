@@ -1,7 +1,7 @@
 {
   "name": "blacksmith",
-  "description": "The node documentation project",
-  "version": "0.0.8",
+  "description": "A static site generator built with Node.js, JSDOM, and Weld.",
+  "version": "0.0.11",
   "scripts": {
     "start": "bin/server"
   },

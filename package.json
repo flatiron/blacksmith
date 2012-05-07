@@ -8,7 +8,10 @@
   "bin": {
     "blacksmith": "bin/blacksmith"
   },
-  "author": "Nodejitsu <info@nodejitsu.com>",
+  "author": "Nodejitsu Inc. <info@nodejitsu.com>",
+  "maintainers": [
+    "jesusabdullah <josh@nodejitsu.com>"
+  ],
   "dependencies": {
     "blacksmith-sites": "0.0.x",
     "async": "0.1.x",

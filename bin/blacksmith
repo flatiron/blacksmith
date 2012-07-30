@@ -2,7 +2,6 @@
 
 var flatiron = require("flatiron"),
     util = require("utile"),
-    path = require("path"),
     fs = require("fs"),
     smith = require("../lib/blacksmith"),
     winston = require("winston"), // TODO: Use log plugin

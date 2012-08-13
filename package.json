@@ -18,7 +18,7 @@
     "marked": "0.1.x",
     "traverse": "0.4.x",
     "mkdirp": "0.0.x",
-    "http-server": "0.2.4",
+    "http-server": "0.5.x",
     "jsdom": "0.2.x",
     "weld": "0.2.1",
     "findit": "0.1.x",

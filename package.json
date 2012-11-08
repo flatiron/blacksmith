@@ -1,0 +1,20 @@
+{
+  "name": "blacksmith",
+  "description": "A static site generator built with Node.js, Plates, and Marked.",
+  "version": "1.0.0",
+  "bin": {
+    "blacksmith": "bin/blacksmith"
+  },
+  "author": "Nodejitsu Inc. <info@nodejitsu.com>",
+  "dependencies": {
+    "async": "0.1.x",
+    "marked": "0.1.x",
+    "mkdirp": "0.0.x",
+    "flatiron": "0.3.0",
+    "plates": "0.4.x"
+  },
+  "devDependencies": {
+    "vows": "0.6.4"
+  }
+}
+

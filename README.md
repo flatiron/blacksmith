@@ -158,9 +158,7 @@ Layouts are fully-formed HTML files; **_they are the top of the rendering hierar
 
 ### Pages
 
-**Pages** allowed you to specify **what type of content** you wish to render and where to render it within a given layout. 
-
-As with layouts, pages may specified in your `.blacksmith` file or in `/pages/page-name.json`. Lets look at two examples from our blog:
+**Pages** allowed you to specify **what type of content** you wish to render and where to render it within a given layout. As with layouts, pages may specified in your `.blacksmith` file or in `/pages/page-name.json`. Lets look at two examples from our blog:
 
 **/pages/index.json**
 
@@ -182,7 +180,7 @@ This example of particular interest: **index.json will always be used to render 
 
 **/pages/post.json**
 
-The layout data for an individual post is much simpler than our `index.json`. By creating this file, `blacksmith` will:
+The rendering information for an individual post is much simpler than our `index.json`. By creating this file, `blacksmith` will:
 
 1. Render all Markdown files in `/content/posts` using the partial found at `/partials/post.html`.
 2. Render the partial found at `/partials/sidebar.html` with the metadata for each Markdown file in `/content/posts` and append it to the HTML element with id="content"
@@ -241,11 +239,45 @@ A list of all options that can be specified in a `page.json` file are listed bel
 
 ### Content
 
+In `blacksmith`, "content" is raw Markdown and supporting files (e.g. images) located within the `/content` directory. Content for individual pages should be placed under `/content/page-name`. 
 
+In our example all content for the `post` page should be placed under `/content/posts`. It is important to take note of the convention:
+
+``` 
+  Convention: Page names are always singular, but their content folder will always be plural.
+```
+
+The content for an individual page may also be a directory where supporting files (such as images can be placed). For example if we wanted to create a post with images the directory structure would be:
+
+```
+/site-name
+  /content
+    /posts
+      /post-with-supporting-files
+        content.md
+        an-image.png
+        another-image.png
+        some-code.js
+```
+
+The directory structure will be respected, but the `/content` prefix will be dropped. So the full-url for `an-image.png` would be `http://your-site.com/post-with-supporting-files/an-image.png`.
+
+#### Content Metadata
+
+**All metadata associated with content is stored within the individual Markdown files as link definitions prefixed with 'meta:'.** Because of a small limitation in the Markdown format you must use the following syntax to specify metadata:
+
+```
+  [meta:author] <> (Author Name)
+  [meta:title] <> (A Really Long Title Different from the Filename)
+```
 
 ### Partials
 
-**Partials** are HTML fragments which are inserted into a layout, a page, or another partial. 
+**Partials** are HTML fragments which are inserted into a layout, a page, or another partial. **All partials are rendered with `plates`**.
+
+```
+  TODO: FINISH DOCUMENTING THIS!!!
+```
 
 ## Rendering Data Structure used by `blacksmith`
 

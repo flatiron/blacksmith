@@ -163,6 +163,7 @@ Layouts are fully-formed HTML files; **_they are the top of the rendering hierar
 As with layouts, pages may specified in your `.blacksmith` file or in `/pages/page-name.json`. Lets look at two examples from our blog:
 
 **/pages/index.json**
+
 This example of particular interest: **index.json will always be used to render index.html.** In the below example specifies that `blacksmith` should render a list of `post` content, which should be truncated, limited to a maximum of 20 posts.
 
 ``` js
@@ -180,6 +181,7 @@ This example of particular interest: **index.json will always be used to render 
 ```
 
 **/pages/post.json**
+
 The layout data for an individual post is much simpler than our `index.json`. By creating this file, `blacksmith` will:
 
 1. Render all Markdown files in `/content/posts` using the partial found at `/partials/post.html`.

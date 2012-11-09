@@ -8,7 +8,7 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
   * [Layouts](#layouts)
   * [Pages and Partials](#pages-and-partials)
   * [Content](#content)
-* [Rendering Data Structure used by blacksmith](rendering-data-structure-used-by-blacksmith)
+* [Rendering Data Structure used by blacksmith](#rendering-data-structure-used-by-blacksmith)
 
 ## Creating a site with `blacksmith` 
 

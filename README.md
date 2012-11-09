@@ -62,7 +62,7 @@ Here's an example of a simple blog that `blacksmith` would render.
 
 ## Components of a `blacksmith` site
 
-Each `blacksmith` site will define a hierarchical set of components which can be composed **to create any type of site you want!** A couple of examples:
+Each `blacksmith` site defines a hierarchical set of components which can be composed **to create any type of site you want!** A couple of examples:
 
 * A Blog
 * A Documentation Site
@@ -77,8 +77,10 @@ The settings for a given `blacksmith` site are stored in the `.blacksmith` file 
 ``` js
   {
     //
-    // Default Layout. Specifying a name here will cause Blacksmith to 
-    // attempt to read `/layouts/layout-name.json` for rendering info.
+    // Default Layout. Specifying a name here will cause Blacksmith to attempt to read
+    // /layouts/layout-name.json for rendering info. If no layout-name.json file is found
+    // blacksmith will use `/layouts/layout-name.html`
+    //
     // Default: default
     //
     "layout": "layout-name"
@@ -100,7 +102,7 @@ The settings for a given `blacksmith` site are stored in the `.blacksmith` file 
 
 You can define settings for all components of your site in the `.blacksmith` file or break them out into individual files within component directories. For example, the above example is equivalent to:
 
-*/.blacksmith*
+**/.blacksmith**
 
 ``` js
   {
@@ -108,7 +110,7 @@ You can define settings for all components of your site in the `.blacksmith` fil
   }
 ```
 
-*/pages/post.json*
+**/pages/post.json**
 
 ``` js
  {
@@ -124,7 +126,7 @@ You can define settings for all components of your site in the `.blacksmith` fil
 
 Layouts are fully-formed HTML files; _they are the top of the rendering hierarchy._ A layout may specified in your `.blacksmith` file or in `/layouts/layout-name.json`. Lets look at an example:
 
-*/layouts/layout-name.json*
+**/layouts/layout-name.json**
 ``` js
   {
     //
@@ -155,8 +157,8 @@ Layouts are fully-formed HTML files; _they are the top of the rendering hierarch
 
 Pages and partials are tightly connected to it is prudent to consider them together:
 
-* *Pages* allowed you to specify **what type of content** you wish to render and where to render it within a given layout. 
-* *Partials* are HTML fragments which are inserted into a layout, a page, or another partial.
+* **Pages** allowed you to specify **what type of content** you wish to render and where to render it within a given layout. 
+* **Partials** are HTML fragments which are inserted into a layout, a page, or another partial.
 
 
 ``` js

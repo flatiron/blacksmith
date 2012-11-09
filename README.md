@@ -8,6 +8,7 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
   * [Layouts](#layouts)
   * [Pages and Partials](#pages-and-partials)
   * [Content](#content)
+* [Rendering Data Structure used by blacksmith](rendering-data-structure-used-by-blacksmith)
 
 ## Creating a site with `blacksmith` 
 
@@ -124,17 +125,17 @@ You can define settings for all components of your site in the `.blacksmith` fil
 
 ### Layouts
 
-Layouts are fully-formed HTML files; _they are the top of the rendering hierarchy._ A layout may specified in your `.blacksmith` file or in `/layouts/layout-name.json`. Lets look at an example:
+Layouts are fully-formed HTML files; **_they are the top of the rendering hierarchy._** A layout may specified in your `.blacksmith` file or in `/layouts/layout-name.json`. Lets look at an example:
 
 **/layouts/layout-name.json**
 ``` js
   {
     //
-    // The "template" property specifies which HTML file within the `/layouts` directory
+    // The "template" property specifies which HTML file within the /layouts directory
     // to use when rendering this layout. In this way a single HTML file can be reused with 
     // different partials.
     //
-    // If no template is specified then blacksmith will look for `/layouts/layout-name.html`
+    // If no template is specified then blacksmith will look for /layouts/layout-name.html
     // when rendering.
     //
     "template": "shared-layout.html",
@@ -155,11 +156,25 @@ Layouts are fully-formed HTML files; _they are the top of the rendering hierarch
 
 ### Pages and Partials
 
-Pages and partials are tightly connected to it is prudent to consider them together:
+Pages and partials are tightly connected so it is prudent to consider them together:
 
 * **Pages** allowed you to specify **what type of content** you wish to render and where to render it within a given layout. 
 * **Partials** are HTML fragments which are inserted into a layout, a page, or another partial.
 
+## Rendering Data Structure used by `blacksmith`
+
+**It's safe to skip this if you're not tinkering with `blacksmith` internals.** As we discussed `blacksmith` uses hierarchical rendering components. Each component inherits the relevant properties from its parent entity. The full hierarchy is:
+
+* Site
+  * Layout
+    * Partial
+    * Page
+      * Content
+      * Partial
+
+Notice that partials can _be specified by both layouts and pages._ In the event of a conflict the partials specified by the page will always be preferred.
+
+Lets examine a fully-formed data structure for rendering a given page:
 
 ``` js
   {

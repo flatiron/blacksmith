@@ -7,8 +7,11 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
   * [Site Settings](#site-settings)
   * [Layouts](#layouts)
   * [Pages](#pages)
-  * [Partials](#partials)
+    * [All Page Options](#all-page-options)
   * [Content](#content)
+    * [Specifying Metadata](#specifying-metadata)
+  * [Partials](#partials)
+    * [Customizing Partials](#customizing-partials)
 * [Rendering Data Structure used by blacksmith](#rendering-data-structure-used-by-blacksmith)
 * [Tests](#tests)
 
@@ -262,7 +265,7 @@ The content for an individual page may also be a directory where supporting file
 
 The directory structure will be respected, but the `/content` prefix will be dropped. So the full-url for `an-image.png` would be `http://your-site.com/post-with-supporting-files/an-image.png`.
 
-#### Content Metadata
+#### Specifying Metadata
 
 **All metadata associated with content is stored within the individual Markdown files as link definitions prefixed with 'meta:'.** Because of a small limitation in the Markdown format you must use the following syntax to specify metadata:
 
@@ -274,6 +277,8 @@ The directory structure will be respected, but the `/content` prefix will be dro
 ### Partials
 
 **Partials** are HTML fragments which are inserted into a layout, a page, or another partial. **All partials are rendered with `plates`**.
+
+#### Customizing Partials
 
 ```
   TODO: FINISH DOCUMENTING THIS!!!

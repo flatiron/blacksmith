@@ -1,0 +1,23 @@
+{
+  "pages": {
+    "post": {
+      "content": "post",
+      "partials": {
+        "content": "sidebar"
+      }
+    },
+    "archive": {
+      "content": {
+        "list": "posts",
+        "truncate": true
+      }
+    },
+    "index": {
+      "content": {
+        "list": "posts",
+        "truncate": true,
+        "limit": 20
+      }
+    }
+  }
+}

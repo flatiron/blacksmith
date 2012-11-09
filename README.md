@@ -6,9 +6,11 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
 * [Components of a Blacksmith site](#components-of-a-blacksmith-site)
   * [Site Settings](#site-settings)
   * [Layouts](#layouts)
-  * [Pages and Partials](#pages-and-partials)
+  * [Pages](#pages)
+  * [Partials](#partials)
   * [Content](#content)
 * [Rendering Data Structure used by blacksmith](#rendering-data-structure-used-by-blacksmith)
+* [Tests](#tests)
 
 ## Creating a site with `blacksmith` 
 
@@ -29,21 +31,21 @@ Here's an example of a simple blog that `blacksmith` would render.
     #
     # Actual Markdown content to render.
     #
-    /articles
-      an-article.md
-      another-article.md
+    /posts
+      a-post.md
+      another-post.md
   /layouts
     #
-    # Layouts to use for pages
+    # Layouts to use for pages. You can specify 
+    # multiple layouts, but default.html is ... the default.
     #
     default.html
-    post.html 
   /partials
     #
     # HTML for partials inside of pages
     #
+    post.html
     sidebar.html
-    breadcrumbs.html
   /pages
     #
     # Metadata for rendering specific pages
@@ -154,12 +156,94 @@ Layouts are fully-formed HTML files; **_they are the top of the rendering hierar
   }
 ```
 
-### Pages and Partials
+### Pages
 
-Pages and partials are tightly connected so it is prudent to consider them together:
+**Pages** allowed you to specify **what type of content** you wish to render and where to render it within a given layout. 
 
-* **Pages** allowed you to specify **what type of content** you wish to render and where to render it within a given layout. 
-* **Partials** are HTML fragments which are inserted into a layout, a page, or another partial.
+As with layouts, pages may specified in your `.blacksmith` file or in `/pages/page-name.json`. Lets look at two examples from our blog:
+
+**/pages/index.json**
+This example of particular interest: **index.json will always be used to render index.html.** In the below example specifies that `blacksmith` should render a list of `post` content, which should be truncated, limited to a maximum of 20 posts.
+
+``` js
+  {
+    //
+    // The "content" property specifies what blacksmith should render
+    // inside the HTML element with id="content"
+    //
+    "content": {
+      "list": "post",
+      "truncate": true,
+      "limit": 20
+    }
+  }
+```
+
+**/pages/post.json**
+The layout data for an individual post is much simpler than our `index.json`. By creating this file, `blacksmith` will:
+
+1. Render all Markdown files in `/content/posts` using the partial found at `/partials/post.html`.
+2. Render the partial found at `/partials/sidebar.html` with the metadata for each Markdown file in `/content/posts` and append it to the HTML element with id="content"
+
+``` js
+  {
+    "partials": {
+      "content": "sidebar"
+    }
+  }
+```
+
+It is important to take note of the convention:
+
+``` 
+  Convention: Page content will be rendered in a partial of the same name by default. 
+```
+
+Alternatively we could have specified a specific partial to use. If no partial is specified and the default partial is not found then **no metadata would be rendered** (in this case author name, date of post, etc).
+
+#### All Page Options
+A list of all options that can be specified in a `page.json` file are listed below:
+
+``` js
+  {
+    //
+    // Specifies the layout for the page. 
+    // Default: Layout for the site.
+    //
+    "layout": "custom-layout-for-page",
+    
+    //
+    // Specifies a mapping of HTML ids to partial(s). If "content" is specified
+    // then it is appended after the rendered markdown content.
+    //
+    "partials": {
+      "html-id": "partial-name",
+      "another-id": ["multiple-partials"]
+    },
+    
+    //
+    // Case 1: Rendering content with a partial
+    //
+    "content": "custom-partial"
+    
+    //
+    // Case 2: Consolidating multiple content sources in a list.
+    //
+    "content": {
+      "list": "post",
+      "truncate": true,
+      "limit": 20
+    }
+  }
+```
+
+### Content
+
+
+
+### Partials
+
+**Partials** are HTML fragments which are inserted into a layout, a page, or another partial. 
 
 ## Rendering Data Structure used by `blacksmith`
 
@@ -200,3 +284,16 @@ Lets examine a fully-formed data structure for rendering a given page:
     }
   }
 ```
+
+## Tests
+All tests are written with [vows][0] and can be run with [npm][1]:
+
+``` bash
+  $ npm test
+```
+
+#### License: MIT
+#### Author: [Charlie Robbins](http://github.com/indexzero)
+
+[0]: http://vowsjs.org
+[1]: http://npmjs.org

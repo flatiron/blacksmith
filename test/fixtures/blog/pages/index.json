@@ -1,0 +1,7 @@
+{
+  "content": {
+    "list": "posts",
+    "truncate": true,
+    "limit": 20
+  }
+}

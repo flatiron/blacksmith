@@ -12,7 +12,9 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
     * [Specifying Metadata](#specifying-metadata)
   * [Partials](#partials)
     * [Customizing Partials](#customizing-partials)
-* [Rendering Data Structure used by blacksmith](#rendering-data-structure-used-by-blacksmith)
+* [How does blacksmith render my Site?](#how-does-blacksmith-render-my-site)
+  * [Rendering Procedure](#rendering-procedure)
+  * [Rendering Data Structure](#rendering-data-structure)
 * [Tests](#tests)
 
 ## Creating a site with `blacksmith` 
@@ -278,15 +280,67 @@ The directory structure will be respected, but the `/content` prefix will be dro
 
 **Partials** are HTML fragments which are inserted into a layout, a page, or another partial. **All partials are rendered with `plates`**.
 
+#### Default Metadata
+
+``` js
+  {
+    "page-details": {
+      "date": "Fully qualified date page was published",
+      "files": {
+        "js": ["file1.js"],
+        "img": ["img1.png"]
+      }
+    }
+  }
+
 #### Customizing Partials
 
 ```
   TODO: FINISH DOCUMENTING THIS!!!
 ```
 
-## Rendering Data Structure used by `blacksmith`
+## How does `blacksmith` render my Site?
 
-**It's safe to skip this if you're not tinkering with `blacksmith` internals.** As we discussed `blacksmith` uses hierarchical rendering components. Each component inherits the relevant properties from its parent entity. The full hierarchy is:
+**It's safe to skip this if you're not tinkering with `blacksmith` internals.** 
+
+### Rendering Process
+
+In order to render list pages with all options supported by `blacksmith` it is necessary to perform multiple rendering passes on a given site to fully render it. Lets examine that process start to finish:
+
+1. Rendering starts
+
+Rendering starts when `blacksmith('/full/path/to/your/site', function () { ... })` is invoked. This tells `blacksmith` where the root directory for a given site is.
+
+2. Load all HTML and rendering settings
+
+Inside `Site.prototype.load` will load all HTML and rendering settings stored in:
+
+  * .blacksmith
+  * /layouts/*.json || *.html
+  * /pages/*.json
+  * /partials/*.html
+ 
+3. Read everything under `/content`
+
+Before layout, page, and partial rendering can take place all content (i.e. Markdown and supporting files) must be known to `blacksmith`. In our example how can we render the page represented by `/pages/index.json` without all rendered content? `Site.prototype.readContent` recursively reads `/content` building this data structure:
+
+``` js
+{
+  posts: {
+    "a-post.md": { html: "..", markdown: "..", metadata: { ... } }
+    "dir-post": {
+      index: { html: "..", markdown: "..", metadata: { ... } },
+      files: ['file1.js', 'file2.js'] //...
+    }
+  }
+  //
+  //...
+  //
+}
+```
+
+### Rendering Data Structure
+As we discussed `blacksmith` uses hierarchical rendering components. Each component inherits the relevant properties from its parent entity. The full hierarchy is:
 
 * Site
   * Layout

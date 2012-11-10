@@ -29,6 +29,7 @@ vows.describe('blacksmith/site').addBatch({
         
         assert.isObject(options);
         assert.equal(options.dir, blogDir);
+        assert.equal(options.layout, 'default');
         
         //
         // TODO: Test page contents

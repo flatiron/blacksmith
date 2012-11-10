@@ -36,25 +36,21 @@ vows.describe('blacksmith/partial').addBatch({
       "a partial": {
         "with simple metadata": {
           topic: function () {
-            partial.render({
+            return partial.render({
               html: partials['about-post'],
               metadata: {
                 'page-details': {
                   date: new Date(),
+                  href: '/a-post',
                   files: {
                     js: ['file1.js', 'file2.js']
                   }
                 }
-              },
-              page: {
-                href: '/a-post'
               }
-            }, this.callback)
+            });
           },
-          "should render correctly": function (err, result) {
-            assert.isNull(err);
+          "should render correctly": function (result) {
             assert.isString(result);
-            
             assert.equal(rendered['about-post'], result);
           }
         },

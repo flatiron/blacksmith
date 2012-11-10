@@ -287,8 +287,8 @@ The directory structure will be respected, but the `/content` prefix will be dro
     "page-details": {
       "date": "Fully qualified date page was published",
       "files": {
-        "js": ["file1.js"],
-        "img": ["img1.png"]
+        "js": [{ "filename": "file1.js", "url": "/full/path/to/file1.js" }],
+        "img": [{ "filename": "img1.png", "url": "/full/path/to/img1.png" }]
       }
     }
   }

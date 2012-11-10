@@ -415,13 +415,12 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 
 ## Roadmap
 
-1. Lookup metadata references
-2. Support nested partials
+1. CLI support
+2. Lookup metadata references
 3. Support nested metadata keys e.g. [meta:nested:key] <> (Value)
-4. Write files to disk
-5. Support rendering page depths greater than 1
-6. CLI support
-7. Implement "truncate" and "limit" options.
+4. Support nested partials
+5. Implement "truncate" and "limit" options.
+6. Support rendering page depths greater than 1
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

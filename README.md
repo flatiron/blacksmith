@@ -308,11 +308,11 @@ The directory structure will be respected, but the `/content` prefix will be dro
 
 In order to render list pages with all options supported by `blacksmith` it is necessary to perform multiple rendering passes on a given site to fully render it. Lets examine that process start to finish:
 
-1. Rendering starts
+* 1. Rendering starts
 
 Rendering starts when `blacksmith('/full/path/to/your/site', function () { ... })` is invoked. This tells `blacksmith` where the root directory for a given site is.
 
-2. Load all HTML and rendering settings
+* 2. Load all HTML and rendering settings
 
 Inside `Site.prototype.load` will load all HTML and rendering settings stored in:
 
@@ -321,7 +321,7 @@ Inside `Site.prototype.load` will load all HTML and rendering settings stored in
   * /pages/*.json
   * /partials/*.html
  
-3. Read everything under `/content`
+* 3. Read everything under `/content`
 
 Before layout, page, and partial rendering can take place all content (i.e. Markdown and supporting files) must be known to `blacksmith`. In our example how can we render the page represented by `/pages/index.json` without all rendered content? `Site.prototype.readContent` recursively reads `/content` building this data structure:
 
@@ -361,7 +361,7 @@ Before layout, page, and partial rendering can take place all content (i.e. Mark
 }
 ```
 
-4. Render all pages
+* 4. Render all pages
 
 ### Rendering Data Structure
 As we discussed `blacksmith` uses hierarchical rendering components. Each component inherits the relevant properties from its parent entity. The full hierarchy is:

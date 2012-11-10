@@ -132,9 +132,27 @@ You can define settings for all components of your site in the `.blacksmith` fil
 
 ### Layouts
 
-Layouts are fully-formed HTML files; **_they are the top of the rendering hierarchy._** A layout may specified in your `.blacksmith` file or in `/layouts/layout-name.json`. Lets look at an example:
+Layouts are fully-formed HTML files; **_they are the top of the rendering hierarchy._** All content will be inserted into a layout inside of the HTML element with the `id="content"`. Lets look at the worlds simplest layout:
+
+``` html
+  <html>
+  <head>
+  	<title>Simple Layout</title>
+  	<link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div id="content">
+      <!-- All rendered content place here-->
+    </div>
+  </body>
+  </html>  
+```
+
+Settings for a layout may specified in your `.blacksmith` file or in `/layouts/layout-name.json`. Lets look at an example:
 
 **/layouts/layout-name.json**
+**NOTE: These properties is not yet supported. See [Roadmap](#roadmap) for more details.**
+
 ``` js
   {
     //
@@ -296,9 +314,14 @@ The directory structure will be respected, but the `/content` prefix will be dro
 
 #### Customizing Partials
 
-```
-  TODO: FINISH DOCUMENTING THIS!!!
-```
+All metadata is placed into partials using a set of simple `plates` conventions. In the future it may be possible to customize these conventions but that is not currently planned.
+
+* _Map URL-like string keys to href="keyname":_ `map.where('href').is(key).use(key).as('href');`
+* _Insert "content" into class="content":_      `map.class('content').use('content').as('value');`
+* _Map string keys to class="keyname":_         `map.class(key).use(key)`
+* _Map everything else to class="keyname":_     `map.class(key).use(key);`
+* _Recursively map Array keys:_                 `exports.map(metadata[key][0], map);`
+* _Recursively map Object keys:_                `exports.map(metadata[key], map);`
 
 ## How does `blacksmith` render my Site?
 
@@ -308,11 +331,11 @@ The directory structure will be respected, but the `/content` prefix will be dro
 
 In order to render list pages with all options supported by `blacksmith` it is necessary to perform multiple rendering passes on a given site to fully render it. Lets examine that process start to finish:
 
-* 1. Rendering starts
+* **1. Rendering starts**
 
 Rendering starts when `blacksmith('/full/path/to/your/site', function () { ... })` is invoked. This tells `blacksmith` where the root directory for a given site is.
 
-* 2. Load all HTML and rendering settings
+* **2. Load all HTML and rendering settings**
 
 Inside `Site.prototype.load` will load all HTML and rendering settings stored in:
 
@@ -323,7 +346,7 @@ Inside `Site.prototype.load` will load all HTML and rendering settings stored in
 
 We need to load all of these files before any rendering can begin because they store the necessary settings for rendering.
 
-* 3. Read everything under `/content`
+* **3. Read everything under `/content`**
 
 Before layout, page, and partial rendering can take place all content (i.e. Markdown and supporting files) must be known to `blacksmith`. In our example how can we render the page represented by `/pages/index.json` without all rendered content? `Site.prototype.readContent` recursively reads `/content` building this data structure:
 
@@ -349,10 +372,13 @@ Before layout, page, and partial rendering can take place all content (i.e. Mark
         markdown: "Markdown in index.markdown",
         metadata: {
           "page-details": {
-            date: new Date(/* Date of post */)
-            href: "/dir-post"
-            files: {
-              "js": ['file1.js', 'file2.js']
+            source: "/dir-post/index.markdown",
+            title: "Title of page in metadata" || "href of page",
+            date: "Saturday, November 10, 2012",
+            href: "/dir-post",
+            "files": {
+              "js": [{ "filename": "file1.js", "url": "/full/path/to/file1.js" }],
+              "img": [{ "filename": "img1.png", "url": "/full/path/to/img1.png" }]
             }
           }
         }
@@ -363,7 +389,7 @@ Before layout, page, and partial rendering can take place all content (i.e. Mark
 }
 ```
 
-* 4. Render all pages
+* 4. **Render all pages**
 
 ### Rendering Data Structure
 As we discussed `blacksmith` uses hierarchical rendering components. Each component inherits the relevant properties from its parent entity. The full hierarchy is:
@@ -418,14 +444,14 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 
 ## Roadmap
 
-1. CLI support
-2. Render partials inside of pages.
-3. Lookup metadata references.
-4. Support nested metadata keys e.g. [meta:nested:key] <> (Value).
-5. Only render "dirty" files (i.e. those not modified since last render).
-6. Support nested partials.
-7. Implement "truncate" and "limit" options.
-8. Support rendering page depths greater than 1.
+1. Render partials inside of pages.
+2. Lookup metadata references.
+3. Support nested metadata keys e.g. [meta:nested:key] <> (Value).
+4. Only render "dirty" files (i.e. those not modified since last render).
+5. Support nested partials.
+6. Implement "truncate" and "limit" options.
+7. Support rendering page depths greater than 1.
+8. Support "template" and "partials" in layouts.
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

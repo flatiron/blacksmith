@@ -1,11 +1,19 @@
 #!/usr/bin/env node
 
+var fs = require('fs'),
+    path = require('path');
+
 //
 // TODO: This is a really limited approach.
 //
 var root = process.argv[2];
 
 console.log('Rendering: ' + root);
+
+if (!fs.exists(path.normalize(root))) {
+  return console.log('Path ' + root + ' does not exist.');
+}
+
 require('../lib/blacksmith')(root, function (err) {
   if (err) {
     console.log('Error rendering: ' + root);

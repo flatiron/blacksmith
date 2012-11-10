@@ -324,18 +324,39 @@ Inside `Site.prototype.load` will load all HTML and rendering settings stored in
 
 Before layout, page, and partial rendering can take place all content (i.e. Markdown and supporting files) must be known to `blacksmith`. In our example how can we render the page represented by `/pages/index.json` without all rendered content? `Site.prototype.readContent` recursively reads `/content` building this data structure:
 
+```
+/content
+  /posts
+    a-post.md
+    another-post.md
+    /dir-post
+      file1.js
+      file2.js
+      index.markdown
+```
+
 ``` js
 {
   posts: {
-    "a-post.md": { html: "..", markdown: "..", metadata: { ... } }
+    "a-post": { _content: { html: "..", markdown: "..", metadata: { ... } } },
+    "another-post": { _content: { html: "..", markdown: "..", metadata: { ... } } }
     "dir-post": {
-      index: { html: "..", markdown: "..", metadata: { ... } },
-      files: ['file1.js', 'file2.js'] //...
+      _content: {
+        html: "HTML rendered from Markdown", 
+        markdown: "Markdown in index.markdown",
+        metadata: {
+          "page-details": {
+            date: new Date(/* Date of post */)
+            href: "/dir-post"
+            files: {
+              "js": ['file1.js', 'file2.js']
+            }
+          }
+        }
+      },
+      _files: ['file1.js', 'file2.js']
     }
   }
-  //
-  //...
-  //
 }
 ```
 

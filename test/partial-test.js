@@ -40,10 +40,19 @@ vows.describe('blacksmith/partial').addBatch({
               html: partials['about-post'],
               metadata: {
                 'page-details': {
-                  date: new Date(),
+                  date: new Date().toLocaleDateString(),
                   href: '/a-post',
                   files: {
-                    js: ['file1.js', 'file2.js']
+                    js: [
+                      {
+                        filename: 'file1.js',
+                        url: '/a-post/file1.js'
+                      },
+                      {
+                        filename: 'file2.js',
+                        url: '/a-post/file2.js'
+                      }
+                    ]
                   }
                 }
               }

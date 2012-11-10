@@ -61,5 +61,21 @@ vows.describe('blacksmith/site').addBatch({
         assert.isObject(content);
       }
     }
+  },
+  "An instance of a site": {
+    topic: new Site(blogDir),
+    "the render() method": {
+      topic: function (site) {
+        //
+        // Remark: We should clean out everything before rendering.
+        // 
+        site.render(this.callback);
+      },
+      "should render all content for the site": function (err, written) {
+        //
+        // TODO: Assert these tests.
+        //
+      }
+    }
   }
 }).export(module);

@@ -1,5 +1,5 @@
 /*
- * page-test.js: Tests for rendering individual content files (i.e. Markdown + metadata) 
+ * content-test.js: Tests for rendering individual content files (i.e. Markdown + metadata) 
  *
  * (C) 2011, Nodejitsu Inc.
  *
@@ -14,13 +14,13 @@ var assert = require('assert'),
 var blogDir = path.join(__dirname, 'fixtures', 'blog');
 
 vows.describe('blacksmith/content').addBatch({
-  "Using content module": {
+  "Using the content module": {
     "the render() method": {
       "with a .md file": {
         "with no marked options": {
           topic: function () {
             content.render(
-              path.join(blogDir, 'content', 'posts', 'a-sample-post.md'),
+              path.join(blogDir, 'content', 'posts', 'a-post.md'),
               this.callback
             );
           },

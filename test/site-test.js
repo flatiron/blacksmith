@@ -50,6 +50,15 @@ vows.describe('blacksmith/site').addBatch({
         assert.isString(html.partials.sidebar);
         assert.isString(html.partials.post);
       }
+    },
+    "the renderContent() method": {
+      topic: function (site) {
+        site.renderContent(path.join(blogDir, 'content'), this.callback);
+      },
+      "should respond with all rendered markdown": function (err, content) {
+        assert.isNull(err);
+        assert.isObject(content);
+      }
     }
   }
 }).export(module);

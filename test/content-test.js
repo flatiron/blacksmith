@@ -40,6 +40,9 @@ vows.describe('blacksmith/content').addBatch({
             assert.isObject(result);
             assert.isObject(result.metadata);
             assert.equal(result.metadata.author, 'Charlie Robbins');
+            assert.isObject(result.metadata.nested);
+            assert.equal(result.metadata.nested.key, 'Metadata value');
+            
           }
         }
       },

@@ -413,6 +413,15 @@ All tests are written with [vows][0] and can be run with [npm][1]:
   $ npm test
 ```
 
+## Roadmap
+
+1. Lookup metadata references
+2. Support nested partials
+3. Support nested metadata keys e.g. [meta:nested:key] <> (Value)
+4. Write files to disk
+5. Support rendering page depths greater than 1
+6. CLI support
+
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)
 

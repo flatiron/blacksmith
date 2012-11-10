@@ -13,3 +13,6 @@ results
 
 node_modules
 npm-debug.log
+
+test/fixtures/blog/public/*.html
+test/fixtures/blog/public/dir-post

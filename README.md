@@ -292,6 +292,7 @@ The directory structure will be respected, but the `/content` prefix will be dro
       }
     }
   }
+```
 
 #### Customizing Partials
 

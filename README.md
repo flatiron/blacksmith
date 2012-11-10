@@ -339,6 +339,8 @@ Before layout, page, and partial rendering can take place all content (i.e. Mark
 }
 ```
 
+4. Render all pages
+
 ### Rendering Data Structure
 As we discussed `blacksmith` uses hierarchical rendering components. Each component inherits the relevant properties from its parent entity. The full hierarchy is:
 
@@ -351,7 +353,9 @@ As we discussed `blacksmith` uses hierarchical rendering components. Each compon
 
 Notice that partials can _be specified by both layouts and pages._ In the event of a conflict the partials specified by the page will always be preferred.
 
-Lets examine a fully-formed data structure for rendering a given page:
+Lets examine a fully-formed data structure for rendering each of our rendering data structures:
+
+**Page**
 
 ``` js
   {
@@ -360,7 +364,10 @@ Lets examine a fully-formed data structure for rendering a given page:
     // page is associated with
     //
     "layout": "layout-name"
-    "template": "shared-filename.html",
+    "html": {
+      "layouts": { ... },
+      "partials": { ... }
+    },
     "partials": {
       "html-id": "sidebar",
       "another-id": "breadcrumbs",

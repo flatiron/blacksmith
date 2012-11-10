@@ -421,6 +421,7 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 4. Write files to disk
 5. Support rendering page depths greater than 1
 6. CLI support
+7. Implement "truncate" and "limit" options.
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

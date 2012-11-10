@@ -2,7 +2,7 @@
   "pages": {
     "archive": {
       "content": {
-        "list": "posts",
+        "list": "post",
         "truncate": true
       }
     }

@@ -1,6 +1,6 @@
 {
   "content": {
-    "list": "posts",
+    "list": "post",
     "truncate": true,
     "limit": 20
   }

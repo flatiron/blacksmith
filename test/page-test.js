@@ -62,7 +62,7 @@ vows.describe('blacksmith/page').addBatch({
           assert.isObject(rendered[file]);
           assert.isString(rendered[file].html);
         });
-
+    
         assert.deepEqual(rendered['dir-post'].files, ['file1.js', 'file2.js']);
       }
     },
@@ -72,7 +72,8 @@ vows.describe('blacksmith/page').addBatch({
           name:    'index',
           dir:     site.dir,
           options: site.options.pages.index,
-          html:    site.html
+          html:    site.html,
+          content: content
         });
         
         return page.renderAll();

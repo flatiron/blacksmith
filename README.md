@@ -320,7 +320,9 @@ Inside `Site.prototype.load` will load all HTML and rendering settings stored in
   * /layouts/*.json || *.html
   * /pages/*.json
   * /partials/*.html
- 
+
+We need to load all of these files before any rendering can begin because they store the necessary settings for rendering.
+
 * 3. Read everything under `/content`
 
 Before layout, page, and partial rendering can take place all content (i.e. Markdown and supporting files) must be known to `blacksmith`. In our example how can we render the page represented by `/pages/index.json` without all rendered content? `Site.prototype.readContent` recursively reads `/content` building this data structure:

@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+//
+// TODO: This is a really limited approach.
+//
+var root = process.argv[2];
+
+console.log('Rendering: ' + root);
+require('../lib/blacksmith')(root, function (err) {
+  if (err) {
+    console.log('Error rendering: ' + root);
+    console.dir(err);
+    console.dir(err.stack.split('\n'));
+    return;
+  }
+  
+  console.log('Done rendering: ' + root);
+});

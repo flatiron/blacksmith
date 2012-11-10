@@ -419,9 +419,10 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 2. Render partials inside of pages.
 3. Lookup metadata references.
 4. Support nested metadata keys e.g. [meta:nested:key] <> (Value).
-5. Support nested partials.
-6. Implement "truncate" and "limit" options.
-7. Support rendering page depths greater than 1.
+5. Only render "dirty" files (i.e. those not modified since last render).
+6. Support nested partials.
+7. Implement "truncate" and "limit" options.
+8. Support rendering page depths greater than 1.
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

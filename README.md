@@ -594,14 +594,13 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 
 ## Roadmap
 
-1. Implement "limit" options.
-2. Highlight snippet code.
-3. Only render "dirty" files (i.e. those not modified since last render).
-4. Customize list sorting by key and direction.
-5. Support nested partials.
-6. Support rendering page depths greater than 1.
-7. Support "template" and "partials" in layouts.
-8. Investigate this bug: https://github.com/flatiron/plates/issues/93
+1. Highlight snippet code.
+2. Only render "dirty" files (i.e. those not modified since last render).
+3. Customize list sorting by key and direction.
+4. Support nested partials.
+5. Support rendering page depths greater than 1.
+6. Support "template" and "partials" in layouts.
+7. Investigate this bug: https://github.com/flatiron/plates/issues/93
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

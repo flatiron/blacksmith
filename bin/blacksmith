@@ -6,11 +6,11 @@ var fs = require('fs'),
 //
 // TODO: This is a really limited approach.
 //
-var root = process.argv[2] || process.cwd();
+var root = path.normalize(process.argv[2] || process.cwd());
 
 console.log('Rendering: ' + root);
 
-if (!fs.existsSync(path.normalize(root))) {
+if (!fs.existsSync(root))) {
   return console.log('Path ' + root + ' does not exist.');
 }
 

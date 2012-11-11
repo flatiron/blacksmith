@@ -12,6 +12,7 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
     * [Specifying Metadata](#specifying-metadata)
   * [Partials](#partials)
     * [Customizing Partials](#customizing-partials)
+    * [Metadata References](#metadata-references)
 * [How does blacksmith render my Site?](#how-does-blacksmith-render-my-site)
   * [Rendering Procedure](#rendering-procedure)
   * [Rendering Data Structure](#rendering-data-structure)
@@ -45,6 +46,12 @@ Here's an example of a simple blog that `blacksmith` would render.
     # multiple layouts, but default.html is ... the default.
     #
     default.html
+  /metadata
+    #
+    # Metadata entities which can be reference in content metdata
+    #
+    /authors
+      author-name.json
   /partials
     #
     # HTML for partials inside of pages
@@ -322,6 +329,38 @@ All metadata is placed into partials using a set of simple `plates` conventions.
 * _Map everything else to class="keyname":_     `map.class(key).use(key);`
 * _Recursively map Array keys:_                 `exports.map(metadata[key][0], map);`
 * _Recursively map Object keys:_                `exports.map(metadata[key], map);`
+
+#### Metadata References
+
+It is useful when writing a content page to use a key to reference a larger section of metadata stored elsewhere. These other sections of metadata are called **metadata references** and are loaded by `blacksmith` from `/metadata`. For example:
+
+**/metdata/dogs/sparky-mcpherson.json**
+```
+  {
+    "name": "sparky-mcpherson",
+    "breed": "labridoodle",
+    "color": "brown",
+    "age": "3",
+    "temperment": "friendly"
+  }
+```
+
+**/content/posts/a-post.md**
+
+``` markdown
+  (... Rest of Content ...)  
+  [meta:dog] <> (Sparky McPherson)
+```
+
+When the content for this page finally gets rendered to a partial the metadata will not be `{ 'dog': 'sparky' }`, it will be the entire object stored in `/metadata/dogs/sparky.json`. By convention:
+
+```
+  Convention: For a given `key:value` blacksmith will lookup metadata references for the `value` in the directory named with the plural of that `key`. 
+```
+
+In the above example the `key:value` pair is `dog:Sparky Mcpherson` so we attempt to lookup `sparky-mcpherson` within `/metadata/dogs/sparky-mcpherson.json`.
+
+**Note:** "Authors" is a special metadata reference which will always be within the `metadata.page-details`.
 
 ## How does `blacksmith` render my Site?
 

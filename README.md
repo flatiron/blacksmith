@@ -194,7 +194,7 @@ Settings for a layout may specified in your `.blacksmith` file or in `/layouts/l
 
 **/pages/index.json**
 
-This example of particular interest: **index.json will always be used to render index.html.** In the below example specifies that `blacksmith` should render a list of `post` content, which should be truncated, limited to a maximum of 20 posts.
+This example of particular interest: **index.json will always be used to render index.html.** In the below example specifies that `blacksmith` should render a list of `post` content, which should be truncated, limited to a maximum of 20 posts. **Note: All lists are sorted descending by the date the content was created.**
 
 ``` js
   {
@@ -228,7 +228,7 @@ The rendering information for an individual post is much simpler than our `index
 It is important to take note of the convention:
 
 ``` 
-  Convention: Page content will be rendered in a partial of the same name by default. 
+  Convention: By default, page content will be rendered in a partial of the same name by default. 
 ```
 
 Alternatively we could have specified a specific partial to use. If no partial is specified and the default partial is not found then **no metadata would be rendered** (in this case author name, date of post, etc).
@@ -595,12 +595,13 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 ## Roadmap
 
 1. Implement "limit" options.
-2. Highlight snippet code. 
+2. Highlight snippet code.
 3. Only render "dirty" files (i.e. those not modified since last render).
-4. Support nested partials.
-5. Support rendering page depths greater than 1.
-6. Support "template" and "partials" in layouts.
-7. Investigate this bug: https://github.com/flatiron/plates/issues/93
+4. Customize list sorting by key and direction.
+5. Support nested partials.
+6. Support rendering page depths greater than 1.
+7. Support "template" and "partials" in layouts.
+8. Investigate this bug: https://github.com/flatiron/plates/issues/93
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

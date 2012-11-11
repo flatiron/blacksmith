@@ -1,5 +1,5 @@
 //
-// A sample javascript file
+// Another sample javascript file
 //
 
 while (true) {

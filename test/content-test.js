@@ -9,6 +9,8 @@ var assert = require('assert'),
     fs = require('fs'),
     path = require('path'),
     vows = require('vows'),
+    utile = require('flatiron').common,
+    async = utile.async,
     content = require('../lib/blacksmith/content');
 
 var blogDir = path.join(__dirname, 'fixtures', 'blog');
@@ -57,6 +59,45 @@ vows.describe('blacksmith/content').addBatch({
           assert.isObject(err);
           assert.equal(err.message, 'Invalid content extention: .html');
         }
+      }
+    },
+    "the addSnippets() method": {
+      topic: function () {
+        var postDir = path.join(blogDir, 'content', 'posts', 'dir-post'),
+            that = this;
+        
+        async.parallel({
+          'index':    async.apply(fs.readFile, path.join(postDir, 'index.markdown'), 'utf8'),
+          'file1.js': async.apply(fs.readFile, path.join(postDir, 'file1.js'), 'utf8'),
+          'file2.js': async.apply(fs.readFile, path.join(postDir, 'file2.js'), 'utf8')
+        }, function (err, files) {
+          if (err) {
+            return that.callback(err);
+          }
+          
+          content.addSnippets({
+            source: files.index,
+            dir: postDir,
+            files: ['file1.js', 'file2.js']
+          }, function (err, source) {
+            return err ? that.callback(err) : that.callback(null, {
+              source: source,
+              files: files
+            }); 
+          });
+        });
+      },
+      "should insert both files": function (err, results) {
+        assert.isNull(err);
+        assert.isString(results.source);
+        
+        ['file1.js', 'file2.js'].forEach(function (file) {
+          assert.isTrue(results.source.indexOf([
+            '``` js',
+            results.files[file],
+            '```'
+          ].join('\n')) !== -1);
+        });        
       }
     }
   }

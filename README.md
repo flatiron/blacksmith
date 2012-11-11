@@ -10,9 +10,11 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
     * [All Page Options](#all-page-options)
   * [Content](#content)
     * [Specifying Metadata](#specifying-metadata)
+    * [Content Snippets](#content-snippets)
   * [Partials](#partials)
     * [Customizing Partials](#customizing-partials)
     * [Metadata References](#metadata-references)
+    * [Conditional Metadata](#conditional-metadata)
 * [How does blacksmith render my Site?](#how-does-blacksmith-render-my-site)
   * [Rendering Procedure](#rendering-procedure)
   * [Rendering Data Structure](#rendering-data-structure)
@@ -299,7 +301,26 @@ The directory structure will be respected, but the `/content` prefix will be dro
 ```
   [meta:author] <> (Author Name)
   [meta:title] <> (A Really Long Title Different from the Filename)
+  [meta:nested:values] <> (Are also supported)
 ```
+
+#### Content Snippets
+
+In large content pages it is often useful to have examples or references to other files to be inserted later in rendering. A classic example is **code samples in a blog post.** This is easy in `blacksmith` using **Content Snippets.** Consider the content:
+
+```
+  /content
+    /dir-post
+      index.md
+      whatever.js
+
+``` markdown
+  This is a piece of markdown content to be rendered later. It has a reference to the file "whatever.js"
+  
+  <whatever.js>
+```
+
+In this example `<whatever.js>` in `index.md` would be replaced with the contents of `/content/dir-post/whatever.js`.
 
 ### Partials
 
@@ -310,6 +331,12 @@ The directory structure will be respected, but the `/content` prefix will be dro
 ``` js
   {
     "page-details": {
+      "author": {
+        //
+        // Contents of /metdata/authors/author-name.json
+        //
+      },
+      "href": "/full/path/to/page",
       "date": "Fully qualified date page was published",
       "files": {
         "js": [{ "filename": "file1.js", "url": "/full/path/to/file1.js" }],
@@ -329,6 +356,69 @@ All metadata is placed into partials using a set of simple `plates` conventions.
 * _Map everything else to class="keyname":_     `map.class(key).use(key);`
 * _Recursively map Array keys:_                 `exports.map(metadata[key][0], map);`
 * _Recursively map Object keys:_                `exports.map(metadata[key], map);`
+
+#### Conditional Metadata
+
+Some content should only exist in partials when a given key is present in the metadata. This is supported by `blacksmith` in the following way:
+
+**/partials/partial-name.json**
+
+``` js
+  {
+    "remove": {
+      "page-details": {
+        "author": ["github", "twitter"]
+      }
+    }
+  }
+```
+
+The keys should specified in the `remove` at the fully qualified path into an Object. In the corresponding HTML file for the partial any elements with "class=if-[keyname]" will be removed if the is no value for `keyname`. In the above example using the following template:
+
+**/partials/partial-name.html**
+
+``` html
+  <div class="page-details">
+    <div class="author">
+      <h3>About the author</h3>
+      <div class="name">Author Name</div>
+      <div class="if-github">
+        <a href="github-url" class="github">Author Github</a>
+      </div>
+      <div class="if-twitter">
+        <a href="twitter-url" class="twitter">Author Twitter</a>  
+      </div>
+    </div>
+  </div>
+```
+
+and this set of metadata:
+
+``` js
+  {
+    "page-details": {
+      "author": {
+        "name": "Charlie Robbins",
+        "github": "indexzero",
+        "github-url": "https://github.com/indexzero"
+      }
+    }
+  }
+```
+
+The output would be the following. **Notice how everything inside `if-twitter` has been removed.**
+
+``` html
+  <div class="page-details">
+    <div class="author">
+      <h3>About the author</h3>
+      <div class="name">Charlie Robbins</div>
+      <div class="if-github">
+        <a href="https://github.com/indexzero" class="github">indexzero</a>
+      </div>
+    </div>
+  </div>
+```
 
 #### Metadata References
 
@@ -484,8 +574,8 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 
 ## Roadmap
 
-1. Render content snippets.
-2. Implement "truncate" and "limit" options.
+1. Implement "truncate" and "limit" options.
+2. Highlight snippet code. 
 3. Only render "dirty" files (i.e. those not modified since last render).
 4. Support nested partials.
 5. Support rendering page depths greater than 1.

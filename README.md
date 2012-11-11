@@ -444,13 +444,12 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 
 ## Roadmap
 
-1. Lookup metadata references.
-2. Render partials inside of pages.
-3. Support nested partials.
-4. Only render "dirty" files (i.e. those not modified since last render).
-5. Implement "truncate" and "limit" options.
-6. Support rendering page depths greater than 1.
-7. Support "template" and "partials" in layouts.
+1. Render partials inside of pages.
+2. Support nested partials.
+3. Only render "dirty" files (i.e. those not modified since last render).
+4. Implement "truncate" and "limit" options.
+5. Support rendering page depths greater than 1.
+6. Support "template" and "partials" in layouts.
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

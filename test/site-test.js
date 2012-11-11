@@ -24,7 +24,7 @@ vows.describe('blacksmith/site').addBatch({
         assert.isNull(err);
         assert.isObject(meta);
       },
-      "should load all metadata": function (err, meta) {
+      "should load all rendering information": function (err, meta) {
         var options = meta.options;
         
         assert.isObject(options);
@@ -38,6 +38,13 @@ vows.describe('blacksmith/site').addBatch({
         assert.isObject(options.pages.post);
         assert.isObject(options.pages.archive);
         assert.isObject(options.pages.index);
+      },
+      "should load all metadata references": function (err, meta) {
+        var references = meta.references;
+        
+        assert.isObject(references);
+        assert.isObject(references.authors);
+        assert.isObject(references.authors['charlie-robbins']);
       },
       "should load all html": function (err, meta) {
         var html = meta.html;
@@ -62,7 +69,7 @@ vows.describe('blacksmith/site').addBatch({
       }
     }
   },
-  "An instance of a site": {
+  "Another instance of a site": {
     topic: new Site(blogDir),
     "the render() method": {
       topic: function (site) {

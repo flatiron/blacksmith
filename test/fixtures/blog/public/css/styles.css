@@ -44,7 +44,7 @@
   height: 50px;
 }
 
-.page-details {
+.page-details .read-more {
   float: left;
   width: 80%;
 }
@@ -64,7 +64,7 @@ a.read-more:hover {
   text-decoration: underline;
 }
 
-.metadata .about {
+.page-details .subtitle {
   color: #BBB; 
   float: right;
   font-family: sans-serif;

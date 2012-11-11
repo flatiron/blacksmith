@@ -379,7 +379,7 @@ All metadata is placed into partials using a set of simple `plates` conventions.
 
 #### Conditional Metadata
 
-Some content should only exist in partials when a given key is present in the metadata. This is supported by `blacksmith` in the following way:
+Some content should only exist in partials when a given key is present in the metadata. This is supported by `blacksmith` in the following way: _The keys in `remove` must be specified at the fully qualified path into an Object._
 
 **/partials/partial-name.json**
 
@@ -393,7 +393,7 @@ Some content should only exist in partials when a given key is present in the me
   }
 ```
 
-The keys should specified in the `remove` at the fully qualified path into an Object. In the corresponding HTML file for the partial any elements with "class=if-[keyname]" will be removed if the is no value for `keyname`. In the above example using the following template:
+In the corresponding HTML file for the partial any elements with "class=if-[keyname]" will be removed if the is no value for `keyname`. In the above example using the following template:
 
 **/partials/partial-name.html**
 

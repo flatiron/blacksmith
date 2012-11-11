@@ -1,5 +1,7 @@
 {
+  "layout": "fullpost",
+  "partial": "fullpost",
   "partials": {
-    "content": "sidebar"
+    "sidebar": ["author", "about-post"]
   }
 }

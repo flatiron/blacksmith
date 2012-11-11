@@ -48,7 +48,7 @@ vows.describe('blacksmith/page').addBatch({
         var page = new Page({
           name:    'post',
           dir:     site.dir,
-          options: site.options.pages.post,
+          options: site.pages.post,
           html:    site.html,
           content: content
         });
@@ -71,7 +71,7 @@ vows.describe('blacksmith/page').addBatch({
         var page = new Page({
           name:    'index',
           dir:     site.dir,
-          options: site.options.pages.index,
+          options: site.pages.index,
           html:    site.html,
           content: content
         });

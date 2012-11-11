@@ -30,7 +30,6 @@ vows.describe('blacksmith/common').addBatch({
           assert.isString(data['about-post']);
           assert.isString(data.author);
           assert.isString(data.post);
-          assert.isString(data.sidebar);
         }
       },
       "with a dir of JSON files": {

@@ -25,19 +25,20 @@ vows.describe('blacksmith/site').addBatch({
         assert.isObject(meta);
       },
       "should load all rendering information": function (err, meta) {
-        var options = meta.options;
-        
-        assert.isObject(options);
-        assert.equal(options.dir, blogDir);
-        assert.equal(options.layout, 'default');
+        assert.equal(meta.dir, blogDir);
+        assert.equal(meta.layout, 'default');
         
         //
         // TODO: Test page contents
         //
-        assert.isObject(options.pages);
-        assert.isObject(options.pages.post);
-        assert.isObject(options.pages.archive);
-        assert.isObject(options.pages.index);
+        assert.isObject(meta.pages);
+        assert.isObject(meta.pages.post);
+        assert.isObject(meta.pages.archive);
+        assert.isObject(meta.pages.index);
+        assert.isObject(meta.partials);
+        assert.isObject(meta.partials['about-post']);
+        assert.isObject(meta.partials.author);
+        assert.isObject(meta.partials.post);
       },
       "should load all metadata references": function (err, meta) {
         var references = meta.references;
@@ -55,7 +56,8 @@ vows.describe('blacksmith/site').addBatch({
         assert.isObject(html.layouts);
         assert.isString(html.layouts.default);
         assert.isObject(html.partials);
-        assert.isString(html.partials.sidebar);
+        assert.isString(html.partials['about-post']);
+        assert.isString(html.partials.author);
         assert.isString(html.partials.post);
       }
     },

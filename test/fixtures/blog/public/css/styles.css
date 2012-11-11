@@ -7,6 +7,10 @@
  * TITLE HEADER
  *********************************************/
 
+#container {
+  margin: 0 50px 0 50px;
+}
+
 #menu {
   border-bottom: 1px solid #e5e5e5;
   background-color: #FFF;
@@ -36,23 +40,37 @@
  * CONTENT AREA
  *********************************************/
 
-#content {
-  margin: 100px 50px 0 50px;
+#content, #sidebar {
+  margin: 100px 0 0 0;
 }
+
+.leftcol {
+  float: left;
+  width: 70%;
+}
+
+.rightcol {
+  float: right;
+  width: 30%;
+}
+
+/*********************************************
+ * LISTS
+ *********************************************/
 
 .metadata {
   height: 50px;
-}
-
-.page-details .read-more {
-  float: left;
-  width: 80%;
 }
 
 h1.title {
   font-family: serif;
   font-size: 28px;
   font-style: italic;
+}
+
+.page-details .read-more {
+  float: left;
+  width: 80%;
 }
 
 a.read-more, h1.article-header {
@@ -87,12 +105,26 @@ a.read-more:hover {
 }
 
 /*********************************************
- * Footer
+ * POSTS
+ *********************************************/
+
+#sidebar .page-details {
+  margin-bottom: 50px;
+}
+
+#sidebar .page-details h3 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/*********************************************
+ * FOOTER
  *********************************************/
 
 #footer {
-  float: none;
-  margin: 50px;
+  padding: 50px 0 0 0;
+  clear: both;
   height: 100px;
 }
 

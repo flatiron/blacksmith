@@ -1,0 +1,7 @@
+{
+  "remove": {
+    "page-details": {
+      "author": ["gravatar", "twitter", "github", "location"]
+    }
+  }
+}

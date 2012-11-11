@@ -355,7 +355,8 @@ It is useful when writing a content page to use a key to reference a larger sect
 When the content for this page finally gets rendered to a partial the metadata will not be `{ 'dog': 'sparky' }`, it will be the entire object stored in `/metadata/dogs/sparky.json`. By convention:
 
 ```
-  Convention: For a given `key:value` blacksmith will lookup metadata references for the `value` in the directory named with the plural of that `key`. 
+  Convention: For a given `key:value` blacksmith will lookup metadata references for the `value`
+  in the directory named with the plural of that `key`. 
 ```
 
 In the above example the `key:value` pair is `dog:Sparky Mcpherson` so we attempt to lookup `sparky-mcpherson` within `/metadata/dogs/sparky-mcpherson.json`.
@@ -484,11 +485,12 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 ## Roadmap
 
 1. Render partials inside of pages.
-2. Support nested partials.
-3. Only render "dirty" files (i.e. those not modified since last render).
-4. Implement "truncate" and "limit" options.
-5. Support rendering page depths greater than 1.
-6. Support "template" and "partials" in layouts.
+2. Render Content references.
+3. Support nested partials.
+4. Only render "dirty" files (i.e. those not modified since last render).
+5. Implement "truncate" and "limit" options.
+6. Support rendering page depths greater than 1.
+7. Support "template" and "partials" in layouts.
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

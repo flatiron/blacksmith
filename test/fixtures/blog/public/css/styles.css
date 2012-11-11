@@ -118,6 +118,31 @@ a.read-more:hover {
   margin-bottom: 20px;
 }
 
+pre {
+  border: 1px solid #e0ded3;
+  border-radius: 4px;
+  margin: 10px 10px 40px 10px;
+  padding: 10px;
+  background-color: #f0efe8;
+  overflow: auto;
+  font-size: 14px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+/*********************************************
+ * SYNTAX HIGHLIGHTING
+ *********************************************/
+
+code {
+  white-space: pre;
+  color: rgba(0,0,0, 1);
+}
+code .keyword              { font-weight: bold; color: #6089d4; }
+code .string, code .regexp { color: green }
+code .class, code .special { color: #6089d4 }
+code .number               { color: red }
+code .comment              { color: grey }
+
 /*********************************************
  * FOOTER
  *********************************************/

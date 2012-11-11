@@ -11,6 +11,8 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
   * [Content](#content)
     * [Specifying Metadata](#specifying-metadata)
     * [Content Snippets](#content-snippets)
+    * [Code Highlighting](#code-highlighting)
+    * [Truncated Content](#truncated-content)
   * [Partials](#partials)
     * [Customizing Partials](#customizing-partials)
     * [Metadata References](#metadata-references)
@@ -321,6 +323,34 @@ In large content pages it is often useful to have examples or references to othe
 ```
 
 In this example `<whatever.js>` in `index.md` would be replaced with the contents of `/content/dir-post/whatever.js`. **Note: Only files with text extensions (.js, .rb, .txt, etc) less than 1MB will be inserted.**
+
+#### Code Highlighting
+
+Because `blacksmith` uses `marked` we get the benefit of **Github Flavored Markdown** through `highlight.js`. By default code highlighting is enabled. All you need to do is add some CSS for your site. For example:
+
+``` css
+  pre {
+    border: 1px solid #e0ded3;
+    border-radius: 4px;
+    margin: 10px 10px 40px 10px;
+    padding: 10px;
+    background-color: #f0efe8;
+    overflow: auto;
+    font-size: 14px;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code {
+    white-space: pre;
+    color: rgba(0,0,0, 1);
+  }
+
+  code .keyword              { font-weight: bold; color: #6089d4; }
+  code .string, code .regexp { color: green }
+  code .class, code .special { color: #6089d4 }
+  code .number               { color: red }
+  code .comment              { color: grey }
+```
 
 #### Truncated Content
 

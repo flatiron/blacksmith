@@ -8,9 +8,10 @@
   "author": "Nodejitsu Inc. <info@nodejitsu.com>",
   "dependencies": {
     "async": "0.1.x",
-    "marked": "0.1.x",
-    "mkdirp": "0.0.x",
     "flatiron": "0.3.0",
+    "highlight.js": "7.3.0",
+    "marked": "0.2.x",
+    "mkdirp": "0.0.x",
     "plates": "0.4.x"
   },
   "devDependencies": {

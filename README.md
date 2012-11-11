@@ -320,7 +320,27 @@ In large content pages it is often useful to have examples or references to othe
   <whatever.js>
 ```
 
-In this example `<whatever.js>` in `index.md` would be replaced with the contents of `/content/dir-post/whatever.js`.
+In this example `<whatever.js>` in `index.md` would be replaced with the contents of `/content/dir-post/whatever.js`. **Note: Only files with text extensions (.js, .rb, .txt, etc) less than 1MB will be inserted.**
+
+#### Truncated Content
+
+It is necessary to truncate large content pages when rendering them within compilations (i.e. lists). This is supported by `blacksmith` with a special identifier in your Markdown files. For example:
+
+**/content/posts/dir-post/index.markdown**
+
+``` markdown
+  A simple post that is truncated with content snippets and metadata that is not used in the post.
+
+  ##!!truncate
+
+  <file1.js>
+  A second file reference with spaces
+  < file2.js  >
+
+  [meta:author]: <> (Charlie index)
+```
+
+When rendered in a page like `index.json` with `{ truncate: true }` only the content above `##!!truncate` will be rendered.
 
 ### Partials
 
@@ -574,7 +594,7 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 
 ## Roadmap
 
-1. Implement "truncate" and "limit" options.
+1. Implement "limit" options.
 2. Highlight snippet code. 
 3. Only render "dirty" files (i.e. those not modified since last render).
 4. Support nested partials.

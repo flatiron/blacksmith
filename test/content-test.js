@@ -46,6 +46,39 @@ vows.describe('blacksmith/content').addBatch({
             assert.equal(result.metadata.nested.key, 'Metadata value');
             
           }
+        },
+        "with ##!!truncate": {
+          topic: function () {
+            var postDir = path.join(blogDir, 'content', 'posts', 'dir-post');
+            content.render(
+              {
+                source: path.join(postDir, 'index.markdown'),
+                files: ['file1.js', 'file2.js'],
+                dir: postDir
+              },
+              this.callback
+            );
+          },
+          "should respond with truncated content": function (err, rendered) {
+            assert.isNull(err);
+            assert.isObject(rendered);
+            assert.isString(rendered.markdown);
+            assert.isString(rendered.html);
+            assert.isObject(rendered.metadata);
+            assert.isObject(rendered.truncated);
+
+            assert.isString(rendered.truncated.markdown);
+            assert.equal(
+              rendered.truncated.markdown,
+              'A simple post that is truncated with content snippets and metadata that is not used in the post.\n\n'
+            );
+            
+            assert.isString(rendered.truncated.html);
+            assert.equal(
+              rendered.truncated.html,
+              '<p>A simple post that is truncated with content snippets and metadata that is not used in the post.\n\n</p>\n'
+            );
+          }
         }
       },
       "with an .html file": {

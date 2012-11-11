@@ -1,4 +1,6 @@
-This is a simple post with metadata, not used in the article
+A simple post that is truncated with content snippets and metadata that is not used in the post.
+
+##!!truncate
 
 <file1.js>
 

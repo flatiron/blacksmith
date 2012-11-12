@@ -10,7 +10,7 @@ var root = path.normalize(process.argv[2] || process.cwd());
 
 console.log('Rendering: ' + root);
 
-if (!fs.existsSync(root))) {
+if (!fs.existsSync(root)) {
   return console.log('Path ' + root + ' does not exist.');
 }
 

@@ -332,6 +332,7 @@ In large content pages it is often useful to have examples or references to othe
     /dir-post
       index.md
       whatever.js
+```
 
 ``` markdown
   This is a piece of markdown content to be rendered later. It has a reference to the file "whatever.js"
@@ -641,12 +642,13 @@ All tests are written with [vows][0] and can be run with [npm][1]:
 
 ## Roadmap
 
-1. Only render "dirty" files (i.e. those not modified since last render).
-2. Customize list sorting by key and direction.
-3. Support nested partials.
-4. Support rendering page depths greater than 1.
-5. Support "template" and "partials" in layouts.
-6. Investigate this bug: https://github.com/flatiron/plates/issues/93
+1. RSS Feed
+2. Only render "dirty" files (i.e. those not modified since last render).
+3. Customize list sorting by key and direction.
+4. Support nested partials.
+5. Support rendering page depths greater than 1.
+6. Support "template" and "partials" in layouts.
+7. Investigate this bug: https://github.com/flatiron/plates/issues/93
 
 #### License: MIT
 #### Author: [Charlie Robbins](http://github.com/indexzero)

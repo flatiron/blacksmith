@@ -1,4 +1,4 @@
-# blacksmith2
+# blacksmith
 
 A generic static site generator built using `flatiron`, `plates`, and `marked`.
 

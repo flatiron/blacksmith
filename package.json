@@ -1,10 +1,7 @@
 {
   "name": "blacksmith",
-  "description": "A static site generator built with Node.js, Plates, and Marked.",
   "version": "1.0.0",
-  "bin": {
-    "blacksmith": "bin/blacksmith"
-  },
+  "description": "A static site generator built with Node.js, Plates, and Marked.",
   "author": "Nodejitsu Inc. <info@nodejitsu.com>",
   "dependencies": {
     "async": "0.1.x",
@@ -14,8 +11,11 @@
     "mkdirp": "0.0.x",
     "plates": "0.4.x"
   },
+  "bin": {
+    "blacksmith": "bin/blacksmith"
+  },
   "devDependencies": {
-    "vows": "0.6.4"
+    "vows": "0.6.x"
   }
 }
 

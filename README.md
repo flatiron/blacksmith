@@ -29,6 +29,23 @@ Blacksmith sites have a specific directory structure for storing the various par
 * Markdown files that `blacksmith` will render.
 * Supporting content such as css and images.
 
+All content will be rendered into `/public`. To render a blacksmith site:
+
+**Install Blacksmith**
+
+``` bash
+  $ npm install blacksmith -g
+```
+
+**Render a Site**
+
+``` bash
+  #
+  # Defaults to `cwd`
+  #
+  $ blacksmith /path/to/your/site
+```
+
 Here's an example of a simple blog that `blacksmith` would render. 
 
 ``` bash

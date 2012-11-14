@@ -13,11 +13,11 @@ var assert = require('assert'),
 
 var fixturesDir = path.join(__dirname, 'fixtures'),
     blogDir = path.join(fixturesDir, 'blog'),
-    renderedDir = path.join(fixturesDir, 'rendered', 'partials'), 
+    renderedDir = path.join(fixturesDir, 'rendered', 'partials'),
     partialsDir = path.join(blogDir, 'partials'),
     partials,
     rendered;
-    
+
 //
 // Read all the partials for later use
 //
@@ -66,16 +66,16 @@ vows.describe('blacksmith/partial').addBatch({
         "with complex metadata": {
           //
           // Remark: What is "nested metadata"
-          //          
+          //
         },
         "with nested partials": {
           //
-          // TODO: Write this feature!!! 
+          // TODO: Write this feature!!!
           //
         },
         "with metadata references": {
           //
-          // TODO: Write this feature!!! 
+          // TODO: Write this feature!!!
           //
         }
       }

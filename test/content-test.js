@@ -1,5 +1,5 @@
 /*
- * content-test.js: Tests for rendering individual content files (i.e. Markdown + metadata) 
+ * content-test.js: Tests for rendering individual content files (i.e. Markdown + metadata)
  *
  * (C) 2011, Nodejitsu Inc.
  *
@@ -44,7 +44,7 @@ vows.describe('blacksmith/content').addBatch({
             assert.equal(result.metadata.author, 'Charlie Robbins');
             assert.isObject(result.metadata.nested);
             assert.equal(result.metadata.nested.key, 'Metadata value');
-            
+
           }
         },
         "with ##!!truncate": {
@@ -66,7 +66,7 @@ vows.describe('blacksmith/content').addBatch({
             assert.isString(rendered.html);
             assert.isObject(rendered.metadata);
             assert.isObject(rendered.truncated);
-    
+
             assert.isString(rendered.truncated.markdown);
             assert.equal(
               rendered.truncated.markdown,
@@ -76,13 +76,13 @@ vows.describe('blacksmith/content').addBatch({
               '[meta:author]: <> (Charlie index)\n' +
               '[0]: http://google.com'
             );
-            
+
             assert.isString(rendered.truncated.html);
             assert.equal(
               rendered.truncated.html,
-              '<p>A simple post that is truncated with content snippets ' + 
-              'and metadata that is not used in the post. ' + 
-              'It has a <a href="http://google.com">link</a> ' + 
+              '<p>A simple post that is truncated with content snippets ' +
+              'and metadata that is not used in the post. ' +
+              'It has a <a href="http://google.com">link</a> ' +
               'that is defined after the truncate marker.\n\n\n</p>\n'
             );
           }
@@ -105,7 +105,7 @@ vows.describe('blacksmith/content').addBatch({
       topic: function () {
         var postDir = path.join(blogDir, 'content', 'posts', 'dir-post'),
             that = this;
-        
+
         async.parallel({
           'index':    async.apply(fs.readFile, path.join(postDir, 'index.markdown'), 'utf8'),
           'file1.js': async.apply(fs.readFile, path.join(postDir, 'file1.js'), 'utf8'),
@@ -114,7 +114,7 @@ vows.describe('blacksmith/content').addBatch({
           if (err) {
             return that.callback(err);
           }
-          
+
           content.addSnippets({
             source: files.index,
             dir: postDir,
@@ -123,28 +123,28 @@ vows.describe('blacksmith/content').addBatch({
             return err ? that.callback(err) : that.callback(null, {
               source: source,
               files: files
-            }); 
+            });
           });
         });
       },
       "should insert both files": function (err, results) {
         assert.isNull(err);
         assert.isString(results.source);
-        
+
         ['file1.js', 'file2.js'].forEach(function (file) {
           assert.isTrue(results.source.indexOf([
             '``` js',
             results.files[file],
             '```'
           ].join('\n')) !== -1);
-        });        
+        });
       }
     },
     "the truncate() method": {
       topic: function () {
         var mdFile = path.join(blogDir, 'content', 'posts', 'dir-post', 'index.markdown'),
             that = this;
-        
+
         fs.readFile(mdFile, 'utf8', function (err, data) {
           return err ? that.callback(err) : that.callback(null, content.truncate(data));
         });
@@ -154,7 +154,7 @@ vows.describe('blacksmith/content').addBatch({
         assert.isObject(truncated);
         assert.isString(truncated.markdown);
         assert.isString(truncated.html);
-        
+
         assert.include(truncated.markdown, '[0]: http://google.com');
         assert.include(truncated.html, '<a href="http://google.com"')
       }

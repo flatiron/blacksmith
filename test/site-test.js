@@ -27,7 +27,7 @@ vows.describe('blacksmith/site').addBatch({
       "should load all rendering information": function (err, meta) {
         assert.equal(meta.dir, blogDir);
         assert.equal(meta.layout, 'default');
-        
+
         //
         // TODO: Test page contents
         //
@@ -42,14 +42,14 @@ vows.describe('blacksmith/site').addBatch({
       },
       "should load all metadata references": function (err, meta) {
         var references = meta.references;
-        
+
         assert.isObject(references);
         assert.isObject(references.authors);
         assert.isObject(references.authors['charlie-robbins']);
       },
       "should load all html": function (err, meta) {
         var html = meta.html;
-        
+
         //
         // TODO: Test HTML contents
         //
@@ -77,7 +77,7 @@ vows.describe('blacksmith/site').addBatch({
       topic: function (site) {
         //
         // Remark: We should clean out everything before rendering.
-        // 
+        //
         site.render(this.callback);
       },
       "should render all content for the site": function (err, written) {

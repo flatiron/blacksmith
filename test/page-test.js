@@ -22,7 +22,7 @@ vows.describe('blacksmith/page').addBatch({
     topic: function () {
       var site = new Site(blogDir),
           self = this;
-      
+
       async.waterfall([
         //
         // 1. Load all HTML and metadata.
@@ -33,7 +33,7 @@ vows.describe('blacksmith/page').addBatch({
           });
         },
         //
-        // 2. Render all content in `/content`. 
+        // 2. Render all content in `/content`.
         //
         function renderContent(next) {
           site.renderContent(path.join(site.dir, 'content'), next);
@@ -41,7 +41,7 @@ vows.describe('blacksmith/page').addBatch({
       ], function (err, content) {
         return err ? self.callback(err) : self.callback(null, site, content);
       })
-      
+
     },
     "that renders multiple files": {
       topic: function (site, content) {
@@ -52,17 +52,17 @@ vows.describe('blacksmith/page').addBatch({
           html:    site.html,
           content: content
         });
-        
+
         return page.renderAll();
       },
       "should respond with the fully rendered pages": function (rendered) {
         assert.isObject(rendered);
-        
+
         ['a-post', 'another-post', 'dir-post'].forEach(function (file) {
           assert.isObject(rendered[file]);
           assert.isString(rendered[file].html);
         });
-    
+
         assert.deepEqual(rendered['dir-post'].files, ['file1.js', 'file2.js']);
       }
     },
@@ -75,7 +75,7 @@ vows.describe('blacksmith/page').addBatch({
           html:    site.html,
           content: content
         });
-        
+
         return page.renderAll();
       },
       "should respond with the fully rendered pages": function (rendered) {

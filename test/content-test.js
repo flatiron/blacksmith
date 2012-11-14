@@ -66,17 +66,24 @@ vows.describe('blacksmith/content').addBatch({
             assert.isString(rendered.html);
             assert.isObject(rendered.metadata);
             assert.isObject(rendered.truncated);
-
+    
             assert.isString(rendered.truncated.markdown);
             assert.equal(
               rendered.truncated.markdown,
-              'A simple post that is truncated with content snippets and metadata that is not used in the post.\n\n'
+              'A simple post that is truncated with content snippets ' +
+              'and metadata that is not used in the post. ' +
+              'It has a [link][0] that is defined after the truncate marker.\n\n\n' +
+              '[meta:author]: <> (Charlie index)\n' +
+              '[0]: http://google.com'
             );
             
             assert.isString(rendered.truncated.html);
             assert.equal(
               rendered.truncated.html,
-              '<p>A simple post that is truncated with content snippets and metadata that is not used in the post.\n\n</p>\n'
+              '<p>A simple post that is truncated with content snippets ' + 
+              'and metadata that is not used in the post. ' + 
+              'It has a <a href="http://google.com">link</a> ' + 
+              'that is defined after the truncate marker.\n\n\n</p>\n'
             );
           }
         }
@@ -131,6 +138,25 @@ vows.describe('blacksmith/content').addBatch({
             '```'
           ].join('\n')) !== -1);
         });        
+      }
+    },
+    "the truncate() method": {
+      topic: function () {
+        var mdFile = path.join(blogDir, 'content', 'posts', 'dir-post', 'index.markdown'),
+            that = this;
+        
+        fs.readFile(mdFile, 'utf8', function (err, data) {
+          return err ? that.callback(err) : that.callback(null, content.truncate(data));
+        });
+      },
+      "should return markdown with all link definitions included": function (err, truncated) {
+        assert.isNull(err);
+        assert.isObject(truncated);
+        assert.isString(truncated.markdown);
+        assert.isString(truncated.html);
+        
+        assert.include(truncated.markdown, '[0]: http://google.com');
+        assert.include(truncated.html, '<a href="http://google.com"')
       }
     }
   }

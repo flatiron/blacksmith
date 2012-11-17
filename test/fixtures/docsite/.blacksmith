@@ -1,0 +1,22 @@
+{
+  "pages": {
+    "index": {
+      "partials": {
+        "sidebar": {
+          "partial": "topic",
+          "tree": "article",
+          "truncate": true
+        }
+      }
+    }, 
+    "article": {
+      "partials": {
+        "sidebar": {
+          "partial": "topic",
+          "tree": "article",
+          "truncate": true
+        }
+      }
+    }
+  }
+}

@@ -1,12 +1,20 @@
 #!/usr/bin/env node
 
 var fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    flatiron = require('flatiron'),
+    app = flatiron.app,
+    blacksmith = require('../lib/blacksmith');
+
+//
+// Use the flatiron CLI plugin
+//
+app.use(flatiron.plugins.cli);
 
 //
 // TODO: This is a really limited approach.
 //
-var root = path.normalize(process.argv[2] || process.cwd());
+var root = path.normalize(app.argv._[0] || process.cwd());
 
 console.log('Rendering: ' + root);
 
@@ -14,7 +22,10 @@ if (!fs.existsSync(root)) {
   return console.log('Path ' + root + ' does not exist.');
 }
 
-require('../lib/blacksmith')(root, function (err) {
+require('../lib/blacksmith')({
+  dir: root,
+  since: app.argv.since
+}, function (err) {
   if (err) {
     console.log('Error rendering: ' + root);
     console.dir(err);

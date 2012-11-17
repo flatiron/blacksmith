@@ -16,3 +16,7 @@ npm-debug.log
 
 test/fixtures/blog/public/*.html
 test/fixtures/blog/public/dir-post
+test/fixtures/docsite/public/*.html
+test/fixtures/docsite/public/topic-one
+test/fixtures/docsite/public/topic-two
+test/fixtures/docsite/public/topic-three

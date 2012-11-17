@@ -9,7 +9,8 @@
     "highlight.js": "7.3.0",
     "marked": "0.2.x",
     "mkdirp": "0.0.x",
-    "plates": "0.4.x"
+    "plates": "0.4.x",
+    "timespan": "2.2.x"
   },
   "bin": {
     "blacksmith": "bin/blacksmith"

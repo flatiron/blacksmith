@@ -58,12 +58,15 @@ vows.describe('blacksmith/page').addBatch({
       "should respond with the fully rendered pages": function (rendered) {
         assert.isObject(rendered);
 
-        ['a-post', 'another-post', 'dir-post'].forEach(function (file) {
+        ['a-post', 'another-post'].forEach(function (file) {
           assert.isObject(rendered[file]);
-          assert.isString(rendered[file].html);
+          assert.isObject(rendered[file]._content);
+          assert.isString(rendered[file]._content.html);
         });
 
-        assert.deepEqual(rendered['dir-post'].files, ['file1.js', 'file2.js']);
+        assert.isObject(rendered['dir-post'].index._content);
+        assert.isString(rendered['dir-post'].index._content.html);
+        assert.deepEqual(rendered['dir-post'].index._content.files, ['file1.js', 'file2.js']);
       }
     },
     "that renders compilation pages (like index)": {
@@ -80,7 +83,8 @@ vows.describe('blacksmith/page').addBatch({
       },
       "should respond with the fully rendered pages": function (rendered) {
         assert.isObject(rendered);
-        assert.isString(rendered.html);
+        assert.isObject(rendered._content);
+        assert.isString(rendered._content.html);
       }
     }
   }

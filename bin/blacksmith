@@ -26,10 +26,10 @@ require('../lib/blacksmith')({
   dir: root,
   since: app.argv.since
 }, function (err) {
-  if (err) {
+  if (err && err instanceof Error) {
     console.log('Error rendering: ' + root);
     console.dir(err);
-    console.dir(err.stack.split('\n'));
+    console.dir(err.stack && err.stack.split('\n'));
     return;
   }
   

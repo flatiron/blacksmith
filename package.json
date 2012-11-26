@@ -1,6 +1,6 @@
 {
   "name": "blacksmith",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A static site generator built with Node.js, Plates, and Marked.",
   "author": "Nodejitsu Inc. <info@nodejitsu.com>",
   "dependencies": {

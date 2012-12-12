@@ -67,7 +67,7 @@ vows.describe('blacksmith/common').addBatch({
       "with `md` language": {
         topic: function () {
           try {
-            var code = common.marked.highlight('# Test', 'md');
+            var code = common.marked.highlight('# Test', 'mdown');
             this.callback(null, code);
           }
           catch (exc) {

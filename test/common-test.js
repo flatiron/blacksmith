@@ -62,6 +62,38 @@ vows.describe('blacksmith/common').addBatch({
           assert.isObject(data.authors['charlie-robbins']);
         }
       }
+    },
+    "Using the marked.highlight() method": {
+      "with `md` language": {
+        topic: function () {
+          try {
+            var code = common.marked.highlight('# Test', 'md');
+            this.callback(null, code);
+          }
+          catch (exc) {
+            this.callback(exc);
+          }
+        },
+        "should return unaltered code": function (err, data) {
+          assert.isNull(err);
+          assert.equal(data, '# Test');
+        }
+      },
+      "with `markdown` language": {
+        topic: function () {
+          try {
+            var code = common.marked.highlight('# Test', 'markdown');
+            this.callback(null, code);
+          }
+          catch (exc) {
+            this.callback(exc);
+          }
+        },
+        "should return unaltered code": function (err, data) {
+          assert.isNull(err);
+          assert.equal(data, '<span class="header"># Test</span>');
+        }
+      }
     }
   }
 }).export(module);

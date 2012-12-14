@@ -22,7 +22,7 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
   * [Rendering Data Structure](#rendering-data-structure)
 * [Tests](#tests)
 
-## Creating a site with `blacksmith` 
+## Creating a site with `blacksmith`
 
 Blacksmith sites have a specific directory structure for storing the various parts of your site: settings, layout, partials, pages, and content. Content exists in two forms:
 
@@ -176,10 +176,10 @@ Layouts are fully-formed HTML files; **_they are the top of the rendering hierar
   </html>  
 ```
 
-Settings for a layout may specified in your `.blacksmith` file or in `/layouts/layout-name.json`. Lets look at an example:
+Settings for a layout may be specified in your `.blacksmith` file or in `/layouts/layout-name.json`. Lets look at an example:
 
 **/layouts/layout-name.json**
-**NOTE: These properties is not yet supported. See [Roadmap](#roadmap) for more details.**
+**NOTE: These properties are not yet supported. See [Roadmap](#roadmap) for more details.**
 
 ``` js
   {
@@ -209,11 +209,11 @@ Settings for a layout may specified in your `.blacksmith` file or in `/layouts/l
 
 ### Pages
 
-**Pages** allowed you to specify **what type of content** you wish to render and where to render it within a given layout. As with layouts, pages may specified in your `.blacksmith` file or in `/pages/page-name.json`. Lets look at two examples from our blog:
+**Pages** allows you to specify **what type of content** you wish to render and where to render it within a given layout. As with layouts, pages may be specified in your `.blacksmith` file or in `/pages/page-name.json`. Lets look at two examples from our blog:
 
 **/pages/index.json**
 
-This example of particular interest: **index.json will always be used to render index.html.** In the below example specifies that `blacksmith` should render a list of `post` content, which should be truncated, limited to a maximum of 20 posts. **Note: All lists are sorted descending by the date the content was created.**
+The above example demonstrates particular interest: **index.json will always be used to render index.html.** The following example specifies that `blacksmith` should render a list of `post` content, which should be truncated and limited to a maximum of 20 posts. **Note: All lists are sorted descending by the date the content was created.**
 
 ``` js
   {
@@ -247,13 +247,13 @@ The rendering information for an individual post is much simpler than our `index
 It is important to take note of the convention:
 
 ``` 
-  Convention: By default, page content will be rendered in a partial of the same name by default. 
+  Convention: By default, page content will be rendered in a partial of the same name. 
 ```
 
-Alternatively we could have specified a specific partial to use. If no partial is specified and the default partial is not found then **no metadata would be rendered** (in this case author name, date of post, etc).
+Alternatively we could have specified an explicit partial to use. If no partial is specified and the default partial is not found then **no metadata would be rendered** (in this case author name, date of post, etc).
 
 #### All Page Options
-A list of all options that can be specified in a `page.json` file are listed below:
+A list of all available options that can be specified in a `page.json` file are listed below:
 
 ``` js
   {
@@ -298,7 +298,7 @@ In our example all content for the `post` page should be placed under `/content/
   Convention: Page names are always singular, but their content folder will always be plural.
 ```
 
-The content for an individual page may also be a directory where supporting files (such as images can be placed). For example if we wanted to create a post with images the directory structure would be:
+The content for an individual page may also be a directory where supporting files (such as images can be placed). For example if we wanted to create a post with images, the directory structure would be:
 
 ```
 /site-name
@@ -441,7 +441,7 @@ Some content should only exist in partials when a given key is present in the me
   }
 ```
 
-In the corresponding HTML file for the partial any elements with "class=if-[keyname]" will be removed if the is no value for `keyname`. In the above example using the following template:
+In the corresponding HTML file for the partial any elements with "class=if-[keyname]" will be removed if there is no value for `keyname`. In the above example using the following template:
 
 **/partials/partial-name.html**
 

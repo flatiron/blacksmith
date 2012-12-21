@@ -17,6 +17,9 @@
   },
   "devDependencies": {
     "vows": "0.6.x"
+  },
+  "scripts": {
+    "test": "vows --spec"
   }
 }
 

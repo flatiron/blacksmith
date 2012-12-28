@@ -6,6 +6,71 @@ var fs = require('fs'),
     app = flatiron.app,
     blacksmith = require('../lib/blacksmith');
 
+function render(root) {
+  console.log('Rendering: ' + root);
+
+  if (!fs.existsSync(root)) {
+    return console.log('Path ' + root + ' does not exist.');
+  }
+
+  require('../lib/blacksmith')({
+    dir: root,
+    since: app.argv.since
+  }, function (err) {
+    if (err && err instanceof Error) {
+      console.log('Error rendering: ' + root);
+      console.dir(err);
+      console.dir(err.stack && err.stack.split('\n'));
+      return;
+    }
+
+    console.log('Done rendering: ' + root);
+  });
+}
+
+function watch(root) {
+  function onError(err) {
+    console.log('Error while watching for changes: ' + err.message);
+    process.exit(1);
+  }
+
+  function watchDirectory(directory) {
+    var watcher = fs.watch(directory, function (event, filename) {
+      console.log('Change detected in ' + directory + '.');
+      render(root);
+    });
+
+    fs.readdir(directory, function (err, files) {
+      if (err) {
+        return onError(err);
+      }
+
+      files.forEach(function (file) {
+        if (['node_modules', '.git', 'public'].indexOf(file) !== -1) {
+          return;
+        }
+
+        file = path.join(directory, file);
+
+        fs.stat(file, function (err, stat) {
+          if (err) {
+            return onError(err);
+          }
+
+          if (stat.isDirectory()) {
+            watchDirectory(file);
+          }
+        });
+      });
+    });
+  }
+
+  render(root);
+
+  console.log('Watching for changes.');
+  watchDirectory(root);
+}
+
 //
 // Use the flatiron CLI plugin
 //
@@ -16,22 +81,4 @@ app.use(flatiron.plugins.cli);
 //
 var root = path.normalize(app.argv._[0] || process.cwd());
 
-console.log('Rendering: ' + root);
-
-if (!fs.existsSync(root)) {
-  return console.log('Path ' + root + ' does not exist.');
-}
-
-require('../lib/blacksmith')({
-  dir: root,
-  since: app.argv.since
-}, function (err) {
-  if (err && err instanceof Error) {
-    console.log('Error rendering: ' + root);
-    console.dir(err);
-    console.dir(err.stack && err.stack.split('\n'));
-    return;
-  }
-  
-  console.log('Done rendering: ' + root);
-});
+return app.argv.watch ? watch(root) : render(root);

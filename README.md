@@ -24,12 +24,12 @@ A generic static site generator built using `flatiron`, `plates`, and `marked`.
 
 ## Creating a site with `blacksmith`
 
-Blacksmith sites have a specific directory structure for storing the various parts of your site: settings, layout, partials, pages, and content. Content exists in two forms:
+In order to generate your site, Blacksmith depends on specific files and directory structure: settings, layout, partials, pages, and content. Content exists in two forms:
 
 * Markdown files that `blacksmith` will render.
 * Supporting content such as css and images.
 
-All content will be rendered into `/public`. To render a blacksmith site:
+Your site content will be rendered into `/public`. To get started: 
 
 **Install Blacksmith**
 
@@ -37,16 +37,7 @@ All content will be rendered into `/public`. To render a blacksmith site:
   $ npm install blacksmith -g
 ```
 
-**Render a Site**
-
-``` bash
-  #
-  # Defaults to `cwd`
-  #
-  $ blacksmith /path/to/your/site
-```
-
-Here's an example of a simple blog that `blacksmith` would render. 
+The following is an example of the necessary structure in order to render a simple blog:
 
 ``` bash
 /site-name
@@ -96,6 +87,15 @@ Here's an example of a simple blog that `blacksmith` would render.
       favicon.png
 ```
 
+**Render a Site**
+
+``` bash
+  #
+  # Defaults to `cwd`
+  #
+  $ blacksmith /path/to/your/site
+```
+
 ## Components of a `blacksmith` site
 
 Each `blacksmith` site defines a hierarchical set of components which can be composed **to create any type of site you want!** A couple of examples:
@@ -108,7 +108,7 @@ Lets examine each of these components and where they are stored in your filesyst
 
 ### Site Settings
 
-The settings for a given `blacksmith` site are stored in the `.blacksmith` file located in the root directory of your site. 
+The settings for a given `blacksmith` site need to be written in the `.blacksmith` file and located in the root directory of your site: 
 
 ``` js
   {

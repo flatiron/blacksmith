@@ -12,8 +12,8 @@ var assert = require('assert'),
     async = utile.async,
     vows = require('vows'),
     common = require('../lib/blacksmith/common'),
-    Page = require('../lib/blacksmith/Page'),
-    Site = require('../lib/blacksmith/Site');
+    Page = require('../lib/blacksmith/page'),
+    Site = require('../lib/blacksmith/site');
 
 var blogDir = path.join(__dirname, 'fixtures', 'blog');
 

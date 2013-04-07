@@ -15,6 +15,7 @@
   "bin": {
     "blacksmith": "bin/blacksmith"
   },
+  "main": "lib/blacksmith",
   "devDependencies": {
     "vows": "0.6.x"
   },

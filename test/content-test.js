@@ -83,7 +83,7 @@ vows.describe('blacksmith/content').addBatch({
               '<p>A simple post that is truncated with content snippets ' +
               'and metadata that is not used in the post. ' +
               'It has a <a href="http://google.com">link</a> ' +
-              'that is defined after the truncate marker.\n\n\n</p>\n'
+              'that is defined after the truncate marker.</p>\n'
             );
           }
         }

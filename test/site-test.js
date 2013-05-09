@@ -68,6 +68,14 @@ vows.describe('blacksmith/site').addBatch({
       "should respond with all rendered markdown": function (err, content) {
         assert.isNull(err);
         assert.isObject(content);
+      },
+      "should output an RSS file": {
+        topic: function(){
+          fs.exists(path.join(blogDir, 'public/', 'feed.xml'), this.callback)
+        },
+        "that exists": function(exists){
+          assert.ok(exists)
+        }
       }
     }
   },

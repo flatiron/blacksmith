@@ -10,16 +10,17 @@
     "marked": "0.2.x",
     "mkdirp": "0.0.x",
     "plates": "0.4.x",
-    "timespan": "2.2.x"
+    "timespan": "2.2.x",
+    "rss": "0.0.4",
+    "handlebars": "~1.0.10"
   },
   "bin": {
     "blacksmith": "bin/blacksmith"
   },
   "devDependencies": {
-    "vows": "0.6.x"
+    "vows": "0.7.x"
   },
   "scripts": {
     "test": "vows --spec"
   }
 }
-

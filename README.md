@@ -119,7 +119,7 @@ The settings for a given `blacksmith` site are stored in the `.blacksmith` file 
     //
     // Default: default
     //
-    "layout": "layout-name"
+    "layout": "layout-name",
     "pages": {
       //
       // These settings will be used for all content in

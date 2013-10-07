@@ -71,6 +71,94 @@ function watch(root) {
   watchDirectory(root);
 }
 
+function create(root) {
+  var dirStructure = {
+
+    // Settings for this blacksmith site.
+    '.blacksmith': JSON.stringify({
+          'layout': 'test'
+        }, null, 2),
+
+    'content': {
+      // Actual Markdown content to render.
+      'posts': {
+        'test-post.md': '# Test\n'
+      }
+    },
+
+    'layouts': {
+      // Layouts to use for pages. You can specify multiple layouts, but default.html is ... the default.
+      'default.html': '<html></html>\n'
+    },
+
+    'metadata': {
+      // Metadata entities which can be reference in content metdata.
+      'authors': {
+        'author-name.json': JSON.stringify({
+            'name': 'anonymous'
+          }, null, 2)
+      }
+    },
+
+    'partials': {
+      // HTML for partials inside of pages
+      'post.html': '<div class="post"></div>\n',
+      'sidebar.html': '<div class="sidebar"></div>\n'
+    },
+
+    'pages': {
+      // Metadata for rendering specific pages
+      'index.json': JSON.stringify({
+          'content': {
+            'list': 'post',
+            'truncate': true,
+            'limit': 20
+          }
+        }, null, 2),
+      'post.json': JSON.stringify({
+          'partials': {
+            'content': 'sidebar'
+          }
+        }, null, 2)
+    },
+
+    'public': {
+      // Any additional files for viewing the site. All rendered HTML will be placed here.
+      'css': {
+        'styles.css': 'html {\n}\n\nbody {\n}\n'
+      },
+      'img': {
+        'favicon.png': ''
+      }
+    }
+  };
+
+  fs.mkdir(root, null, function (err) {
+    if (err && err.code !== 'EEXIST') {
+      console.error('Could not create directory', root);
+      return;
+    }
+
+    function dive(obj, rootPath) {
+      Object.keys(obj).forEach(function (key) {
+        var val = obj[key];
+        var nextPath = path.normalize(rootPath + '/' + key);
+
+        if (typeof val === 'string') {
+          fs.writeFile(nextPath, val);
+        }
+        else if (typeof val === 'object') {
+          fs.mkdir(nextPath, null, function (err) {
+            dive(val, nextPath);
+          });
+        }
+      });
+    }
+
+    dive(dirStructure, root);
+  });
+}
+
 //
 // Use the flatiron CLI plugin
 //
@@ -81,4 +169,13 @@ app.use(flatiron.plugins.cli);
 //
 var root = path.normalize(app.argv._[0] || process.cwd());
 
-return app.argv.watch ? watch(root) : render(root);
+if (app.argv['create']) {
+  root = path.normalize(app.argv['create']);
+  create(root);
+}
+else if (app.argv.watch) {
+  watch(root);
+}
+else {
+  render(root);
+}
